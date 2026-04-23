@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predicting the probability of finding missing older adults ù Ruiz-Rizzo, Archila-Melùndez, Gonzùlez Veloza (2022)</title>
+    <title>Predicting the probability of finding missing older adults &mdash; Ruiz-Rizzo, Archila-Mel&eacute;ndez, Gonz&aacute;lez Veloza (2022)</title>
     <meta name="description"
-        content="A supervised machine learning study identifying individual and environmental factors that predict whether a missing older adult reported missing in Colombia (1930ù2021) will be found.">
+        content="A supervised machine learning study identifying individual and environmental factors that predict whether a missing older adult reported missing in Colombia (1930&ndash;2021) will be found.">
     <meta property="og:title" content="Predicting the probability of finding missing older adults based on machine learning">
     <meta property="og:description"
         content="Gradient boosting models outperform a data-driven reference baseline by up to 10% AUC in predicting outcomes of missing older adult cases in Colombia.">
@@ -298,9 +298,21 @@
         }
 
         .tldr-icon {
-            font-size: 1.8rem;
             flex-shrink: 0;
-            line-height: 1;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            color: #b45309;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tldr-icon svg {
+            width: 24px;
+            height: 24px;
+            display: block;
         }
 
         .tldr-text {
@@ -1516,6 +1528,10 @@
             .histogram-grid {
                 grid-template-columns: 1fr;
             }
+
+            .identity-layout {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 540px) {
@@ -1523,6 +1539,215 @@
                 grid-template-columns: 90px 1fr 48px;
             }
         }
+
+        /* ===== Identity / subgroup-parity plot ===== */
+        .identity-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 24px;
+        }
+
+        .identity-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .identity-head-text h5 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0 0 4px;
+        }
+
+        .identity-sub {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin: 0;
+            max-width: 620px;
+            line-height: 1.5;
+        }
+
+        .identity-badge {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: #f1f5f9;
+            color: #475569;
+            font-size: 0.74rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .identity-badge strong {
+            color: #0f172a;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .identity-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 180px;
+            gap: 18px;
+            align-items: start;
+        }
+
+        .identity-svg {
+            display: block;
+            width: 100%;
+            height: auto;
+            overflow: visible;
+        }
+
+        .identity-svg .id-axis {
+            stroke: #cbd5e1;
+            stroke-width: 1;
+            fill: none;
+        }
+
+        .identity-svg .id-grid {
+            stroke: #eef2f7;
+            stroke-width: 1;
+        }
+
+        .identity-svg .id-diagonal {
+            stroke: #0f172a;
+            stroke-width: 1.2;
+            stroke-dasharray: 4 4;
+            opacity: 0.45;
+        }
+
+        .identity-svg .id-diag-band {
+            fill: #0f172a;
+            opacity: 0.04;
+        }
+
+        .identity-svg .id-axis-label {
+            fill: #64748b;
+            font-size: 10px;
+            font-family: inherit;
+        }
+
+        .identity-svg .id-axis-title {
+            fill: #334155;
+            font-size: 10.5px;
+            font-weight: 600;
+            font-family: inherit;
+        }
+
+        .identity-svg .id-tick-label {
+            fill: #64748b;
+            font-size: 9px;
+            font-family: inherit;
+        }
+
+        .identity-svg .id-bubble {
+            opacity: 0.82;
+            transition: opacity 0.15s ease, stroke-width 0.15s ease;
+            cursor: pointer;
+        }
+
+        .identity-svg .id-bubble:hover {
+            opacity: 1;
+            stroke-width: 2;
+        }
+
+        .identity-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 14px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 0.78rem;
+            color: #334155;
+        }
+
+        .identity-legend h6 {
+            margin: 0 0 2px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #475569;
+        }
+
+        .identity-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .identity-legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .identity-legend-note {
+            margin-top: 4px;
+            font-size: 0.7rem;
+            color: #64748b;
+            line-height: 1.5;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 10px;
+        }
+
+        .identity-tooltip {
+            position: fixed;
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.74rem;
+            line-height: 1.45;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0;
+            transform: translate(-50%, -110%);
+            transition: opacity 0.12s ease;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.22);
+            white-space: nowrap;
+        }
+
+        .identity-tooltip.visible {
+            opacity: 1;
+        }
+
+        .identity-tooltip-feature {
+            font-size: 0.64rem;
+            color: #cbd5e1;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 2px;
+        }
+
+        .identity-tooltip-label {
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .identity-tooltip-row {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .identity-tooltip-delta {
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        .identity-tooltip-delta.up { color: #86efac; }
+        .identity-tooltip-delta.down { color: #fca5a5; }
+        .identity-tooltip-delta.same { color: #cbd5e1; }
 
         /* ===== AUC explainer ===== */
         .auc-intro {
@@ -1911,7 +2136,7 @@
     <header class="hero" id="top">
         <div class="container">
             <div class="hero-logo">M</div>
-            <div class="hero-venue">Journal of Computational Social Science ù 2022</div>
+            <div class="hero-venue">Journal of Computational Social Science &middot; 2022</div>
             <h1 class="hero-title">Predicting the probability of finding<br>missing older adults based on machine learning</h1>
             <p class="hero-subtitle">
                 Supervised machine learning on 7,855 open-data missing older adult cases in Colombia
@@ -1920,18 +2145,18 @@
             </p>
             <div class="hero-authors">
                 Adriana L. Ruiz-Rizzo<sup>1,2</sup>
-                &nbsp;ù&nbsp;
+                &nbsp;&middot;&nbsp;
                 Mario E. Archila-Mel&eacute;ndez<sup>3</sup>
-                &nbsp;ù&nbsp;
+                &nbsp;&middot;&nbsp;
                 Jos&eacute; John Fredy Gonz&aacute;lez Veloza<sup>4</sup>
             </div>
             <div class="hero-affiliations">
                 <sup>1</sup>Ludwig-Maximilians-Universit&auml;t M&uuml;nchen, Germany
-                &nbsp;ù&nbsp;
+                &nbsp;&middot;&nbsp;
                 <sup>2</sup>Jena University Hospital, Germany
-                &nbsp;ù&nbsp;
+                &nbsp;&middot;&nbsp;
                 <sup>3</sup>Technical University of Munich, Germany
-                &nbsp;ù&nbsp;
+                &nbsp;&middot;&nbsp;
                 <sup>4</sup>Fundaci&oacute;n Universitaria Los Libertadores, Bogot&aacute;, Colombia
             </div>
             <div class="hero-buttons">
@@ -1987,21 +2212,45 @@
             <h2 class="section-title">Overview</h2>
             <div class="tldr-grid fade-in">
                 <div class="tldr-card">
-                    <div class="tldr-icon">??</div>
+                    <div class="tldr-icon" aria-hidden="true">
+                        <!-- target / bullseye -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9"/>
+                            <circle cx="12" cy="12" r="5"/>
+                            <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+                        </svg>
+                    </div>
                     <div class="tldr-text">
                         Gradient-boosting classifiers predict whether a missing older adult will be found with up to
                         <strong>10% higher AUC</strong> than a data-informed reference model.
                     </div>
                 </div>
                 <div class="tldr-card">
-                    <div class="tldr-icon">??</div>
+                    <div class="tldr-icon" aria-hidden="true">
+                        <!-- puzzle piece (intrinsic + extrinsic) -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10 3h4a1 1 0 0 1 1 1v2.2a2 2 0 1 0 0 3.6V13h3.2a2 2 0 1 1 0 4H15v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4.2a2 2 0 1 0 0-3.6V7a1 1 0 0 1 1-1h5.2a2 2 0 1 0 .8-3Z"/>
+                        </svg>
+                    </div>
                     <div class="tldr-text">
                         The outcome depends on both <strong>intrinsic</strong> (age, sex) and
                         <strong>extrinsic</strong> (time elapsed, place size) factors of missingness.
                     </div>
                 </div>
                 <div class="tldr-card">
-                    <div class="tldr-icon">????</div>
+                    <div class="tldr-icon" aria-hidden="true">
+                        <!-- map pin over a globe (Colombia, 90 years of open data) -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9"/>
+                            <path d="M3 12h18"/>
+                            <path d="M12 3a13 13 0 0 1 0 18"/>
+                            <path d="M12 3a13 13 0 0 0 0 18"/>
+                            <circle cx="17" cy="7" r="2.4" fill="#fff" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
                     <div class="tldr-text">
                         First study to characterize non-forced missingness in older adults in Colombia using open
                         SIRDEC data spanning <strong>90&nbsp;years</strong>.
@@ -2734,6 +2983,39 @@
                                 <h5>Found rate by sex</h5>
                                 <div class="breakdown-sub">Share found alive among men and women</div>
                                 <div id="brkSex"></div>
+                            </div>
+                        </div>
+
+                        <div class="identity-card">
+                            <div class="identity-head">
+                                <div class="identity-head-text">
+                                    <h5>Subgroup parity vs. full cohort</h5>
+                                    <p class="identity-sub">
+                                        Each bubble is one subgroup (sex, age band,
+                                        municipality size, reporting decade, education
+                                        or vulnerability). The <strong>x-axis</strong>
+                                        fixes that subgroup&rsquo;s found rate in the
+                                        full 7,855-case cohort; the <strong>y-axis</strong>
+                                        shows its rate inside the current selection.
+                                        Bubble area is proportional to the number of
+                                        selected cases in that subgroup. Dots
+                                        <strong>above</strong> the dashed diagonal
+                                        find more people than the full-cohort
+                                        baseline; dots <strong>below</strong> find
+                                        fewer.
+                                    </p>
+                                </div>
+                                <div class="identity-badge" id="identityBadge">
+                                    selection found-rate <strong id="identityRate">&mdash;</strong>
+                                    &middot; baseline <strong id="identityBaseline">&mdash;</strong>
+                                </div>
+                            </div>
+                            <div class="identity-layout">
+                                <svg class="identity-svg" id="identityPlot"
+                                     viewBox="0 0 480 360"
+                                     role="img"
+                                     aria-label="Subgroup parity plot"></svg>
+                                <div class="identity-legend" id="identityLegend"></div>
                             </div>
                         </div>
 
@@ -3545,7 +3827,7 @@
                     if (!edus.has(r[iEdu])) continue;
                     out.push(r);
                 }
-                return { out, iFound, iSex, iAge, iYear, iMuni };
+                return { out, iFound, iSex, iAge, iYear, iMuni, iVuln, iEdu };
             }
 
             function ageBucket(a) {
@@ -3716,7 +3998,7 @@
 
             function update() {
                 if (!state.records) return;
-                const { out, iFound, iSex, iAge, iYear, iMuni } = filterRecords();
+                const { out, iFound, iSex, iAge, iYear, iMuni, iVuln, iEdu } = filterRecords();
                 const total = out.length;
                 const totalAll = state.records.length;
 
@@ -3803,6 +4085,323 @@
                     v => String(v),
                     ''
                 );
+
+                const I = { found: iFound, sex: iSex, age: iAge, year: iYear,
+                            muni: iMuni, vuln: iVuln, edu: iEdu };
+                if (!state.baselineRates) {
+                    state.baselineRates = computeSubgroupRates(
+                        state.records, I, SUBGROUP_DEFS);
+                }
+                const filteredRates = computeSubgroupRates(out, I, SUBGROUP_DEFS);
+                renderIdentityPlot(state.baselineRates, filteredRates, foundRate / 100);
+            }
+
+            const SUBGROUP_DEFS = [
+                { feature: 'Sex', label: 'Men',   color: '#2563eb',
+                  test: function (r, I) { return r[I.sex] === 'M'; } },
+                { feature: 'Sex', label: 'Women', color: '#2563eb',
+                  test: function (r, I) { return r[I.sex] === 'F'; } },
+
+                { feature: 'Age', label: '60\u201369', color: '#d97706',
+                  test: function (r, I) { return r[I.age] >= 60 && r[I.age] < 70; } },
+                { feature: 'Age', label: '70\u201379', color: '#d97706',
+                  test: function (r, I) { return r[I.age] >= 70 && r[I.age] < 80; } },
+                { feature: 'Age', label: '80\u201389', color: '#d97706',
+                  test: function (r, I) { return r[I.age] >= 80 && r[I.age] < 90; } },
+                { feature: 'Age', label: '90+', color: '#d97706',
+                  test: function (r, I) { return r[I.age] >= 90; } },
+
+                { feature: 'Municipality', label: '>4M', color: '#0d9488',
+                  test: function (r, I) { return r[I.muni] === '>4M'; } },
+                { feature: 'Municipality', label: '1M\u20134M', color: '#0d9488',
+                  test: function (r, I) { return r[I.muni] === '1M-4M'; } },
+                { feature: 'Municipality', label: '500k\u20131M', color: '#0d9488',
+                  test: function (r, I) { return r[I.muni] === '500k-1M'; } },
+                { feature: 'Municipality', label: '200k\u2013500k', color: '#0d9488',
+                  test: function (r, I) { return r[I.muni] === '200k-500k'; } },
+                { feature: 'Municipality', label: '<200k', color: '#0d9488',
+                  test: function (r, I) { return r[I.muni] === '<200k'; } },
+
+                { feature: 'Decade', label: 'Before 2000', color: '#7c3aed',
+                  test: function (r, I) { return r[I.year] < 2000; } },
+                { feature: 'Decade', label: '2000s', color: '#7c3aed',
+                  test: function (r, I) { return r[I.year] >= 2000 && r[I.year] < 2010; } },
+                { feature: 'Decade', label: '2010s', color: '#7c3aed',
+                  test: function (r, I) { return r[I.year] >= 2010 && r[I.year] < 2020; } },
+                { feature: 'Decade', label: '2020s', color: '#7c3aed',
+                  test: function (r, I) { return r[I.year] >= 2020; } },
+
+                { feature: 'Education', label: 'No formal', color: '#db2777',
+                  test: function (r, I) { return r[I.edu] === 'None' ||
+                                                  r[I.edu] === 'Preschool'; } },
+                { feature: 'Education', label: 'Primary', color: '#db2777',
+                  test: function (r, I) { return r[I.edu] === 'Primary'; } },
+                { feature: 'Education', label: 'Secondary', color: '#db2777',
+                  test: function (r, I) { return r[I.edu] === 'Secondary (lower)' ||
+                                                  r[I.edu] === 'Secondary (upper)'; } },
+                { feature: 'Education', label: 'Tertiary', color: '#db2777',
+                  test: function (r, I) { return r[I.edu] === 'Technical' ||
+                                                  r[I.edu] === 'University' ||
+                                                  r[I.edu] === 'Postgraduate'; } },
+
+                { feature: 'Vulnerability', label: 'None reported', color: '#ea580c',
+                  test: function (r, I) { return r[I.vuln] === 'None reported'; } },
+                { feature: 'Vulnerability', label: 'Any reported', color: '#ea580c',
+                  test: function (r, I) { return r[I.vuln] !== 'None reported' &&
+                                                  r[I.vuln] !== 'Unknown'; } }
+            ];
+
+            function computeSubgroupRates(records, I, defs) {
+                const out = new Array(defs.length);
+                for (let d = 0; d < defs.length; d++) {
+                    out[d] = { total: 0, found: 0 };
+                }
+                for (let k = 0; k < records.length; k++) {
+                    const r = records[k];
+                    const f = r[I.found];
+                    for (let d = 0; d < defs.length; d++) {
+                        if (defs[d].test(r, I)) {
+                            out[d].total++;
+                            out[d].found += f;
+                        }
+                    }
+                }
+                return defs.map(function (def, d) {
+                    return {
+                        feature: def.feature,
+                        label: def.label,
+                        color: def.color,
+                        count: out[d].total,
+                        foundCount: out[d].found,
+                        rate: out[d].total > 0 ? out[d].found / out[d].total : null
+                    };
+                });
+            }
+
+            let identityTooltip = null;
+            function getIdentityTooltip() {
+                if (!identityTooltip) {
+                    identityTooltip = document.createElement('div');
+                    identityTooltip.className = 'identity-tooltip';
+                    document.body.appendChild(identityTooltip);
+                }
+                return identityTooltip;
+            }
+
+            function renderIdentityPlot(baseline, current, overallRate) {
+                const svg = document.getElementById('identityPlot');
+                if (!svg) return;
+
+                const SVG_NS = 'http://www.w3.org/2000/svg';
+                function el(tag, attrs) {
+                    const n = document.createElementNS(SVG_NS, tag);
+                    for (const k in attrs) n.setAttribute(k, attrs[k]);
+                    return n;
+                }
+
+                // Geometry.
+                const W = 480, H = 360;
+                const padL = 52, padR = 18, padT = 18, padB = 48;
+                const plotW = W - padL - padR;
+                const plotH = H - padT - padB;
+                function sx(v) { return padL + v * plotW; }
+                function sy(v) { return padT + (1 - v) * plotH; }
+
+                svg.innerHTML = '';
+
+                // Light diagonal band (+/- 5 percentage points).
+                const bandD =
+                    'M ' + sx(0) + ' ' + sy(0.05) +
+                    ' L ' + sx(0.95) + ' ' + sy(1) +
+                    ' L ' + sx(1) + ' ' + sy(1) +
+                    ' L ' + sx(1) + ' ' + sy(0.95) +
+                    ' L ' + sx(0.05) + ' ' + sy(0) +
+                    ' L ' + sx(0) + ' ' + sy(0) + ' Z';
+                svg.appendChild(el('path', { d: bandD, class: 'id-diag-band' }));
+
+                // Gridlines + ticks.
+                const ticks = [0, 0.2, 0.4, 0.6, 0.8, 1];
+                for (const t of ticks) {
+                    svg.appendChild(el('line', {
+                        x1: sx(0), y1: sy(t),
+                        x2: sx(1), y2: sy(t),
+                        class: 'id-grid'
+                    }));
+                    svg.appendChild(el('line', {
+                        x1: sx(t), y1: sy(0),
+                        x2: sx(t), y2: sy(1),
+                        class: 'id-grid'
+                    }));
+                    const yL = el('text', {
+                        x: sx(0) - 8, y: sy(t) + 3,
+                        class: 'id-tick-label',
+                        'text-anchor': 'end'
+                    });
+                    yL.textContent = Math.round(t * 100) + '%';
+                    svg.appendChild(yL);
+
+                    const xL = el('text', {
+                        x: sx(t), y: sy(0) + 14,
+                        class: 'id-tick-label',
+                        'text-anchor': 'middle'
+                    });
+                    xL.textContent = Math.round(t * 100) + '%';
+                    svg.appendChild(xL);
+                }
+
+                // Axes frame.
+                svg.appendChild(el('line', {
+                    x1: sx(0), y1: sy(0), x2: sx(1), y2: sy(0),
+                    class: 'id-axis'
+                }));
+                svg.appendChild(el('line', {
+                    x1: sx(0), y1: sy(0), x2: sx(0), y2: sy(1),
+                    class: 'id-axis'
+                }));
+
+                // Diagonal y = x.
+                svg.appendChild(el('line', {
+                    x1: sx(0), y1: sy(0), x2: sx(1), y2: sy(1),
+                    class: 'id-diagonal'
+                }));
+
+                // Axis titles.
+                const xTitle = el('text', {
+                    x: sx(0.5), y: H - 10,
+                    class: 'id-axis-title',
+                    'text-anchor': 'middle'
+                });
+                xTitle.textContent = 'Found rate in full cohort';
+                svg.appendChild(xTitle);
+
+                const yTitle = el('text', {
+                    x: 14, y: sy(0.5),
+                    class: 'id-axis-title',
+                    'text-anchor': 'middle',
+                    transform: 'rotate(-90 14 ' + sy(0.5) + ')'
+                });
+                yTitle.textContent = 'Found rate in current selection';
+                svg.appendChild(yTitle);
+
+                // Bubbles.
+                // Size scales with sqrt(count) to keep areas proportional.
+                let maxCount = 1;
+                for (const c of current) {
+                    if (c.count > maxCount) maxCount = c.count;
+                }
+                const R_MIN = 4, R_MAX = 16;
+                function radius(count) {
+                    if (count <= 0) return 0;
+                    const s = Math.sqrt(count / maxCount);
+                    return R_MIN + (R_MAX - R_MIN) * s;
+                }
+
+                // Draw bubbles for subgroups that have data in both baseline
+                // and current selection.
+                const drawn = [];
+                for (let i = 0; i < baseline.length; i++) {
+                    const b = baseline[i], c = current[i];
+                    if (b.rate === null || c.rate === null || c.count === 0) continue;
+                    const r = radius(c.count);
+                    drawn.push({ b: b, c: c, r: r });
+                }
+
+                // Draw larger bubbles first so smaller ones sit on top.
+                drawn.sort(function (a, b) { return b.r - a.r; });
+
+                for (const d of drawn) {
+                    const cx = sx(d.b.rate);
+                    const cy = sy(d.c.rate);
+                    const circle = el('circle', {
+                        cx: cx, cy: cy, r: d.r,
+                        fill: d.c.color,
+                        stroke: '#fff',
+                        'stroke-width': 1.4,
+                        class: 'id-bubble'
+                    });
+                    circle.dataset.feature = d.c.feature;
+                    circle.dataset.label = d.c.label;
+                    circle.dataset.baseline = d.b.rate.toFixed(4);
+                    circle.dataset.current = d.c.rate.toFixed(4);
+                    circle.dataset.count = String(d.c.count);
+                    circle.dataset.found = String(d.c.foundCount);
+                    svg.appendChild(circle);
+                }
+
+                // Tooltip wiring.
+                const tip = getIdentityTooltip();
+                function showTip(e) {
+                    const t = e.target;
+                    if (!t || t.nodeName !== 'circle' || !t.dataset.feature) {
+                        tip.classList.remove('visible');
+                        return;
+                    }
+                    const base = parseFloat(t.dataset.baseline);
+                    const cur = parseFloat(t.dataset.current);
+                    const delta = (cur - base) * 100;
+                    const deltaStr = (delta >= 0 ? '+' : '') + delta.toFixed(1) + ' pp';
+                    const cls = Math.abs(delta) < 0.5 ? 'same' : (delta > 0 ? 'up' : 'down');
+                    tip.innerHTML =
+                        '<div class="identity-tooltip-feature">' + t.dataset.feature + '</div>' +
+                        '<div class="identity-tooltip-label">' + t.dataset.label + '</div>' +
+                        '<div class="identity-tooltip-row">Baseline: ' +
+                            (base * 100).toFixed(1) + '%</div>' +
+                        '<div class="identity-tooltip-row">Selection: ' +
+                            (cur * 100).toFixed(1) + '% &middot; ' +
+                            Number(t.dataset.found).toLocaleString() + ' / ' +
+                            Number(t.dataset.count).toLocaleString() + '</div>' +
+                        '<div class="identity-tooltip-delta ' + cls + '">' + deltaStr + '</div>';
+                    tip.style.left = e.clientX + 'px';
+                    tip.style.top = e.clientY + 'px';
+                    tip.classList.add('visible');
+                }
+                function hideTip() { tip.classList.remove('visible'); }
+                svg.onmousemove = showTip;
+                svg.onmouseleave = hideTip;
+
+                // Update the badge and legend.
+                const rateEl = document.getElementById('identityRate');
+                const baseEl = document.getElementById('identityBaseline');
+                if (rateEl) rateEl.textContent = (overallRate * 100).toFixed(1) + '%';
+                if (baseEl && state.baselineOverall === undefined) {
+                    let bf = 0, bt = state.records.length;
+                    for (let k = 0; k < bt; k++) bf += state.records[k][I_FOUND_IDX()];
+                    state.baselineOverall = bf / bt;
+                }
+                if (baseEl) baseEl.textContent = (state.baselineOverall * 100).toFixed(1) + '%';
+
+                renderIdentityLegend();
+            }
+
+            function I_FOUND_IDX() { return state.columns.indexOf('found'); }
+
+            function renderIdentityLegend() {
+                const host = document.getElementById('identityLegend');
+                if (!host) return;
+                const seen = new Map();
+                for (const def of SUBGROUP_DEFS) {
+                    if (!seen.has(def.feature)) seen.set(def.feature, def.color);
+                }
+                host.innerHTML = '<h6>Feature</h6>';
+                for (const [feature, color] of seen) {
+                    const row = document.createElement('div');
+                    row.className = 'identity-legend-item';
+                    const sw = document.createElement('span');
+                    sw.className = 'identity-legend-swatch';
+                    sw.style.background = color;
+                    const lab = document.createElement('span');
+                    lab.textContent = feature;
+                    row.appendChild(sw);
+                    row.appendChild(lab);
+                    host.appendChild(row);
+                }
+                const note = document.createElement('div');
+                note.className = 'identity-legend-note';
+                note.innerHTML =
+                    'Bubble area &prop; subgroup size in the current selection. ' +
+                    'Hover any bubble for its baseline vs. selection rate and ' +
+                    'change in percentage points.';
+                host.appendChild(note);
             }
 
             loadOnVisible();
