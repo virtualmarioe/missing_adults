@@ -18,6 +18,13 @@ Every change to the filters live-updates the KPIs, outcome stack bar,
 per-subgroup breakdowns and two color-coded stacked histograms (age at
 missingness and year reported) with hover tooltips.
 
+A dedicated **"Understanding ROC-AUC"** section walks readers through
+the metric the paper optimizes, with a live dummy-model demo: two
+overlapping score distributions plus the ROC curve, driven by sliders
+for class separation, decision threshold and positive-class prevalence,
+so users can see first-hand which factors move AUC and which only move
+the operating point.
+
 ## Structure
 
 ```

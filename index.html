@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predicting the probability of finding missing older adults &mdash; Ruiz-Rizzo, Archila-Mel&eacute;ndez, Gonz&aacute;lez Veloza (2022)</title>
+    <title>Predicting the probability of finding missing older adults ù Ruiz-Rizzo, Archila-Melùndez, Gonzùlez Veloza (2022)</title>
     <meta name="description"
-        content="A supervised machine learning study identifying individual and environmental factors that predict whether a missing older adult reported missing in Colombia (1930&ndash;2021) will be found.">
+        content="A supervised machine learning study identifying individual and environmental factors that predict whether a missing older adult reported missing in Colombia (1930ù2021) will be found.">
     <meta property="og:title" content="Predicting the probability of finding missing older adults based on machine learning">
     <meta property="og:description"
         content="Gradient boosting models outperform a data-driven reference baseline by up to 10% AUC in predicting outcomes of missing older adult cases in Colombia.">
@@ -1524,6 +1524,373 @@
             }
         }
 
+        /* ===== AUC explainer ===== */
+        .auc-intro {
+            text-align: center;
+            font-size: 1rem;
+            color: #475569;
+            max-width: 760px;
+            margin: 0 auto 36px;
+            line-height: 1.7;
+        }
+
+        .auc-intro em {
+            color: #0f172a;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .auc-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 36px;
+        }
+
+        .auc-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 22px;
+        }
+
+        .auc-card h4 {
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #d97706;
+            margin: 0 0 10px;
+        }
+
+        .auc-card p {
+            font-size: 0.88rem;
+            color: #334155;
+            margin: 0;
+            line-height: 1.55;
+        }
+
+        .auc-demo {
+            display: grid;
+            grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+            gap: 24px;
+            align-items: start;
+        }
+
+        .auc-plots {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .auc-panel {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 22px;
+        }
+
+        .auc-panel-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .auc-panel-head h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0;
+        }
+
+        .auc-hint {
+            font-size: 0.72rem;
+            color: #94a3b8;
+            margin: 0;
+        }
+
+        .auc-svg {
+            display: block;
+            width: 100%;
+            height: auto;
+            overflow: visible;
+        }
+
+        .auc-svg .axis {
+            stroke: #cbd5e1;
+            stroke-width: 1;
+            fill: none;
+        }
+
+        .auc-svg .axis-label {
+            fill: #64748b;
+            font-size: 10px;
+            font-family: inherit;
+        }
+
+        .auc-svg .tick {
+            stroke: #e2e8f0;
+            stroke-width: 1;
+        }
+
+        .auc-svg .dist-line-neg { fill: none; stroke: #475569; stroke-width: 1.5; }
+        .auc-svg .dist-line-pos { fill: none; stroke: #d97706; stroke-width: 1.5; }
+        .auc-svg .dist-fill-neg { fill: #94a3b8; opacity: 0.18; }
+        .auc-svg .dist-fill-pos { fill: #fbbf24; opacity: 0.22; }
+        .auc-svg .dist-tail-neg { fill: #94a3b8; opacity: 0.45; }
+        .auc-svg .dist-tail-pos { fill: #fbbf24; opacity: 0.6; }
+        .auc-svg .threshold-line {
+            stroke: #0f172a;
+            stroke-width: 1.5;
+            stroke-dasharray: 4 3;
+        }
+        .auc-svg .threshold-label {
+            fill: #0f172a;
+            font-size: 10px;
+            font-weight: 600;
+            font-family: inherit;
+        }
+
+        .auc-svg .roc-fill {
+            fill: #fbbf24;
+            opacity: 0.18;
+        }
+
+        .auc-svg .roc-line {
+            fill: none;
+            stroke: #d97706;
+            stroke-width: 2;
+        }
+
+        .auc-svg .roc-diagonal {
+            stroke: #cbd5e1;
+            stroke-width: 1;
+            stroke-dasharray: 3 3;
+            fill: none;
+        }
+
+        .auc-svg .roc-dot {
+            fill: #0f172a;
+            stroke: #fff;
+            stroke-width: 2;
+        }
+
+        .auc-svg .roc-dot-guide {
+            stroke: #0f172a;
+            stroke-width: 1;
+            stroke-dasharray: 2 3;
+            opacity: 0.35;
+        }
+
+        .auc-svg .legend-label {
+            fill: #334155;
+            font-size: 10px;
+            font-family: inherit;
+        }
+
+        .auc-svg .legend-swatch-pos { fill: #fbbf24; }
+        .auc-svg .legend-swatch-neg { fill: #94a3b8; }
+
+        .auc-controls {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .auc-kpis {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+
+        .auc-kpi-hero {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 1px solid #fbbf24;
+            border-radius: 12px;
+            padding: 14px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .auc-kpi-hero .auc-kpi-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #92400e;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .auc-kpi-hero .auc-kpi-value {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #92400e;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .auc-kpi-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .auc-kpi-row .auc-kpi {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 10px 12px;
+        }
+
+        .auc-kpi-row .auc-kpi-label {
+            font-size: 0.66rem;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .auc-kpi-row .auc-kpi-value {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-top: 2px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .auc-slider {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .auc-slider label {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .auc-slider label em {
+            font-style: normal;
+            color: #94a3b8;
+            font-weight: 500;
+            font-size: 0.75rem;
+        }
+
+        .auc-slider label span:last-child {
+            font-variant-numeric: tabular-nums;
+            color: #d97706;
+            font-weight: 700;
+        }
+
+        .auc-slider input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .auc-slider input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #d97706;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.18);
+            cursor: pointer;
+        }
+
+        .auc-slider input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #d97706;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.18);
+            cursor: pointer;
+        }
+
+        .auc-slider-hint {
+            font-size: 0.72rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        .auc-presets {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            padding-top: 6px;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 4px;
+        }
+
+        .auc-presets button {
+            flex: 1;
+            min-width: 100px;
+            padding: 8px 10px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            background: #fff;
+            color: #334155;
+            border: 1px solid #e2e8f0;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .auc-presets button:hover {
+            border-color: #d97706;
+            color: #d97706;
+        }
+
+        .auc-takeaway {
+            margin-top: 28px;
+            padding: 18px 22px;
+            background: linear-gradient(135deg, #fef3c7, #fffbeb);
+            border-left: 4px solid #d97706;
+            border-radius: 10px;
+            font-size: 0.88rem;
+            color: #422006;
+            line-height: 1.6;
+        }
+
+        .auc-takeaway strong {
+            color: #92400e;
+        }
+
+        @media (max-width: 960px) {
+            .auc-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .auc-demo {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .auc-kpi-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* ===== Animations ===== */
         .fade-in {
             opacity: 0;
@@ -1544,7 +1911,7 @@
     <header class="hero" id="top">
         <div class="container">
             <div class="hero-logo">M</div>
-            <div class="hero-venue">Journal of Computational Social Science &middot; 2022</div>
+            <div class="hero-venue">Journal of Computational Social Science ù 2022</div>
             <h1 class="hero-title">Predicting the probability of finding<br>missing older adults based on machine learning</h1>
             <p class="hero-subtitle">
                 Supervised machine learning on 7,855 open-data missing older adult cases in Colombia
@@ -1553,18 +1920,18 @@
             </p>
             <div class="hero-authors">
                 Adriana L. Ruiz-Rizzo<sup>1,2</sup>
-                &nbsp;&middot;&nbsp;
+                &nbsp;ù&nbsp;
                 Mario E. Archila-Mel&eacute;ndez<sup>3</sup>
-                &nbsp;&middot;&nbsp;
+                &nbsp;ù&nbsp;
                 Jos&eacute; John Fredy Gonz&aacute;lez Veloza<sup>4</sup>
             </div>
             <div class="hero-affiliations">
                 <sup>1</sup>Ludwig-Maximilians-Universit&auml;t M&uuml;nchen, Germany
-                &nbsp;&middot;&nbsp;
+                &nbsp;ù&nbsp;
                 <sup>2</sup>Jena University Hospital, Germany
-                &nbsp;&middot;&nbsp;
+                &nbsp;ù&nbsp;
                 <sup>3</sup>Technical University of Munich, Germany
-                &nbsp;&middot;&nbsp;
+                &nbsp;ù&nbsp;
                 <sup>4</sup>Fundaci&oacute;n Universitaria Los Libertadores, Bogot&aacute;, Colombia
             </div>
             <div class="hero-buttons">
@@ -1607,6 +1974,7 @@
             <a href="#methods" class="nav-link">Methods</a>
             <a href="#features" class="nav-link">Key Features</a>
             <a href="#results" class="nav-link">Results</a>
+            <a href="#auc" class="nav-link">AUC</a>
             <a href="#explore" class="nav-link">Explore</a>
             <a href="#authors" class="nav-link">Authors</a>
             <a href="#bibtex" class="nav-link">Cite</a>
@@ -2006,6 +2374,155 @@
                     <div class="finding-label">Sensitivity analysis</div>
                     <p>Restricting the sample to cases from 2000 onwards preserves the model&rsquo;s performance and feature ranking, confirming robustness to historical-technological change.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AUC EXPLAINER ===== -->
+    <section id="auc">
+        <div class="container">
+            <h2 class="section-title">Understanding ROC-AUC</h2>
+            <p class="auc-intro">
+                <strong>AUC</strong> (Area Under the ROC Curve) is the metric the
+                authors optimize. It answers a simple question:
+                <em>if we draw one &ldquo;found&rdquo; case and one &ldquo;still
+                missing&rdquo; case at random, how often does the model assign a
+                higher score to the found case?</em> A perfect model scores
+                <strong>1.0</strong>; random guessing scores <strong>0.5</strong>.
+                Drag the sliders below to see how the three most-confused factors
+                &mdash; separation, threshold and class balance &mdash; each
+                influence what you see.
+            </p>
+
+            <div class="auc-cards fade-in">
+                <div class="auc-card">
+                    <h4>1. Separation <em>moves AUC</em></h4>
+                    <p>
+                        The <em>only</em> thing that changes AUC is how much the
+                        &ldquo;found&rdquo; and &ldquo;still-missing&rdquo; score
+                        distributions overlap. More overlap &rarr; noisier model
+                        &rarr; lower AUC.
+                    </p>
+                </div>
+                <div class="auc-card">
+                    <h4>2. Threshold <em>picks a point</em></h4>
+                    <p>
+                        The decision threshold slides your operating point along
+                        the ROC curve (trading recall for false-alarms). It never
+                        changes the underlying AUC.
+                    </p>
+                </div>
+                <div class="auc-card">
+                    <h4>3. Prevalence <em>hides in precision</em></h4>
+                    <p>
+                        AUC, TPR and FPR are invariant to class balance, but
+                        <strong>precision</strong> reacts sharply. That&rsquo;s
+                        exactly why the paper undersamples the majority class to
+                        boost recall from 52% to 83%.
+                    </p>
+                </div>
+            </div>
+
+            <div class="auc-demo fade-in">
+                <div class="auc-plots">
+                    <div class="auc-panel">
+                        <div class="auc-panel-head">
+                            <h4>Score distributions</h4>
+                            <p class="auc-hint">Dashed line = threshold &middot; solid tails = model says &ldquo;found&rdquo;</p>
+                        </div>
+                        <svg class="auc-svg" id="aucDist" viewBox="0 0 420 210"
+                             role="img" aria-label="Score distributions for Found vs. Still missing classes"></svg>
+                    </div>
+
+                    <div class="auc-panel">
+                        <div class="auc-panel-head">
+                            <h4>ROC curve</h4>
+                            <p class="auc-hint">Dot = current threshold &middot; shaded area = AUC</p>
+                        </div>
+                        <svg class="auc-svg" id="aucRoc" viewBox="0 0 260 240"
+                             role="img" aria-label="ROC curve with current operating point"></svg>
+                    </div>
+                </div>
+
+                <div class="auc-controls">
+                    <div class="auc-kpis">
+                        <div class="auc-kpi auc-kpi-hero">
+                            <div class="auc-kpi-label">AUC</div>
+                            <div class="auc-kpi-value" id="aucAucVal">0.857</div>
+                        </div>
+                        <div class="auc-kpi-row">
+                            <div class="auc-kpi">
+                                <div class="auc-kpi-label">Recall (TPR)</div>
+                                <div class="auc-kpi-value" id="aucTprVal">77.3%</div>
+                            </div>
+                            <div class="auc-kpi">
+                                <div class="auc-kpi-label">False alarm (FPR)</div>
+                                <div class="auc-kpi-value" id="aucFprVal">22.7%</div>
+                            </div>
+                            <div class="auc-kpi">
+                                <div class="auc-kpi-label">Precision</div>
+                                <div class="auc-kpi-value" id="aucPrecVal">59.3%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="auc-slider">
+                        <label>
+                            <span>Class separation <em>(centers apart)</em></span>
+                            <span id="aucSepVal">1.50</span>
+                        </label>
+                        <input type="range" id="aucSep" min="0" max="400" value="150" step="1">
+                        <div class="auc-slider-hint">
+                            How far apart the centers of the two score
+                            distributions sit. Only this slider moves AUC.
+                        </div>
+                    </div>
+
+                    <div class="auc-slider">
+                        <label>
+                            <span>Decision threshold</span>
+                            <span id="aucThrVal">0.00</span>
+                        </label>
+                        <input type="range" id="aucThr" min="-400" max="400" value="0" step="1">
+                        <div class="auc-slider-hint">
+                            Slides the operating point along the ROC curve.
+                            AUC stays the same &mdash; only recall and
+                            false-alarm swap.
+                        </div>
+                    </div>
+
+                    <div class="auc-slider">
+                        <label>
+                            <span>Positive prevalence</span>
+                            <span id="aucPrevVal">30%</span>
+                        </label>
+                        <input type="range" id="aucPrev" min="5" max="95" value="30" step="1">
+                        <div class="auc-slider-hint">
+                            Share of cases that are truly &ldquo;found.&rdquo;
+                            Watch precision collapse when the positive class
+                            becomes rare &mdash; even at the same AUC.
+                        </div>
+                    </div>
+
+                    <div class="auc-presets">
+                        <button type="button" data-auc-preset="random">Random (0.5)</button>
+                        <button type="button" data-auc-preset="paper">Paper (&asymp;0.73)</button>
+                        <button type="button" data-auc-preset="strong">Strong (&asymp;0.92)</button>
+                        <button type="button" data-auc-preset="perfect">Perfect (1.0)</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="auc-takeaway">
+                <strong>In the paper&rsquo;s language:</strong> the Gradient
+                Boosting Classifier pushes AUC from the
+                mean-elapsed-time baseline (&asymp;0.63) up to
+                &asymp;0.73 &mdash; exactly the kind of separation change you
+                can produce with the first slider. Undersampling the dominant
+                &ldquo;still missing&rdquo; class doesn&rsquo;t move AUC, but
+                it lets the team pick a more generous threshold that keeps
+                recall on the minority &ldquo;found&rdquo; class high &mdash;
+                the trade-off the middle slider reveals.
             </div>
         </div>
     </section>
@@ -2434,7 +2951,404 @@
 
             // ===== Interactive data explorer =====
             initExplorer();
+
+            // ===== AUC / ROC explainer demo =====
+            initAucExplainer();
         });
+
+        function initAucExplainer() {
+            const distSvg = document.getElementById('aucDist');
+            const rocSvg = document.getElementById('aucRoc');
+            if (!distSvg || !rocSvg) return;
+
+            const SVG_NS = 'http://www.w3.org/2000/svg';
+
+            // Gaussian helpers.
+            // Abramowitz & Stegun 7.1.26 approximation of erf (max error ~1.5e-7).
+            function erf(x) {
+                const sign = x < 0 ? -1 : 1;
+                x = Math.abs(x);
+                const a1 = 0.254829592, a2 = -0.284496736, a3 = 1.421413741;
+                const a4 = -1.453152027, a5 = 1.061405429, p = 0.3275911;
+                const t = 1 / (1 + p * x);
+                const y = 1 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t *
+                    Math.exp(-x * x);
+                return sign * y;
+            }
+            function Phi(x) { return 0.5 * (1 + erf(x / Math.SQRT2)); }
+            function phiPdf(x) {
+                return Math.exp(-0.5 * x * x) / Math.sqrt(2 * Math.PI);
+            }
+
+            const state = {
+                d: 1.5,         // class separation (slider 0..4)
+                thr: 0.0,       // decision threshold (slider -4..4)
+                prev: 0.30      // positive prevalence (slider 0.05..0.95)
+            };
+
+            // Plot domains shared by both distributions.
+            const X_MIN = -4.5;
+            const X_MAX = 4.5;
+
+            // Distribution plot geometry (viewBox 420x210).
+            const DIST = {
+                w: 420, h: 210,
+                padL: 30, padR: 14, padT: 18, padB: 28,
+                yMax: 0.45
+            };
+            function distSx(x) {
+                return DIST.padL +
+                    (x - X_MIN) / (X_MAX - X_MIN) *
+                    (DIST.w - DIST.padL - DIST.padR);
+            }
+            function distSy(y) {
+                return DIST.h - DIST.padB -
+                    (y / DIST.yMax) * (DIST.h - DIST.padT - DIST.padB);
+            }
+
+            // ROC plot geometry (viewBox 260x240, a 200x200 square plot).
+            const ROC = {
+                w: 260, h: 240,
+                padL: 42, padR: 18, padT: 18, padB: 42
+            };
+            function rocSx(fpr) {
+                return ROC.padL + fpr * (ROC.w - ROC.padL - ROC.padR);
+            }
+            function rocSy(tpr) {
+                return ROC.h - ROC.padB -
+                    tpr * (ROC.h - ROC.padT - ROC.padB);
+            }
+
+            function pdfPoints(mu, xStart, xEnd, N) {
+                const pts = [];
+                for (let i = 0; i <= N; i++) {
+                    const x = xStart + (xEnd - xStart) * i / N;
+                    pts.push([x, phiPdf(x - mu)]);
+                }
+                return pts;
+            }
+
+            function fillPath(pts, sx, sy, baseY) {
+                if (pts.length === 0) return '';
+                let d = 'M ' + sx(pts[0][0]) + ' ' + baseY;
+                for (const p of pts) d += ' L ' + sx(p[0]) + ' ' + sy(p[1]);
+                d += ' L ' + sx(pts[pts.length - 1][0]) + ' ' + baseY + ' Z';
+                return d;
+            }
+
+            function linePath(pts, sx, sy) {
+                return pts.map(function (p, i) {
+                    return (i === 0 ? 'M ' : 'L ') + sx(p[0]) + ' ' + sy(p[1]);
+                }).join(' ');
+            }
+
+            function el(tag, attrs) {
+                const node = document.createElementNS(SVG_NS, tag);
+                for (const k in attrs) node.setAttribute(k, attrs[k]);
+                return node;
+            }
+
+            function renderDist() {
+                distSvg.innerHTML = '';
+                const d = state.d, t = state.thr;
+                const muN = -d / 2, muP = d / 2;
+
+                const baseY = distSy(0);
+
+                // Full-curve fills (soft, underneath).
+                const negAll = pdfPoints(muN, X_MIN, X_MAX, 120);
+                const posAll = pdfPoints(muP, X_MIN, X_MAX, 120);
+                distSvg.appendChild(el('path', {
+                    d: fillPath(negAll, distSx, distSy, baseY),
+                    class: 'dist-fill-neg'
+                }));
+                distSvg.appendChild(el('path', {
+                    d: fillPath(posAll, distSx, distSy, baseY),
+                    class: 'dist-fill-pos'
+                }));
+
+                // Right-of-threshold tails (darker: "model predicts found").
+                if (t < X_MAX) {
+                    const negTail = pdfPoints(muN, t, X_MAX, 60);
+                    const posTail = pdfPoints(muP, t, X_MAX, 60);
+                    distSvg.appendChild(el('path', {
+                        d: fillPath(negTail, distSx, distSy, baseY),
+                        class: 'dist-tail-neg'
+                    }));
+                    distSvg.appendChild(el('path', {
+                        d: fillPath(posTail, distSx, distSy, baseY),
+                        class: 'dist-tail-pos'
+                    }));
+                }
+
+                // Outlines on top.
+                distSvg.appendChild(el('path', {
+                    d: linePath(negAll, distSx, distSy),
+                    class: 'dist-line-neg'
+                }));
+                distSvg.appendChild(el('path', {
+                    d: linePath(posAll, distSx, distSy),
+                    class: 'dist-line-pos'
+                }));
+
+                // Baseline axis.
+                distSvg.appendChild(el('line', {
+                    x1: distSx(X_MIN), y1: baseY,
+                    x2: distSx(X_MAX), y2: baseY,
+                    class: 'axis'
+                }));
+
+                // X-axis ticks every 1 unit.
+                for (let v = -4; v <= 4; v++) {
+                    distSvg.appendChild(el('line', {
+                        x1: distSx(v), y1: baseY,
+                        x2: distSx(v), y2: baseY + 4,
+                        class: 'tick'
+                    }));
+                    const lab = el('text', {
+                        x: distSx(v), y: baseY + 16,
+                        class: 'axis-label',
+                        'text-anchor': 'middle'
+                    });
+                    lab.textContent = v.toString();
+                    distSvg.appendChild(lab);
+                }
+
+                // Threshold line + label.
+                distSvg.appendChild(el('line', {
+                    x1: distSx(t), y1: DIST.padT - 4,
+                    x2: distSx(t), y2: baseY,
+                    class: 'threshold-line'
+                }));
+                const thrLab = el('text', {
+                    x: distSx(t), y: DIST.padT - 6,
+                    class: 'threshold-label',
+                    'text-anchor': 'middle'
+                });
+                thrLab.textContent = 't = ' + t.toFixed(2);
+                distSvg.appendChild(thrLab);
+
+                // Legend (top-right).
+                const legX = DIST.w - DIST.padR - 160;
+                const legY = DIST.padT;
+                distSvg.appendChild(el('rect', {
+                    x: legX, y: legY, width: 10, height: 10, rx: 2,
+                    class: 'legend-swatch-neg'
+                }));
+                const legNeg = el('text', {
+                    x: legX + 14, y: legY + 9,
+                    class: 'legend-label'
+                });
+                legNeg.textContent = 'Still missing';
+                distSvg.appendChild(legNeg);
+                distSvg.appendChild(el('rect', {
+                    x: legX + 88, y: legY, width: 10, height: 10, rx: 2,
+                    class: 'legend-swatch-pos'
+                }));
+                const legPos = el('text', {
+                    x: legX + 102, y: legY + 9,
+                    class: 'legend-label'
+                });
+                legPos.textContent = 'Found';
+                distSvg.appendChild(legPos);
+
+                // X-axis title.
+                const xLab = el('text', {
+                    x: (distSx(X_MIN) + distSx(X_MAX)) / 2,
+                    y: DIST.h - 4,
+                    class: 'axis-label',
+                    'text-anchor': 'middle'
+                });
+                xLab.textContent = 'model score';
+                distSvg.appendChild(xLab);
+            }
+
+            function renderRoc() {
+                rocSvg.innerHTML = '';
+                const d = state.d, t = state.thr;
+                const muN = -d / 2, muP = d / 2;
+
+                // Sample ROC points by sweeping threshold from high to low.
+                const N = 120;
+                const ts = 6 + d / 2;
+                const te = -6 + d / 2;
+                const pts = [];
+                for (let i = 0; i <= N; i++) {
+                    const tt = ts + (te - ts) * i / N;
+                    const fpr = 1 - Phi(tt - muN);
+                    const tpr = 1 - Phi(tt - muP);
+                    pts.push([fpr, tpr]);
+                }
+
+                // AUC shaded area (polygon under the curve).
+                let fillD = 'M ' + rocSx(0) + ' ' + rocSy(0);
+                for (const p of pts) fillD += ' L ' + rocSx(p[0]) + ' ' + rocSy(p[1]);
+                fillD += ' L ' + rocSx(1) + ' ' + rocSy(0) + ' Z';
+                rocSvg.appendChild(el('path', { d: fillD, class: 'roc-fill' }));
+
+                // Random-classifier diagonal.
+                rocSvg.appendChild(el('line', {
+                    x1: rocSx(0), y1: rocSy(0),
+                    x2: rocSx(1), y2: rocSy(1),
+                    class: 'roc-diagonal'
+                }));
+
+                // ROC curve outline.
+                rocSvg.appendChild(el('path', {
+                    d: linePath(pts, rocSx, rocSy),
+                    class: 'roc-line'
+                }));
+
+                // Axes frame.
+                rocSvg.appendChild(el('line', {
+                    x1: rocSx(0), y1: rocSy(0),
+                    x2: rocSx(1), y2: rocSy(0),
+                    class: 'axis'
+                }));
+                rocSvg.appendChild(el('line', {
+                    x1: rocSx(0), y1: rocSy(0),
+                    x2: rocSx(0), y2: rocSy(1),
+                    class: 'axis'
+                }));
+
+                // Ticks + labels at 0, 0.5, 1.
+                const ticks = [0, 0.25, 0.5, 0.75, 1];
+                for (const tk of ticks) {
+                    rocSvg.appendChild(el('line', {
+                        x1: rocSx(tk), y1: rocSy(0),
+                        x2: rocSx(tk), y2: rocSy(0) + 4,
+                        class: 'tick'
+                    }));
+                    const xLab = el('text', {
+                        x: rocSx(tk), y: rocSy(0) + 16,
+                        class: 'axis-label',
+                        'text-anchor': 'middle'
+                    });
+                    xLab.textContent = tk.toFixed(tk === 0 || tk === 1 ? 0 : 2).replace(/^0/, '');
+                    if (tk === 0) xLab.textContent = '0';
+                    if (tk === 1) xLab.textContent = '1';
+                    rocSvg.appendChild(xLab);
+
+                    rocSvg.appendChild(el('line', {
+                        x1: rocSx(0) - 4, y1: rocSy(tk),
+                        x2: rocSx(0), y2: rocSy(tk),
+                        class: 'tick'
+                    }));
+                    const yLab = el('text', {
+                        x: rocSx(0) - 8, y: rocSy(tk) + 3,
+                        class: 'axis-label',
+                        'text-anchor': 'end'
+                    });
+                    yLab.textContent = tk === 0 || tk === 1 ? tk.toString() :
+                        tk.toFixed(2).replace(/^0/, '');
+                    rocSvg.appendChild(yLab);
+                }
+
+                // Current operating-point dot.
+                const fprNow = 1 - Phi(t - muN);
+                const tprNow = 1 - Phi(t - muP);
+                rocSvg.appendChild(el('line', {
+                    x1: rocSx(fprNow), y1: rocSy(0),
+                    x2: rocSx(fprNow), y2: rocSy(tprNow),
+                    class: 'roc-dot-guide'
+                }));
+                rocSvg.appendChild(el('line', {
+                    x1: rocSx(0), y1: rocSy(tprNow),
+                    x2: rocSx(fprNow), y2: rocSy(tprNow),
+                    class: 'roc-dot-guide'
+                }));
+                rocSvg.appendChild(el('circle', {
+                    cx: rocSx(fprNow), cy: rocSy(tprNow), r: 5,
+                    class: 'roc-dot'
+                }));
+
+                // Axis titles.
+                const xTitle = el('text', {
+                    x: (rocSx(0) + rocSx(1)) / 2, y: ROC.h - 6,
+                    class: 'axis-label',
+                    'text-anchor': 'middle'
+                });
+                xTitle.textContent = 'False-positive rate';
+                rocSvg.appendChild(xTitle);
+
+                const yTitle = el('text', {
+                    x: 12, y: (rocSy(0) + rocSy(1)) / 2,
+                    class: 'axis-label',
+                    'text-anchor': 'middle',
+                    transform: 'rotate(-90 12 ' + ((rocSy(0) + rocSy(1)) / 2) + ')'
+                });
+                yTitle.textContent = 'True-positive rate';
+                rocSvg.appendChild(yTitle);
+            }
+
+            function updateKpis() {
+                const d = state.d, t = state.thr, pi = state.prev;
+                const muN = -d / 2, muP = d / 2;
+                const auc = Phi(d / Math.SQRT2);
+                const fpr = 1 - Phi(t - muN);
+                const tpr = 1 - Phi(t - muP);
+                const denom = pi * tpr + (1 - pi) * fpr;
+                const prec = denom > 0 ? (pi * tpr) / denom : 0;
+
+                document.getElementById('aucAucVal').textContent = auc.toFixed(3);
+                document.getElementById('aucTprVal').textContent =
+                    (tpr * 100).toFixed(1) + '%';
+                document.getElementById('aucFprVal').textContent =
+                    (fpr * 100).toFixed(1) + '%';
+                document.getElementById('aucPrecVal').textContent =
+                    (prec * 100).toFixed(1) + '%';
+
+                document.getElementById('aucSepVal').textContent = d.toFixed(2);
+                document.getElementById('aucThrVal').textContent = t.toFixed(2);
+                document.getElementById('aucPrevVal').textContent =
+                    Math.round(pi * 100) + '%';
+            }
+
+            function rerender() {
+                renderDist();
+                renderRoc();
+                updateKpis();
+            }
+
+            // Wire controls.
+            const sepEl = document.getElementById('aucSep');
+            const thrEl = document.getElementById('aucThr');
+            const prevEl = document.getElementById('aucPrev');
+
+            sepEl.addEventListener('input', function () {
+                state.d = parseInt(sepEl.value, 10) / 100;
+                rerender();
+            });
+            thrEl.addEventListener('input', function () {
+                state.thr = parseInt(thrEl.value, 10) / 100;
+                rerender();
+            });
+            prevEl.addEventListener('input', function () {
+                state.prev = parseInt(prevEl.value, 10) / 100;
+                updateKpis();
+            });
+
+            // Presets.
+            const presets = {
+                random:  { d: 0.0, thr: 0.0, prev: 0.30 },
+                paper:   { d: 0.87, thr: 0.15, prev: 0.34 },
+                strong:  { d: 2.0, thr: 0.0, prev: 0.30 },
+                perfect: { d: 4.0, thr: 0.0, prev: 0.30 }
+            };
+            document.querySelectorAll('[data-auc-preset]').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    const p = presets[btn.getAttribute('data-auc-preset')];
+                    if (!p) return;
+                    state.d = p.d; state.thr = p.thr; state.prev = p.prev;
+                    sepEl.value = Math.round(p.d * 100);
+                    thrEl.value = Math.round(p.thr * 100);
+                    prevEl.value = Math.round(p.prev * 100);
+                    rerender();
+                });
+            });
+
+            rerender();
+        }
 
         function initExplorer() {
             const loadingEl = document.getElementById('exploreLoading');
