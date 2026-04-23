@@ -15,12 +15,17 @@ includes an **interactive data explorer** that loads the exact
 7,855-case cohort from the paper and lets readers slice the *found-alive*
 rate by age, sex, municipality size, vulnerability factor and education.
 Every change to the filters live-updates the KPIs, outcome stack bar,
-per-subgroup breakdowns, two color-coded stacked histograms (age at
-missingness and year reported) with hover tooltips, and a **subgroup
-parity (identity) plot** that scatter-charts each subgroup&rsquo;s
-baseline found rate against its rate in the current selection around a
-`y = x` reference, making it easy to see which groups shift above or
-below the cohort-wide baseline whenever a filter is toggled.
+a **subgroup parity (identity) plot** sitting directly under the
+outcome mix, two color-coded stacked histograms (age at missingness
+and year reported) with hover tooltips, and per-subgroup breakdowns.
+The parity plot encodes each subgroup on seven visual channels at
+once &mdash; *x* = full-cohort rate, *y* = current-selection rate,
+bubble color = feature family, bubble area = selected-case count,
+vertical whisker = 95% Wilson confidence interval, a thin guide line
+tying each bubble to its baseline position on the diagonal, and a
+hollow marker at that baseline &mdash; so it becomes obvious which
+groups shift above or below the cohort-wide baseline whenever a
+filter is toggled and how confident each shift is.
 
 A dedicated **"Understanding ROC-AUC"** section walks readers through
 the metric the paper optimizes, with a live dummy-model demo: two

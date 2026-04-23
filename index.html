@@ -1648,7 +1648,7 @@
         }
 
         .identity-svg .id-bubble {
-            opacity: 0.82;
+            opacity: 0.72;
             transition: opacity 0.15s ease, stroke-width 0.15s ease;
             cursor: pointer;
         }
@@ -1656,6 +1656,32 @@
         .identity-svg .id-bubble:hover {
             opacity: 1;
             stroke-width: 2;
+        }
+
+        .identity-svg .id-guide {
+            stroke-width: 1.5;
+            opacity: 0.45;
+            stroke-linecap: round;
+        }
+
+        .identity-svg .id-baseline-marker {
+            fill: #fff;
+            stroke-width: 1.4;
+            opacity: 0.75;
+        }
+
+        .identity-svg .id-whisker {
+            stroke-width: 1.4;
+            opacity: 0.65;
+            stroke-linecap: round;
+            fill: none;
+        }
+
+        .identity-svg .id-whisker-cap {
+            stroke-width: 1.4;
+            opacity: 0.65;
+            stroke-linecap: round;
+            fill: none;
         }
 
         .identity-legend {
@@ -2911,6 +2937,46 @@
                             </div>
                         </div>
 
+                        <div class="identity-card">
+                            <div class="identity-head">
+                                <div class="identity-head-text">
+                                    <h5>Subgroup parity vs. full cohort</h5>
+                                    <p class="identity-sub">
+                                        Each subgroup (sex, age band,
+                                        municipality size, reporting decade,
+                                        education or vulnerability) is encoded on
+                                        <strong>seven dimensions</strong>: its
+                                        full-cohort rate on the <strong>x</strong>
+                                        axis, its current-selection rate on the
+                                        <strong>y</strong> axis, feature family
+                                        as <strong>color</strong>, selected-case
+                                        count as bubble <strong>area</strong>,
+                                        a 95% Wilson confidence interval as a
+                                        vertical <strong>whisker</strong>, a
+                                        thin <strong>guide line</strong>
+                                        connecting the baseline (on the
+                                        diagonal) to the current point, and a
+                                        hollow <strong>baseline marker</strong>
+                                        at the starting position. Dots above
+                                        the dashed diagonal find more people
+                                        than the overall baseline; dots below
+                                        find fewer.
+                                    </p>
+                                </div>
+                                <div class="identity-badge" id="identityBadge">
+                                    selection found-rate <strong id="identityRate">&mdash;</strong>
+                                    &middot; baseline <strong id="identityBaseline">&mdash;</strong>
+                                </div>
+                            </div>
+                            <div class="identity-layout">
+                                <svg class="identity-svg" id="identityPlot"
+                                     viewBox="0 0 480 360"
+                                     role="img"
+                                     aria-label="Subgroup parity plot"></svg>
+                                <div class="identity-legend" id="identityLegend"></div>
+                            </div>
+                        </div>
+
                         <div class="histogram-grid">
                             <div class="histogram-card">
                                 <div class="histogram-head">
@@ -2983,39 +3049,6 @@
                                 <h5>Found rate by sex</h5>
                                 <div class="breakdown-sub">Share found alive among men and women</div>
                                 <div id="brkSex"></div>
-                            </div>
-                        </div>
-
-                        <div class="identity-card">
-                            <div class="identity-head">
-                                <div class="identity-head-text">
-                                    <h5>Subgroup parity vs. full cohort</h5>
-                                    <p class="identity-sub">
-                                        Each bubble is one subgroup (sex, age band,
-                                        municipality size, reporting decade, education
-                                        or vulnerability). The <strong>x-axis</strong>
-                                        fixes that subgroup&rsquo;s found rate in the
-                                        full 7,855-case cohort; the <strong>y-axis</strong>
-                                        shows its rate inside the current selection.
-                                        Bubble area is proportional to the number of
-                                        selected cases in that subgroup. Dots
-                                        <strong>above</strong> the dashed diagonal
-                                        find more people than the full-cohort
-                                        baseline; dots <strong>below</strong> find
-                                        fewer.
-                                    </p>
-                                </div>
-                                <div class="identity-badge" id="identityBadge">
-                                    selection found-rate <strong id="identityRate">&mdash;</strong>
-                                    &middot; baseline <strong id="identityBaseline">&mdash;</strong>
-                                </div>
-                            </div>
-                            <div class="identity-layout">
-                                <svg class="identity-svg" id="identityPlot"
-                                     viewBox="0 0 480 360"
-                                     role="img"
-                                     aria-label="Subgroup parity plot"></svg>
-                                <div class="identity-legend" id="identityLegend"></div>
                             </div>
                         </div>
 
@@ -4296,19 +4329,83 @@
                     return R_MIN + (R_MAX - R_MIN) * s;
                 }
 
-                // Draw bubbles for subgroups that have data in both baseline
-                // and current selection.
+                // Wilson 95% confidence interval for a binomial proportion.
+                // z = 1.959964 for 95% two-sided.
+                function wilsonCI(p, n) {
+                    if (!n || n <= 0) return { lo: 0, hi: 1 };
+                    const z = 1.959964;
+                    const z2 = z * z;
+                    const denom = 1 + z2 / n;
+                    const center = (p + z2 / (2 * n)) / denom;
+                    const half = (z * Math.sqrt(p * (1 - p) / n + z2 / (4 * n * n))) / denom;
+                    return { lo: Math.max(0, center - half), hi: Math.min(1, center + half) };
+                }
+
+                // Prepare drawables: bubbles, guide lines, baseline markers, CI whiskers.
                 const drawn = [];
                 for (let i = 0; i < baseline.length; i++) {
                     const b = baseline[i], c = current[i];
                     if (b.rate === null || c.rate === null || c.count === 0) continue;
                     const r = radius(c.count);
-                    drawn.push({ b: b, c: c, r: r });
+                    drawn.push({
+                        b: b, c: c, r: r,
+                        ci: wilsonCI(c.rate, c.count)
+                    });
                 }
-
                 // Draw larger bubbles first so smaller ones sit on top.
                 drawn.sort(function (a, b) { return b.r - a.r; });
 
+                // Layer 1: faint guide lines from diagonal baseline -> current point.
+                for (const d of drawn) {
+                    const cx = sx(d.b.rate);
+                    const yBase = sy(d.b.rate);
+                    const yCur = sy(d.c.rate);
+                    if (Math.abs(yBase - yCur) < 0.5) continue;
+                    svg.appendChild(el('line', {
+                        x1: cx, y1: yBase,
+                        x2: cx, y2: yCur,
+                        stroke: d.c.color,
+                        class: 'id-guide'
+                    }));
+                }
+
+                // Layer 2: 95% Wilson CI whiskers for the selection rate.
+                for (const d of drawn) {
+                    const cx = sx(d.b.rate);
+                    const yLo = sy(d.ci.lo);
+                    const yHi = sy(d.ci.hi);
+                    svg.appendChild(el('line', {
+                        x1: cx, y1: yLo, x2: cx, y2: yHi,
+                        stroke: d.c.color,
+                        class: 'id-whisker'
+                    }));
+                    const capW = Math.max(3, Math.min(d.r * 0.55, 6));
+                    svg.appendChild(el('line', {
+                        x1: cx - capW, y1: yLo,
+                        x2: cx + capW, y2: yLo,
+                        stroke: d.c.color,
+                        class: 'id-whisker-cap'
+                    }));
+                    svg.appendChild(el('line', {
+                        x1: cx - capW, y1: yHi,
+                        x2: cx + capW, y2: yHi,
+                        stroke: d.c.color,
+                        class: 'id-whisker-cap'
+                    }));
+                }
+
+                // Layer 3: hollow baseline markers on the diagonal.
+                for (const d of drawn) {
+                    const cx = sx(d.b.rate);
+                    const cy = sy(d.b.rate);
+                    svg.appendChild(el('circle', {
+                        cx: cx, cy: cy, r: 3.2,
+                        stroke: d.c.color,
+                        class: 'id-baseline-marker'
+                    }));
+                }
+
+                // Layer 4: filled "current selection" bubbles (top-most, interactive).
                 for (const d of drawn) {
                     const cx = sx(d.b.rate);
                     const cy = sy(d.c.rate);
@@ -4325,6 +4422,10 @@
                     circle.dataset.current = d.c.rate.toFixed(4);
                     circle.dataset.count = String(d.c.count);
                     circle.dataset.found = String(d.c.foundCount);
+                    circle.dataset.basecount = String(d.b.count);
+                    circle.dataset.basefound = String(d.b.foundCount);
+                    circle.dataset.cilo = d.ci.lo.toFixed(4);
+                    circle.dataset.cihi = d.ci.hi.toFixed(4);
                     svg.appendChild(circle);
                 }
 
@@ -4341,15 +4442,22 @@
                     const delta = (cur - base) * 100;
                     const deltaStr = (delta >= 0 ? '+' : '') + delta.toFixed(1) + ' pp';
                     const cls = Math.abs(delta) < 0.5 ? 'same' : (delta > 0 ? 'up' : 'down');
+                    const ciLo = parseFloat(t.dataset.cilo);
+                    const ciHi = parseFloat(t.dataset.cihi);
                     tip.innerHTML =
                         '<div class="identity-tooltip-feature">' + t.dataset.feature + '</div>' +
                         '<div class="identity-tooltip-label">' + t.dataset.label + '</div>' +
                         '<div class="identity-tooltip-row">Baseline: ' +
-                            (base * 100).toFixed(1) + '%</div>' +
+                            (base * 100).toFixed(1) + '% &middot; ' +
+                            Number(t.dataset.basefound).toLocaleString() + ' / ' +
+                            Number(t.dataset.basecount).toLocaleString() + '</div>' +
                         '<div class="identity-tooltip-row">Selection: ' +
                             (cur * 100).toFixed(1) + '% &middot; ' +
                             Number(t.dataset.found).toLocaleString() + ' / ' +
                             Number(t.dataset.count).toLocaleString() + '</div>' +
+                        '<div class="identity-tooltip-row">95% CI: ' +
+                            (ciLo * 100).toFixed(1) + '% &ndash; ' +
+                            (ciHi * 100).toFixed(1) + '%</div>' +
                         '<div class="identity-tooltip-delta ' + cls + '">' + deltaStr + '</div>';
                     tip.style.left = e.clientX + 'px';
                     tip.style.top = e.clientY + 'px';
@@ -4398,9 +4506,12 @@
                 const note = document.createElement('div');
                 note.className = 'identity-legend-note';
                 note.innerHTML =
-                    'Bubble area &prop; subgroup size in the current selection. ' +
-                    'Hover any bubble for its baseline vs. selection rate and ' +
-                    'change in percentage points.';
+                    '<strong>Bubble area</strong> &prop; subgroup size in the ' +
+                    'selection. <strong>Hollow ring</strong> on the diagonal = ' +
+                    'full-cohort baseline. <strong>Guide line</strong> connects ' +
+                    'baseline to current. <strong>Whisker</strong> = 95% Wilson ' +
+                    'confidence interval for the selection rate. Hover any ' +
+                    'bubble for exact counts, rates, CI and delta.';
                 host.appendChild(note);
             }
 
