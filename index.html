@@ -2136,6 +2136,488 @@
             }
         }
 
+        /* ===== Gradient Boosting Classifier explainer ===== */
+        .gbc-intro {
+            max-width: 880px;
+            margin: 0 auto 36px;
+            text-align: center;
+            font-size: 1.05rem;
+            color: #475569;
+            line-height: 1.7;
+        }
+
+        .gbc-intro em { color: #0f766e; font-style: normal; font-weight: 600; }
+
+        .gbc-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 36px;
+        }
+
+        .gbc-card {
+            background: #f0fdfa;
+            border: 1px solid #99f6e4;
+            border-radius: 12px;
+            padding: 20px 22px;
+            line-height: 1.55;
+        }
+
+        .gbc-card h4 {
+            margin: 0 0 8px;
+            font-size: 1rem;
+            color: #0f766e;
+            font-weight: 700;
+        }
+
+        .gbc-card h4 em { color: #0d9488; font-style: normal; }
+
+        .gbc-card p {
+            margin: 0;
+            font-size: 0.88rem;
+            color: #134e4a;
+        }
+
+        .gbc-demo {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 28px 28px 32px;
+            display: grid;
+            grid-template-columns: minmax(0, 1.35fr) minmax(260px, 1fr);
+            gap: 28px;
+            box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+        }
+
+        .gbc-plots {
+            display: grid;
+            grid-template-rows: auto auto;
+            gap: 20px;
+        }
+
+        .gbc-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .gbc-panel-head h4 {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #0f172a;
+        }
+
+        .gbc-hint {
+            margin: 2px 0 0;
+            font-size: 0.78rem;
+            color: #64748b;
+        }
+
+        .gbc-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .gbc-svg .axis { stroke: #cbd5e1; stroke-width: 1; }
+        .gbc-svg .axis-label { font-size: 10px; fill: #475569; font-weight: 600; }
+        .gbc-svg .tick { font-size: 9px; fill: #64748b; }
+        .gbc-svg .grid { stroke: #e2e8f0; stroke-width: 0.6; stroke-dasharray: 2 3; }
+        .gbc-svg .loss-line { fill: none; stroke: #0d9488; stroke-width: 2; stroke-linejoin: round; }
+        .gbc-svg .loss-area { fill: #14b8a6; opacity: 0.16; }
+        .gbc-svg .loss-dot { fill: #0f766e; stroke: #fff; stroke-width: 2; }
+        .gbc-svg .loss-guide { stroke: #0f766e; stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.55; }
+        .gbc-svg .pt-pos { fill: #d97706; stroke: #fff; stroke-width: 1; }
+        .gbc-svg .pt-neg { fill: #475569; stroke: #fff; stroke-width: 1; }
+        .gbc-svg .legend-label { font-size: 10px; fill: #475569; }
+
+        .gbc-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .gbc-kpis {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+        }
+
+        .gbc-kpi {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 10px 12px;
+            text-align: center;
+        }
+
+        .gbc-kpi-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .gbc-kpi-value {
+            margin-top: 3px;
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #0f766e;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .gbc-slider {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .gbc-slider label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .gbc-slider label em {
+            font-style: normal;
+            color: #64748b;
+            font-weight: 500;
+            font-size: 0.8rem;
+        }
+
+        .gbc-slider label span:last-child {
+            color: #0f766e;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .gbc-slider input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 4px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .gbc-slider input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px; height: 16px;
+            border-radius: 50%;
+            background: #0d9488;
+            border: 2px solid #fff;
+            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.2);
+            cursor: pointer;
+        }
+
+        .gbc-slider input[type="range"]::-moz-range-thumb {
+            width: 16px; height: 16px;
+            border-radius: 50%;
+            background: #0d9488;
+            border: 2px solid #fff;
+            cursor: pointer;
+        }
+
+        .gbc-slider-hint {
+            font-size: 0.75rem;
+            color: #64748b;
+            line-height: 1.45;
+        }
+
+        .gbc-presets {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .gbc-presets button {
+            padding: 6px 12px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            background: #fff;
+            color: #334155;
+            border: 1px solid #e2e8f0;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .gbc-presets button:hover {
+            border-color: #0d9488;
+            color: #0d9488;
+        }
+
+        .gbc-takeaway {
+            margin-top: 28px;
+            padding: 18px 22px;
+            background: linear-gradient(135deg, #ccfbf1, #f0fdfa);
+            border-left: 4px solid #0d9488;
+            border-radius: 10px;
+            font-size: 0.88rem;
+            color: #134e4a;
+            line-height: 1.6;
+        }
+
+        .gbc-takeaway strong { color: #0f766e; }
+
+        @media (max-width: 960px) {
+            .gbc-cards { grid-template-columns: 1fr; }
+            .gbc-demo { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 540px) {
+            .gbc-kpis { grid-template-columns: 1fr; }
+        }
+
+        /* ===== SHAP explainer ===== */
+        .shap-intro {
+            max-width: 880px;
+            margin: 0 auto 36px;
+            text-align: center;
+            font-size: 1.05rem;
+            color: #475569;
+            line-height: 1.7;
+        }
+
+        .shap-intro em { color: #7c3aed; font-style: normal; font-weight: 600; }
+
+        .shap-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 36px;
+        }
+
+        .shap-card {
+            background: #f5f3ff;
+            border: 1px solid #ddd6fe;
+            border-radius: 12px;
+            padding: 20px 22px;
+            line-height: 1.55;
+        }
+
+        .shap-card h4 {
+            margin: 0 0 8px;
+            font-size: 1rem;
+            color: #6d28d9;
+            font-weight: 700;
+        }
+
+        .shap-card h4 em { color: #7c3aed; font-style: normal; }
+
+        .shap-card p {
+            margin: 0;
+            font-size: 0.88rem;
+            color: #4c1d95;
+        }
+
+        .shap-demo {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 28px 28px 32px;
+            display: grid;
+            grid-template-columns: minmax(0, 1.35fr) minmax(260px, 1fr);
+            gap: 28px;
+            box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+        }
+
+        .shap-plots {
+            display: grid;
+            grid-template-rows: auto auto;
+            gap: 20px;
+        }
+
+        .shap-panel-head h4 {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #0f172a;
+        }
+
+        .shap-hint {
+            margin: 2px 0 0;
+            font-size: 0.78rem;
+            color: #64748b;
+        }
+
+        .shap-svg { width: 100%; height: auto; display: block; }
+        .shap-svg .axis { stroke: #cbd5e1; stroke-width: 1; }
+        .shap-svg .axis-label { font-size: 10px; fill: #475569; font-weight: 600; }
+        .shap-svg .tick { font-size: 9px; fill: #64748b; }
+        .shap-svg .grid { stroke: #e2e8f0; stroke-width: 0.6; stroke-dasharray: 2 3; }
+        .shap-svg .wf-bar-pos { fill: #d97706; opacity: 0.9; }
+        .shap-svg .wf-bar-neg { fill: #475569; opacity: 0.9; }
+        .shap-svg .wf-connector { stroke: #94a3b8; stroke-width: 1; stroke-dasharray: 2 3; }
+        .shap-svg .wf-label { font-size: 10px; fill: #0f172a; font-weight: 600; }
+        .shap-svg .wf-value { font-size: 10px; fill: #475569; font-variant-numeric: tabular-nums; }
+        .shap-svg .wf-baseline-line { stroke: #7c3aed; stroke-width: 1.4; stroke-dasharray: 4 3; }
+        .shap-svg .wf-final-line { stroke: #0f766e; stroke-width: 1.6; }
+        .shap-svg .bee-point { stroke: #fff; stroke-width: 0.5; }
+        .shap-svg .bee-row { stroke: #e2e8f0; stroke-width: 0.6; stroke-dasharray: 1 2; }
+
+        .shap-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .shap-prediction {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #f5f3ff, #ede9fe);
+            border: 1px solid #ddd6fe;
+        }
+
+        .shap-prediction-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #6d28d9;
+        }
+
+        .shap-prediction-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #5b21b6;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .shap-prediction-sub {
+            font-size: 0.78rem;
+            color: #6b21a8;
+        }
+
+        .shap-slider {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .shap-slider label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .shap-slider label em {
+            font-style: normal;
+            color: #64748b;
+            font-weight: 500;
+            font-size: 0.8rem;
+        }
+
+        .shap-slider label span:last-child {
+            color: #7c3aed;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .shap-slider input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 4px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .shap-slider input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px; height: 16px;
+            border-radius: 50%;
+            background: #7c3aed;
+            border: 2px solid #fff;
+            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.2);
+            cursor: pointer;
+        }
+
+        .shap-slider input[type="range"]::-moz-range-thumb {
+            width: 16px; height: 16px;
+            border-radius: 50%;
+            background: #7c3aed;
+            border: 2px solid #fff;
+            cursor: pointer;
+        }
+
+        .shap-pillbar {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 2px;
+        }
+
+        .shap-pillbar button {
+            padding: 6px 12px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            border: 1px solid #e2e8f0;
+            background: #fff;
+            color: #334155;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .shap-pillbar button.active {
+            border-color: #7c3aed;
+            color: #5b21b6;
+            background: #f5f3ff;
+        }
+
+        .shap-presets {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .shap-presets button {
+            padding: 6px 12px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            background: #fff;
+            color: #334155;
+            border: 1px solid #e2e8f0;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .shap-presets button:hover {
+            border-color: #7c3aed;
+            color: #7c3aed;
+        }
+
+        .shap-takeaway {
+            margin-top: 28px;
+            padding: 18px 22px;
+            background: linear-gradient(135deg, #ede9fe, #f5f3ff);
+            border-left: 4px solid #7c3aed;
+            border-radius: 10px;
+            font-size: 0.88rem;
+            color: #4c1d95;
+            line-height: 1.6;
+        }
+
+        .shap-takeaway strong { color: #6d28d9; }
+
+        @media (max-width: 960px) {
+            .shap-cards { grid-template-columns: 1fr; }
+            .shap-demo { grid-template-columns: 1fr; }
+        }
+
         @media (max-width: 540px) {
             .auc-kpi-row {
                 grid-template-columns: 1fr;
@@ -2226,6 +2708,8 @@
             <a href="#features" class="nav-link">Key Features</a>
             <a href="#results" class="nav-link">Results</a>
             <a href="#auc" class="nav-link">AUC</a>
+            <a href="#gbc" class="nav-link">GBC</a>
+            <a href="#shap" class="nav-link">SHAP</a>
             <a href="#explore" class="nav-link">Explore</a>
             <a href="#authors" class="nav-link">Authors</a>
             <a href="#bibtex" class="nav-link">Cite</a>
@@ -2802,6 +3286,310 @@
         </div>
     </section>
 
+    <!-- ===== GRADIENT BOOSTING CLASSIFIER ===== -->
+    <section id="gbc">
+        <div class="container">
+            <h2 class="section-title">Gradient Boosting in Action</h2>
+            <p class="gbc-intro">
+                The paper&rsquo;s best model is a
+                <em>Gradient Boosting Classifier</em> (GBC): it builds a
+                <em>sequence</em> of very simple decision trees &mdash; each
+                one trained to fix the mistakes of the ensemble built so far.
+                With a small synthetic dataset inspired by the paper
+                (<em>days elapsed</em> vs. <em>age at missingness</em>),
+                the demo below lets you add trees one at a time and watch
+                the decision surface sharpen and the training log-loss drop.
+            </p>
+
+            <div class="gbc-cards fade-in">
+                <div class="gbc-card">
+                    <h4>1. Weak learners <em>cooperate</em></h4>
+                    <p>
+                        Each individual tree is intentionally shallow
+                        (here, depth-1 <em>stumps</em>). On its own a stump
+                        is barely better than guessing, but adding many of
+                        them in sequence produces a strong model.
+                    </p>
+                </div>
+                <div class="gbc-card">
+                    <h4>2. Fit the <em>residuals</em></h4>
+                    <p>
+                        At step <em>m</em>, the new tree is fit on the
+                        gradient of the log-loss at the current prediction
+                        &mdash; in practice, the <em>residuals</em>
+                        <em>y&nbsp;&minus;&nbsp;p</em>. That is what &ldquo;gradient
+                        boosting&rdquo; literally means.
+                    </p>
+                </div>
+                <div class="gbc-card">
+                    <h4>3. Learning rate <em>controls speed</em></h4>
+                    <p>
+                        A small learning rate takes smaller, more careful
+                        steps: more trees are needed, but the model
+                        generalizes better. Large rates reach low loss
+                        quickly but can overshoot and overfit.
+                    </p>
+                </div>
+            </div>
+
+            <div class="gbc-demo fade-in">
+                <div class="gbc-plots">
+                    <div class="gbc-panel">
+                        <div class="gbc-panel-head">
+                            <h4>Decision surface after <span id="gbcTreesHead">30</span> trees</h4>
+                            <p class="gbc-hint">Orange cloud = P(found) high &middot; grey cloud = P(found) low &middot; dots = training samples</p>
+                        </div>
+                        <svg class="gbc-svg" id="gbcSurface" viewBox="0 0 420 260"
+                             role="img" aria-label="Decision surface of a gradient boosting classifier"></svg>
+                    </div>
+
+                    <div class="gbc-panel">
+                        <div class="gbc-panel-head">
+                            <h4>Training log-loss per iteration</h4>
+                            <p class="gbc-hint">Each new tree should push the loss down; dot marks the current setting.</p>
+                        </div>
+                        <svg class="gbc-svg" id="gbcLoss" viewBox="0 0 420 160"
+                             role="img" aria-label="Training log-loss versus boosting iteration"></svg>
+                    </div>
+                </div>
+
+                <div class="gbc-controls">
+                    <div class="gbc-kpis">
+                        <div class="gbc-kpi">
+                            <div class="gbc-kpi-label">Trees</div>
+                            <div class="gbc-kpi-value" id="gbcTreesKpi">30</div>
+                        </div>
+                        <div class="gbc-kpi">
+                            <div class="gbc-kpi-label">Log-loss</div>
+                            <div class="gbc-kpi-value" id="gbcLossKpi">0.42</div>
+                        </div>
+                        <div class="gbc-kpi">
+                            <div class="gbc-kpi-label">Train acc.</div>
+                            <div class="gbc-kpi-value" id="gbcAccKpi">82%</div>
+                        </div>
+                    </div>
+
+                    <div class="gbc-slider">
+                        <label>
+                            <span>Number of trees <em>(boosting iterations)</em></span>
+                            <span id="gbcTreesVal">30</span>
+                        </label>
+                        <input type="range" id="gbcTrees" min="1" max="60" value="30" step="1">
+                        <div class="gbc-slider-hint">
+                            How many weak learners are added to the ensemble.
+                            Slide to the left to see the underfit regime;
+                            slide right to watch the loss keep dropping.
+                        </div>
+                    </div>
+
+                    <div class="gbc-slider">
+                        <label>
+                            <span>Learning rate <em>(shrinkage)</em></span>
+                            <span id="gbcEtaVal">0.30</span>
+                        </label>
+                        <input type="range" id="gbcEta" min="5" max="100" value="30" step="1">
+                        <div class="gbc-slider-hint">
+                            Each new tree is multiplied by this rate before
+                            being added. Low &rarr; more trees needed but
+                            safer; high &rarr; fast progress but jumpier.
+                        </div>
+                    </div>
+
+                    <div class="gbc-slider">
+                        <label>
+                            <span>Tree depth <em>(per weak learner)</em></span>
+                            <span id="gbcDepthVal">1</span>
+                        </label>
+                        <input type="range" id="gbcDepth" min="1" max="3" value="1" step="1">
+                        <div class="gbc-slider-hint">
+                            Depth-1 means decision <em>stumps</em> (one split).
+                            Deeper trees capture interactions but risk
+                            overfitting with many iterations.
+                        </div>
+                    </div>
+
+                    <div class="gbc-presets">
+                        <button type="button" data-gbc-preset="underfit">Underfit (3 trees)</button>
+                        <button type="button" data-gbc-preset="paper">Paper-like</button>
+                        <button type="button" data-gbc-preset="overfit">Greedy (60 &middot; &eta;=1.0)</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gbc-takeaway">
+                <strong>Why the paper picks GBC:</strong> with tabular
+                features like <em>days elapsed</em>, <em>age</em>,
+                <em>municipality size</em>, <em>sex</em>, <em>education</em>
+                and <em>vulnerability factor</em>, no single decision rule
+                captures the full pattern. Gradient boosting adds dozens of
+                tiny, almost-orthogonal rules until the ensemble together
+                models the interactions. In the paper this recipe improves
+                ROC-AUC from the <em>mean-elapsed-time</em> baseline of
+                &asymp;0.63 to &asymp;0.73, while keeping recall on the
+                minority <em>&ldquo;found&rdquo;</em> class at 83%.
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SHAP EXPLAINER ===== -->
+    <section id="shap">
+        <div class="container">
+            <h2 class="section-title">Explaining Predictions with SHAP</h2>
+            <p class="shap-intro">
+                SHAP (<em>SHapley Additive exPlanations</em>) answers a
+                deceptively simple question for any single prediction:
+                <em>how much did each feature push the model&rsquo;s output
+                away from the average case?</em> The paper uses SHAP both
+                as a <em>global</em> feature-importance ranking (Fig.&nbsp;3
+                in the article) and, implicitly, to sanity-check the
+                model&rsquo;s logic. Slide the controls below to see a
+                local explanation build up feature by feature.
+            </p>
+
+            <div class="shap-cards fade-in">
+                <div class="shap-card">
+                    <h4>1. Additivity <em>is the rule</em></h4>
+                    <p>
+                        SHAP values are defined so that
+                        <em>baseline&nbsp;+&nbsp;&sum;&nbsp;&phi;<sub>i</sub>&nbsp;=&nbsp;prediction</em>.
+                        That means every explanation is guaranteed to add
+                        up exactly &mdash; no hand-waving.
+                    </p>
+                </div>
+                <div class="shap-card">
+                    <h4>2. Fair <em>attribution</em></h4>
+                    <p>
+                        &phi;<sub>i</sub> is the <em>average marginal
+                        contribution</em> of feature&nbsp;<em>i</em> over
+                        every possible order in which features could enter
+                        the model &mdash; the Shapley value from
+                        cooperative game theory.
+                    </p>
+                </div>
+                <div class="shap-card">
+                    <h4>3. Local <em>and</em> global</h4>
+                    <p>
+                        Each case gets its own &phi;<sub>i</sub>&rsquo;s.
+                        Averaging <em>|&phi;<sub>i</sub>|</em> across the
+                        cohort turns those local attributions into the
+                        global ranking shown in the paper&rsquo;s Key
+                        Features figure.
+                    </p>
+                </div>
+            </div>
+
+            <div class="shap-demo fade-in">
+                <div class="shap-plots">
+                    <div class="shap-panel">
+                        <div class="shap-panel-head">
+                            <h4>Local explanation (waterfall)</h4>
+                            <p class="shap-hint">
+                                Bars show each feature&rsquo;s push on the log-odds of <em>found alive</em>
+                                &middot; orange = towards <em>found</em> &middot; grey = towards <em>still missing</em>
+                            </p>
+                        </div>
+                        <svg class="shap-svg" id="shapWaterfall" viewBox="0 0 420 240"
+                             role="img" aria-label="SHAP waterfall for a single prediction"></svg>
+                    </div>
+
+                    <div class="shap-panel">
+                        <div class="shap-panel-head">
+                            <h4>Global summary (beeswarm)</h4>
+                            <p class="shap-hint">
+                                One dot per synthetic case. <em>X</em> = SHAP value &middot;
+                                <em>color</em> = feature value (blue&nbsp;=&nbsp;low, orange&nbsp;=&nbsp;high)
+                            </p>
+                        </div>
+                        <svg class="shap-svg" id="shapBeeswarm" viewBox="0 0 420 220"
+                             role="img" aria-label="SHAP beeswarm summary across synthetic cases"></svg>
+                    </div>
+                </div>
+
+                <div class="shap-controls">
+                    <div class="shap-prediction">
+                        <span class="shap-prediction-label">Model prediction</span>
+                        <span class="shap-prediction-value" id="shapPredVal">52%</span>
+                        <span class="shap-prediction-sub" id="shapPredSub">
+                            baseline 34% &middot; shift +18 pp
+                        </span>
+                    </div>
+
+                    <div class="shap-slider">
+                        <label>
+                            <span>Days elapsed since report <em>(feature 1)</em></span>
+                            <span id="shapDaysVal">300 d</span>
+                        </label>
+                        <input type="range" id="shapDays" min="0" max="1800" value="300" step="10">
+                        <div class="shap-slider-hint">
+                            Longer delays make cases harder to solve
+                            &mdash; this is the strongest negative driver
+                            in the paper&rsquo;s SHAP ranking.
+                        </div>
+                    </div>
+
+                    <div class="shap-slider">
+                        <label>
+                            <span>Age at missingness</span>
+                            <span id="shapAgeVal">75 yr</span>
+                        </label>
+                        <input type="range" id="shapAge" min="60" max="100" value="75" step="1">
+                        <div class="shap-slider-hint">
+                            Higher ages push the probability down, with
+                            a modest non-linear kink around the
+                            mid-seventies.
+                        </div>
+                    </div>
+
+                    <div class="shap-slider">
+                        <label>
+                            <span>Municipality population</span>
+                            <span id="shapMuniVal">&gt;4M</span>
+                        </label>
+                        <input type="range" id="shapMuni" min="0" max="4" value="4" step="1">
+                        <div class="shap-slider-hint">
+                            Larger cities have denser search networks
+                            &rarr; finding someone alive is more likely.
+                        </div>
+                    </div>
+
+                    <div class="shap-slider">
+                        <label>
+                            <span>Sex</span>
+                            <span id="shapSexVal">Female</span>
+                        </label>
+                        <div class="shap-pillbar" id="shapSexPills">
+                            <button type="button" data-shap-sex="F" class="active">Female</button>
+                            <button type="button" data-shap-sex="M">Male</button>
+                        </div>
+                        <div class="shap-slider-hint">
+                            The paper reports higher found-rates for women
+                            than for men; SHAP makes this visible for any
+                            individual case.
+                        </div>
+                    </div>
+
+                    <div class="shap-presets">
+                        <button type="button" data-shap-preset="easy">Easy case</button>
+                        <button type="button" data-shap-preset="average">Average case</button>
+                        <button type="button" data-shap-preset="hard">Hard case</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shap-takeaway">
+                <strong>What the paper learns from SHAP:</strong> averaged
+                across all 7,855 cases, the four biggest drivers of
+                <em>&ldquo;found alive&rdquo;</em> probability are the
+                <em>time elapsed</em> since the disappearance was reported,
+                the <em>population size</em> of the municipality where the
+                case was opened, the person&rsquo;s <em>sex</em>, and
+                their <em>age</em> &mdash; in that order. Marital status,
+                education and vulnerability factors tune the answer but
+                rarely dominate it.
+            </div>
+        </div>
+    </section>
+
     <!-- ===== EXPLORE ===== -->
     <section id="explore">
         <div class="container">
@@ -3269,6 +4057,12 @@
 
             // ===== AUC / ROC explainer demo =====
             initAucExplainer();
+
+            // ===== Gradient Boosting Classifier demo =====
+            initGbcDemo();
+
+            // ===== SHAP explainer demo =====
+            initShapDemo();
         });
 
         function initAucExplainer() {
@@ -4516,6 +5310,1093 @@
             }
 
             loadOnVisible();
+        }
+
+        // =====================================================================
+        // Gradient Boosting Classifier demo
+        // =====================================================================
+        function initGbcDemo() {
+            const surfaceSvg = document.getElementById('gbcSurface');
+            const lossSvg = document.getElementById('gbcLoss');
+            if (!surfaceSvg || !lossSvg) return;
+
+            const SVG_NS = 'http://www.w3.org/2000/svg';
+            const el = function (tag, attrs) {
+                const n = document.createElementNS(SVG_NS, tag);
+                if (attrs) {
+                    for (const k in attrs) n.setAttribute(k, attrs[k]);
+                }
+                return n;
+            };
+
+            // --- Deterministic RNG for reproducible synthetic data. ---
+            function mulberry32(a) {
+                return function () {
+                    a |= 0; a = a + 0x6D2B79F5 | 0;
+                    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+                    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+                    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+                };
+            }
+
+            // --- Synthetic training data inspired by the paper.
+            //     x0 = days elapsed (0..1), x1 = age at missingness (0..1).
+            //     P(found) rises when days and age are both low, with
+            //     a soft diagonal interaction so the boundary is clearly
+            //     non-linear. ---
+            function buildDataset(nPos, nNeg, seed) {
+                const rand = mulberry32(seed);
+                const xs = [];
+                const ys = [];
+                const target = nPos + nNeg;
+                let pos = 0, neg = 0;
+                let attempts = 0;
+                while (xs.length < target && attempts < target * 200) {
+                    attempts++;
+                    const x0 = rand();
+                    const x1 = rand();
+                    const logit = 2.4 - 3.6 * x0 - 2.6 * x1
+                                  + 1.5 * (x0 - 0.5) * (x1 - 0.5) * 4;
+                    const p = 1 / (1 + Math.exp(-logit));
+                    const draw = rand();
+                    if (draw < p) {
+                        if (pos < nPos) { xs.push([x0, x1]); ys.push(1); pos++; }
+                    } else {
+                        if (neg < nNeg) { xs.push([x0, x1]); ys.push(0); neg++; }
+                    }
+                }
+                return { xs: xs, ys: ys };
+            }
+
+            const DATA = buildDataset(90, 110, 20250423);
+            const N = DATA.xs.length;
+
+            // --- Decision-tree regressor on residuals. ---
+            function fitBestSplit(xs, residuals, featureIdx, indices) {
+                // Sort indices by feature value.
+                const sortedIdx = indices.slice().sort(function (a, b) {
+                    return xs[a][featureIdx] - xs[b][featureIdx];
+                });
+                const n = sortedIdx.length;
+                if (n < 2) return null;
+                // Running sums for O(n) split evaluation.
+                let sumR = 0, sumSq = 0;
+                for (const i of sortedIdx) {
+                    sumR += residuals[i];
+                    sumSq += residuals[i] * residuals[i];
+                }
+                let best = null;
+                let leftSum = 0, leftCount = 0;
+                for (let k = 0; k < n - 1; k++) {
+                    const idx = sortedIdx[k];
+                    leftSum += residuals[idx];
+                    leftCount++;
+                    const nextIdx = sortedIdx[k + 1];
+                    const vi = xs[idx][featureIdx];
+                    const vj = xs[nextIdx][featureIdx];
+                    if (vi === vj) continue;
+                    const rightSum = sumR - leftSum;
+                    const rightCount = n - leftCount;
+                    const leftMean = leftSum / leftCount;
+                    const rightMean = rightSum / rightCount;
+                    // SSE reduction proxy: -(leftCount*leftMean^2 + rightCount*rightMean^2)
+                    const score = leftCount * leftMean * leftMean
+                                + rightCount * rightMean * rightMean;
+                    if (!best || score > best.score) {
+                        best = {
+                            score: score,
+                            feature: featureIdx,
+                            threshold: (vi + vj) / 2,
+                            leftValue: leftMean,
+                            rightValue: rightMean,
+                            leftIdx: sortedIdx.slice(0, k + 1),
+                            rightIdx: sortedIdx.slice(k + 1)
+                        };
+                    }
+                }
+                return best;
+            }
+
+            function buildTree(xs, residuals, indices, depth, maxDepth) {
+                if (depth >= maxDepth || indices.length < 4) {
+                    let s = 0;
+                    for (const i of indices) s += residuals[i];
+                    return { leaf: true, value: indices.length ? s / indices.length : 0 };
+                }
+                let best = null;
+                for (let f = 0; f < 2; f++) {
+                    const cand = fitBestSplit(xs, residuals, f, indices);
+                    if (cand && (!best || cand.score > best.score)) best = cand;
+                }
+                if (!best) {
+                    let s = 0;
+                    for (const i of indices) s += residuals[i];
+                    return { leaf: true, value: indices.length ? s / indices.length : 0 };
+                }
+                return {
+                    leaf: false,
+                    feature: best.feature,
+                    threshold: best.threshold,
+                    left: buildTree(xs, residuals, best.leftIdx, depth + 1, maxDepth),
+                    right: buildTree(xs, residuals, best.rightIdx, depth + 1, maxDepth)
+                };
+            }
+
+            function predictTree(tree, x) {
+                if (tree.leaf) return tree.value;
+                if (x[tree.feature] < tree.threshold) return predictTree(tree.left, x);
+                return predictTree(tree.right, x);
+            }
+
+            function sigmoid(z) { return 1 / (1 + Math.exp(-z)); }
+
+            // --- Train a gradient-boosting ensemble with given hyperparams. ---
+            function trainGbm(eta, nTrees, maxDepth) {
+                const xs = DATA.xs, ys = DATA.ys;
+                const pBar = ys.reduce(function (a, b) { return a + b; }, 0) / ys.length;
+                const f0 = Math.log(pBar / (1 - pBar));
+                const F = new Array(xs.length).fill(f0);
+                const trees = [];
+                const losses = [];
+                const indices = xs.map(function (_, i) { return i; });
+                // Initial loss.
+                let loss0 = 0;
+                for (let i = 0; i < xs.length; i++) {
+                    const p = sigmoid(F[i]);
+                    loss0 += -(ys[i] * Math.log(p + 1e-12) + (1 - ys[i]) * Math.log(1 - p + 1e-12));
+                }
+                losses.push(loss0 / xs.length);
+                for (let m = 0; m < nTrees; m++) {
+                    const residuals = new Array(xs.length);
+                    for (let i = 0; i < xs.length; i++) {
+                        residuals[i] = ys[i] - sigmoid(F[i]);
+                    }
+                    const tree = buildTree(xs, residuals, indices, 0, maxDepth);
+                    trees.push(tree);
+                    let lossSum = 0;
+                    for (let i = 0; i < xs.length; i++) {
+                        F[i] += eta * predictTree(tree, xs[i]);
+                        const p = sigmoid(F[i]);
+                        lossSum += -(ys[i] * Math.log(p + 1e-12) + (1 - ys[i]) * Math.log(1 - p + 1e-12));
+                    }
+                    losses.push(lossSum / xs.length);
+                }
+                return { f0: f0, eta: eta, trees: trees, losses: losses };
+            }
+
+            // Score a single point with the first `truncTrees` trees.
+            function scorePoint(model, x, truncTrees) {
+                let f = model.f0;
+                const t = Math.min(truncTrees, model.trees.length);
+                for (let m = 0; m < t; m++) {
+                    f += model.eta * predictTree(model.trees[m], x);
+                }
+                return sigmoid(f);
+            }
+
+            // --- Render the decision surface with training samples. ---
+            const surfaceViewW = 420, surfaceViewH = 260;
+            const sMargin = { top: 14, right: 14, bottom: 42, left: 42 };
+            const sPlotW = surfaceViewW - sMargin.left - sMargin.right;
+            const sPlotH = surfaceViewH - sMargin.top - sMargin.bottom;
+
+            function renderSurface(model, nTrees) {
+                while (surfaceSvg.firstChild) surfaceSvg.removeChild(surfaceSvg.firstChild);
+
+                // Background contour: 30x22 grid coloured by predicted probability.
+                const gx = 36, gy = 26;
+                const cellW = sPlotW / gx;
+                const cellH = sPlotH / gy;
+                for (let i = 0; i < gx; i++) {
+                    for (let j = 0; j < gy; j++) {
+                        const x0 = (i + 0.5) / gx;
+                        const x1 = 1 - (j + 0.5) / gy;
+                        const p = scorePoint(model, [x0, x1], nTrees);
+                        // Color ramp: slate -> neutral -> amber.
+                        const color = probColor(p);
+                        surfaceSvg.appendChild(el('rect', {
+                            x: sMargin.left + i * cellW,
+                            y: sMargin.top + j * cellH,
+                            width: cellW + 0.5,
+                            height: cellH + 0.5,
+                            fill: color,
+                            opacity: 0.85
+                        }));
+                    }
+                }
+
+                // Axes.
+                surfaceSvg.appendChild(el('line', {
+                    x1: sMargin.left, y1: sMargin.top + sPlotH,
+                    x2: sMargin.left + sPlotW, y2: sMargin.top + sPlotH,
+                    class: 'axis'
+                }));
+                surfaceSvg.appendChild(el('line', {
+                    x1: sMargin.left, y1: sMargin.top,
+                    x2: sMargin.left, y2: sMargin.top + sPlotH,
+                    class: 'axis'
+                }));
+                const xTicks = [
+                    { v: 0, label: '0 d' },
+                    { v: 0.5, label: '~900 d' },
+                    { v: 1, label: '1800 d' }
+                ];
+                for (const t of xTicks) {
+                    const x = sMargin.left + t.v * sPlotW;
+                    surfaceSvg.appendChild(el('line', {
+                        x1: x, y1: sMargin.top + sPlotH,
+                        x2: x, y2: sMargin.top + sPlotH + 4,
+                        class: 'axis'
+                    }));
+                    const tx = el('text', {
+                        x: x, y: sMargin.top + sPlotH + 14,
+                        'text-anchor': 'middle', class: 'tick'
+                    });
+                    tx.textContent = t.label;
+                    surfaceSvg.appendChild(tx);
+                }
+                const yTicks = [
+                    { v: 0, label: '60' },
+                    { v: 0.5, label: '80' },
+                    { v: 1, label: '100' }
+                ];
+                for (const t of yTicks) {
+                    const y = sMargin.top + (1 - t.v) * sPlotH;
+                    surfaceSvg.appendChild(el('line', {
+                        x1: sMargin.left - 4, y1: y,
+                        x2: sMargin.left, y2: y, class: 'axis'
+                    }));
+                    const tx = el('text', {
+                        x: sMargin.left - 6, y: y + 3,
+                        'text-anchor': 'end', class: 'tick'
+                    });
+                    tx.textContent = t.label;
+                    surfaceSvg.appendChild(tx);
+                }
+                const xlab = el('text', {
+                    x: sMargin.left + sPlotW / 2,
+                    y: surfaceViewH - 6,
+                    'text-anchor': 'middle',
+                    class: 'axis-label'
+                });
+                xlab.textContent = 'Days elapsed since report';
+                surfaceSvg.appendChild(xlab);
+                const ylab = el('text', {
+                    x: 10, y: sMargin.top + sPlotH / 2,
+                    'text-anchor': 'middle',
+                    class: 'axis-label',
+                    transform: 'rotate(-90 10 ' + (sMargin.top + sPlotH / 2) + ')'
+                });
+                ylab.textContent = 'Age at missingness';
+                surfaceSvg.appendChild(ylab);
+
+                // Training samples on top.
+                for (let i = 0; i < DATA.xs.length; i++) {
+                    const x = DATA.xs[i];
+                    const cx = sMargin.left + x[0] * sPlotW;
+                    const cy = sMargin.top + (1 - x[1]) * sPlotH;
+                    surfaceSvg.appendChild(el('circle', {
+                        cx: cx, cy: cy, r: 3.2,
+                        class: DATA.ys[i] === 1 ? 'pt-pos' : 'pt-neg'
+                    }));
+                }
+
+                // Legend.
+                const legendX = sMargin.left + sPlotW - 96;
+                const legendY = sMargin.top + 6;
+                surfaceSvg.appendChild(el('rect', {
+                    x: legendX - 6, y: legendY - 4, width: 102, height: 34,
+                    fill: '#ffffffd9', rx: 6, stroke: '#e2e8f0'
+                }));
+                surfaceSvg.appendChild(el('circle', {
+                    cx: legendX + 6, cy: legendY + 5, r: 3.2, class: 'pt-pos'
+                }));
+                const lt1 = el('text', {
+                    x: legendX + 14, y: legendY + 8, class: 'legend-label'
+                });
+                lt1.textContent = 'found alive';
+                surfaceSvg.appendChild(lt1);
+                surfaceSvg.appendChild(el('circle', {
+                    cx: legendX + 6, cy: legendY + 20, r: 3.2, class: 'pt-neg'
+                }));
+                const lt2 = el('text', {
+                    x: legendX + 14, y: legendY + 23, class: 'legend-label'
+                });
+                lt2.textContent = 'still missing';
+                surfaceSvg.appendChild(lt2);
+            }
+
+            function probColor(p) {
+                // Smoothly interpolate: slate (p=0) -> off-white (p=0.5) -> amber (p=1).
+                if (p <= 0.5) {
+                    const t = p / 0.5;
+                    const r = Math.round(71 + t * (248 - 71));
+                    const g = Math.round(85 + t * (250 - 85));
+                    const b = Math.round(105 + t * (252 - 105));
+                    return 'rgb(' + r + ',' + g + ',' + b + ')';
+                }
+                const t = (p - 0.5) / 0.5;
+                const r = Math.round(248 + t * (217 - 248));
+                const g = Math.round(250 + t * (119 - 250));
+                const b = Math.round(252 + t * (6 - 252));
+                return 'rgb(' + r + ',' + g + ',' + b + ')';
+            }
+
+            // --- Render the training-loss curve. ---
+            const lossViewW = 420, lossViewH = 160;
+            const lMargin = { top: 12, right: 14, bottom: 30, left: 44 };
+            const lPlotW = lossViewW - lMargin.left - lMargin.right;
+            const lPlotH = lossViewH - lMargin.top - lMargin.bottom;
+
+            function renderLoss(model, nTrees) {
+                while (lossSvg.firstChild) lossSvg.removeChild(lossSvg.firstChild);
+                const losses = model.losses;
+                const total = losses.length - 1;
+                if (total <= 0) return;
+                const maxLoss = Math.max.apply(null, losses);
+                const minLoss = Math.min.apply(null, losses);
+                const yMax = Math.ceil(maxLoss * 10) / 10;
+                const yMin = Math.max(0, Math.floor(minLoss * 10) / 10);
+                const sx = function (k) { return lMargin.left + (k / total) * lPlotW; };
+                const sy = function (v) {
+                    if (yMax === yMin) return lMargin.top + lPlotH;
+                    return lMargin.top + (1 - (v - yMin) / (yMax - yMin)) * lPlotH;
+                };
+
+                // Gridlines.
+                for (let i = 0; i <= 4; i++) {
+                    const yy = lMargin.top + (i / 4) * lPlotH;
+                    lossSvg.appendChild(el('line', {
+                        x1: lMargin.left, y1: yy,
+                        x2: lMargin.left + lPlotW, y2: yy, class: 'grid'
+                    }));
+                    const val = yMax - (i / 4) * (yMax - yMin);
+                    const tx = el('text', {
+                        x: lMargin.left - 6, y: yy + 3,
+                        'text-anchor': 'end', class: 'tick'
+                    });
+                    tx.textContent = val.toFixed(2);
+                    lossSvg.appendChild(tx);
+                }
+
+                // Area under curve up to current iteration.
+                let areaD = 'M ' + sx(0) + ' ' + sy(yMin);
+                for (let k = 0; k <= Math.min(nTrees, total); k++) {
+                    areaD += ' L ' + sx(k) + ' ' + sy(losses[k]);
+                }
+                areaD += ' L ' + sx(Math.min(nTrees, total)) + ' ' + sy(yMin) + ' Z';
+                lossSvg.appendChild(el('path', { d: areaD, class: 'loss-area' }));
+
+                // Full loss line.
+                let pathD = 'M ' + sx(0) + ' ' + sy(losses[0]);
+                for (let k = 1; k <= total; k++) {
+                    pathD += ' L ' + sx(k) + ' ' + sy(losses[k]);
+                }
+                lossSvg.appendChild(el('path', { d: pathD, class: 'loss-line' }));
+
+                // Axes.
+                lossSvg.appendChild(el('line', {
+                    x1: lMargin.left, y1: lMargin.top + lPlotH,
+                    x2: lMargin.left + lPlotW, y2: lMargin.top + lPlotH, class: 'axis'
+                }));
+                lossSvg.appendChild(el('line', {
+                    x1: lMargin.left, y1: lMargin.top,
+                    x2: lMargin.left, y2: lMargin.top + lPlotH, class: 'axis'
+                }));
+
+                // X tick labels.
+                const stepGuess = total <= 10 ? 1 : Math.max(1, Math.round(total / 6));
+                for (let k = 0; k <= total; k += stepGuess) {
+                    const x = sx(k);
+                    lossSvg.appendChild(el('line', {
+                        x1: x, y1: lMargin.top + lPlotH,
+                        x2: x, y2: lMargin.top + lPlotH + 3, class: 'axis'
+                    }));
+                    const t = el('text', {
+                        x: x, y: lMargin.top + lPlotH + 14,
+                        'text-anchor': 'middle', class: 'tick'
+                    });
+                    t.textContent = String(k);
+                    lossSvg.appendChild(t);
+                }
+
+                // Current point marker.
+                const curK = Math.min(nTrees, total);
+                const dotX = sx(curK);
+                const dotY = sy(losses[curK]);
+                lossSvg.appendChild(el('line', {
+                    x1: dotX, y1: lMargin.top,
+                    x2: dotX, y2: lMargin.top + lPlotH, class: 'loss-guide'
+                }));
+                lossSvg.appendChild(el('circle', {
+                    cx: dotX, cy: dotY, r: 5, class: 'loss-dot'
+                }));
+
+                // Axis labels.
+                const xlab = el('text', {
+                    x: lMargin.left + lPlotW / 2,
+                    y: lossViewH - 2,
+                    'text-anchor': 'middle', class: 'axis-label'
+                });
+                xlab.textContent = 'Number of boosting iterations (trees)';
+                lossSvg.appendChild(xlab);
+                const ylab = el('text', {
+                    x: 12, y: lMargin.top + lPlotH / 2,
+                    'text-anchor': 'middle', class: 'axis-label',
+                    transform: 'rotate(-90 12 ' + (lMargin.top + lPlotH / 2) + ')'
+                });
+                ylab.textContent = 'Training log-loss';
+                lossSvg.appendChild(ylab);
+            }
+
+            // --- State + wire up interactions. ---
+            const state = { trees: 30, eta: 0.30, depth: 1, model: null };
+            const MAX_TREES = 60;
+
+            function retrain() {
+                state.model = trainGbm(state.eta, MAX_TREES, state.depth);
+            }
+
+            function updateKpis() {
+                const model = state.model;
+                const k = Math.min(state.trees, model.trees.length);
+                let correct = 0;
+                for (let i = 0; i < DATA.xs.length; i++) {
+                    const p = scorePoint(model, DATA.xs[i], k);
+                    const yhat = p >= 0.5 ? 1 : 0;
+                    if (yhat === DATA.ys[i]) correct++;
+                }
+                document.getElementById('gbcTreesKpi').textContent = String(k);
+                document.getElementById('gbcLossKpi').textContent = model.losses[k].toFixed(2);
+                document.getElementById('gbcAccKpi').textContent = Math.round(100 * correct / DATA.xs.length) + '%';
+                document.getElementById('gbcTreesHead').textContent = String(k);
+            }
+
+            function render() {
+                updateKpis();
+                renderSurface(state.model, state.trees);
+                renderLoss(state.model, state.trees);
+            }
+
+            const treesInp = document.getElementById('gbcTrees');
+            const etaInp = document.getElementById('gbcEta');
+            const depthInp = document.getElementById('gbcDepth');
+            const treesVal = document.getElementById('gbcTreesVal');
+            const etaVal = document.getElementById('gbcEtaVal');
+            const depthVal = document.getElementById('gbcDepthVal');
+
+            function syncLabels() {
+                treesVal.textContent = state.trees;
+                etaVal.textContent = state.eta.toFixed(2);
+                depthVal.textContent = state.depth;
+            }
+
+            treesInp.addEventListener('input', function () {
+                state.trees = Number(treesInp.value);
+                syncLabels();
+                render();
+            });
+            etaInp.addEventListener('input', function () {
+                state.eta = Number(etaInp.value) / 100;
+                syncLabels();
+                retrain();
+                render();
+            });
+            depthInp.addEventListener('input', function () {
+                state.depth = Number(depthInp.value);
+                syncLabels();
+                retrain();
+                render();
+            });
+
+            document.querySelectorAll('[data-gbc-preset]').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    const p = btn.getAttribute('data-gbc-preset');
+                    if (p === 'underfit') {
+                        state.trees = 3; state.eta = 0.30; state.depth = 1;
+                    } else if (p === 'paper') {
+                        state.trees = 30; state.eta = 0.30; state.depth = 2;
+                    } else if (p === 'overfit') {
+                        state.trees = 60; state.eta = 1.00; state.depth = 3;
+                    }
+                    treesInp.value = state.trees;
+                    etaInp.value = Math.round(state.eta * 100);
+                    depthInp.value = state.depth;
+                    syncLabels();
+                    retrain();
+                    render();
+                });
+            });
+
+            // Lazy initialization when the section scrolls into view.
+            const section = document.getElementById('gbc');
+            let initialized = false;
+            function boot() {
+                if (initialized) return;
+                initialized = true;
+                syncLabels();
+                retrain();
+                render();
+            }
+            if ('IntersectionObserver' in window) {
+                const obs = new IntersectionObserver(function (entries) {
+                    for (const e of entries) {
+                        if (e.isIntersecting) { boot(); obs.disconnect(); return; }
+                    }
+                }, { threshold: 0.1 });
+                obs.observe(section);
+            } else {
+                boot();
+            }
+        }
+
+        // =====================================================================
+        // SHAP demo
+        // =====================================================================
+        function initShapDemo() {
+            const wfSvg = document.getElementById('shapWaterfall');
+            const beeSvg = document.getElementById('shapBeeswarm');
+            if (!wfSvg || !beeSvg) return;
+
+            const SVG_NS = 'http://www.w3.org/2000/svg';
+            const el = function (tag, attrs) {
+                const n = document.createElementNS(SVG_NS, tag);
+                if (attrs) {
+                    for (const k in attrs) n.setAttribute(k, attrs[k]);
+                }
+                return n;
+            };
+
+            // --- Feature definitions and the toy scoring model ----------------
+            //
+            // Features are encoded in a normalized [0..1] form inside the model,
+            // but the UI exposes intuitive units.
+            //
+            //   0: days elapsed  (0 d .. 1800 d)  -> higher = worse
+            //   1: age           (60 yr .. 100 yr) -> higher = worse
+            //   2: municipality size (0 = <200k .. 4 = >4M) -> higher = better
+            //   3: sex (0 = male, 1 = female) -> female = better
+            // ------------------------------------------------------------------
+            const FEATURES = [
+                { name: 'Days elapsed', unit: 'd' },
+                { name: 'Age', unit: 'yr' },
+                { name: 'Municipality size', unit: '' },
+                { name: 'Sex', unit: '' }
+            ];
+            const MUNI_LABELS = ['<200k', '200-500k', '500k-1M', '1M-4M', '>4M'];
+            const F_DAYS = 0, F_AGE = 1, F_MUNI = 2, F_SEX = 3;
+
+            function toNorm(days, age, muniIdx, sexF) {
+                return [
+                    Math.max(0, Math.min(1, days / 1800)),
+                    Math.max(0, Math.min(1, (age - 60) / 40)),
+                    Math.max(0, Math.min(1, muniIdx / 4)),
+                    sexF ? 1 : 0
+                ];
+            }
+
+            // Scoring function f(x) -> log-odds of "found alive".
+            // Includes a soft interaction between age and days to make SHAP
+            // values non-trivial even for a small model.
+            function scoreLogit(xn) {
+                return 0.15
+                    - 3.2 * xn[F_DAYS]
+                    - 1.8 * (xn[F_AGE] - 0.45)
+                    + 1.6 * xn[F_MUNI]
+                    + 0.6 * xn[F_SEX]
+                    - 1.2 * xn[F_DAYS] * xn[F_AGE];
+            }
+
+            function sigmoid(z) { return 1 / (1 + Math.exp(-z)); }
+
+            // --- Synthetic background population for Shapley marginalization --
+            function mulberry32(a) {
+                return function () {
+                    a |= 0; a = a + 0x6D2B79F5 | 0;
+                    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+                    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+                    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+                };
+            }
+            const rng = mulberry32(20220412);
+            const BG_N = 60;
+            const BACKGROUND = [];
+            for (let i = 0; i < BG_N; i++) {
+                BACKGROUND.push([
+                    rng(), // days
+                    rng(), // age
+                    Math.floor(rng() * 5) / 4, // muni in {0,0.25,0.5,0.75,1}
+                    rng() < 0.52 ? 1 : 0 // slightly more women
+                ]);
+            }
+            // Baseline = mean prediction on background (in log-odds space).
+            let BASELINE_LOGIT = 0;
+            for (const bx of BACKGROUND) BASELINE_LOGIT += scoreLogit(bx);
+            BASELINE_LOGIT /= BACKGROUND.length;
+
+            // --- Exact Shapley via weighted coalition average (4 features)
+            // Uses marginal expectation approximation: for features outside a
+            // coalition S we draw values from the background population.
+            const COALITIONS = [];
+            for (let mask = 0; mask < 16; mask++) COALITIONS.push(mask);
+
+            function factorial(n) { let f = 1; for (let i = 2; i <= n; i++) f *= i; return f; }
+            const FACT = [factorial(0), factorial(1), factorial(2), factorial(3), factorial(4)];
+
+            function expectedLogitGivenS(x, mask) {
+                // E[f(x_S, X_notS)] averaged over background.
+                let sum = 0;
+                for (const bx of BACKGROUND) {
+                    const xs = new Array(4);
+                    for (let k = 0; k < 4; k++) {
+                        xs[k] = (mask & (1 << k)) ? x[k] : bx[k];
+                    }
+                    sum += scoreLogit(xs);
+                }
+                return sum / BACKGROUND.length;
+            }
+
+            function shapValues(x) {
+                const phi = [0, 0, 0, 0];
+                const n = 4;
+                // Cache E[f | S] for every subset mask.
+                const cache = new Array(16);
+                for (const m of COALITIONS) cache[m] = expectedLogitGivenS(x, m);
+                for (let i = 0; i < n; i++) {
+                    const bit = 1 << i;
+                    for (const m of COALITIONS) {
+                        if (m & bit) continue;
+                        const s = popcount(m);
+                        const weight = (FACT[s] * FACT[n - s - 1]) / FACT[n];
+                        phi[i] += weight * (cache[m | bit] - cache[m]);
+                    }
+                }
+                return phi;
+            }
+
+            function popcount(m) {
+                let c = 0; while (m) { c += m & 1; m >>>= 1; } return c;
+            }
+
+            // --- State & UI wiring ------------------------------------------------
+            const state = {
+                days: 300, age: 75, muni: 4, sexF: true,
+                phi: null
+            };
+
+            const daysInp = document.getElementById('shapDays');
+            const ageInp = document.getElementById('shapAge');
+            const muniInp = document.getElementById('shapMuni');
+            const sexPills = document.getElementById('shapSexPills');
+            const daysVal = document.getElementById('shapDaysVal');
+            const ageVal = document.getElementById('shapAgeVal');
+            const muniVal = document.getElementById('shapMuniVal');
+            const sexVal = document.getElementById('shapSexVal');
+            const predVal = document.getElementById('shapPredVal');
+            const predSub = document.getElementById('shapPredSub');
+
+            function syncLabels() {
+                daysVal.textContent = state.days + ' d';
+                ageVal.textContent = state.age + ' yr';
+                muniVal.textContent = MUNI_LABELS[state.muni];
+                sexVal.textContent = state.sexF ? 'Female' : 'Male';
+                Array.prototype.forEach.call(
+                    sexPills.querySelectorAll('button'),
+                    function (b) {
+                        const want = b.getAttribute('data-shap-sex');
+                        const active = (want === 'F' && state.sexF)
+                                    || (want === 'M' && !state.sexF);
+                        if (active) b.classList.add('active');
+                        else b.classList.remove('active');
+                    }
+                );
+            }
+
+            // --- Waterfall plot ------------------------------------------------
+            const wfViewW = 420, wfViewH = 240;
+            const wfMargin = { top: 16, right: 50, bottom: 34, left: 150 };
+            const wfPlotW = wfViewW - wfMargin.left - wfMargin.right;
+            const wfPlotH = wfViewH - wfMargin.top - wfMargin.bottom;
+
+            function renderWaterfall(x, phi) {
+                while (wfSvg.firstChild) wfSvg.removeChild(wfSvg.firstChild);
+                const baseline = BASELINE_LOGIT;
+                const predLogit = scoreLogit(x);
+                // Order features by |phi|, biggest absolute contribution first.
+                const order = [0, 1, 2, 3].slice().sort(function (a, b) {
+                    return Math.abs(phi[b]) - Math.abs(phi[a]);
+                });
+                // Compute x domain: running log-odds over steps.
+                const steps = [baseline];
+                let cur = baseline;
+                for (const idx of order) {
+                    cur += phi[idx];
+                    steps.push(cur);
+                }
+                let minV = Math.min.apply(null, steps);
+                let maxV = Math.max.apply(null, steps);
+                const pad = Math.max(0.2, (maxV - minV) * 0.1);
+                minV -= pad; maxV += pad;
+                const sx = function (v) {
+                    return wfMargin.left + ((v - minV) / (maxV - minV)) * wfPlotW;
+                };
+                const rowHeight = wfPlotH / (order.length + 2);
+
+                // X axis with ticks at nicely rounded log-odds values.
+                const xAxisY = wfMargin.top + wfPlotH + 4;
+                wfSvg.appendChild(el('line', {
+                    x1: wfMargin.left, y1: xAxisY,
+                    x2: wfMargin.left + wfPlotW, y2: xAxisY, class: 'axis'
+                }));
+                const tickVals = [];
+                const step = niceStep(maxV - minV, 5);
+                const tFirst = Math.ceil(minV / step) * step;
+                for (let v = tFirst; v <= maxV; v += step) tickVals.push(v);
+                for (const t of tickVals) {
+                    const x = sx(t);
+                    wfSvg.appendChild(el('line', {
+                        x1: x, y1: xAxisY, x2: x, y2: xAxisY + 3, class: 'axis'
+                    }));
+                    const tx = el('text', {
+                        x: x, y: xAxisY + 13,
+                        'text-anchor': 'middle', class: 'tick'
+                    });
+                    tx.textContent = t.toFixed(1);
+                    wfSvg.appendChild(tx);
+                }
+                const axLab = el('text', {
+                    x: wfMargin.left + wfPlotW / 2,
+                    y: wfViewH - 4,
+                    'text-anchor': 'middle', class: 'axis-label'
+                });
+                axLab.textContent = 'Log-odds of "found alive"';
+                wfSvg.appendChild(axLab);
+
+                // Baseline guideline.
+                const xBase = sx(baseline);
+                wfSvg.appendChild(el('line', {
+                    x1: xBase, y1: wfMargin.top,
+                    x2: xBase, y2: wfMargin.top + wfPlotH,
+                    class: 'wf-baseline-line'
+                }));
+                const bLab = el('text', {
+                    x: xBase, y: wfMargin.top - 4,
+                    'text-anchor': 'middle', class: 'wf-label',
+                    fill: '#7c3aed'
+                });
+                bLab.textContent = 'baseline';
+                wfSvg.appendChild(bLab);
+
+                // Final prediction guideline.
+                const xFinal = sx(predLogit);
+                wfSvg.appendChild(el('line', {
+                    x1: xFinal, y1: wfMargin.top,
+                    x2: xFinal, y2: wfMargin.top + wfPlotH,
+                    class: 'wf-final-line'
+                }));
+                const fLab = el('text', {
+                    x: xFinal, y: wfMargin.top - 4,
+                    'text-anchor': 'middle', class: 'wf-label',
+                    fill: '#0f766e'
+                });
+                fLab.textContent = 'prediction';
+                wfSvg.appendChild(fLab);
+
+                // Feature rows.
+                let running = baseline;
+                for (let k = 0; k < order.length; k++) {
+                    const idx = order[k];
+                    const y = wfMargin.top + (k + 0.5) * rowHeight;
+                    const xStart = sx(running);
+                    const xEnd = sx(running + phi[idx]);
+                    const barY = y - rowHeight * 0.32;
+                    const barH = rowHeight * 0.64;
+                    const barX = Math.min(xStart, xEnd);
+                    const barW = Math.max(2, Math.abs(xEnd - xStart));
+                    wfSvg.appendChild(el('rect', {
+                        x: barX, y: barY, width: barW, height: barH,
+                        class: phi[idx] >= 0 ? 'wf-bar-pos' : 'wf-bar-neg',
+                        rx: 2
+                    }));
+                    // Connector to next row.
+                    if (k < order.length - 1) {
+                        const yNext = wfMargin.top + (k + 1.5) * rowHeight;
+                        wfSvg.appendChild(el('line', {
+                            x1: xEnd, y1: y + rowHeight * 0.32,
+                            x2: xEnd, y2: yNext - rowHeight * 0.32,
+                            class: 'wf-connector'
+                        }));
+                    }
+                    // Feature label + value on the left.
+                    const fLab2 = el('text', {
+                        x: wfMargin.left - 8, y: y - 2,
+                        'text-anchor': 'end', class: 'wf-label'
+                    });
+                    fLab2.textContent = FEATURES[idx].name;
+                    wfSvg.appendChild(fLab2);
+                    const vLab = el('text', {
+                        x: wfMargin.left - 8, y: y + 10,
+                        'text-anchor': 'end', class: 'wf-value'
+                    });
+                    vLab.textContent = featureValueLabel(idx);
+                    wfSvg.appendChild(vLab);
+                    // phi value on the right.
+                    const pLab = el('text', {
+                        x: wfViewW - wfMargin.right + 6, y: y + 3,
+                        'text-anchor': 'start', class: 'wf-value',
+                        fill: phi[idx] >= 0 ? '#9a3412' : '#334155'
+                    });
+                    pLab.textContent = (phi[idx] >= 0 ? '+' : '') + phi[idx].toFixed(2);
+                    wfSvg.appendChild(pLab);
+
+                    running += phi[idx];
+                }
+            }
+
+            function niceStep(range, count) {
+                const rough = range / count;
+                const pow = Math.pow(10, Math.floor(Math.log10(rough)));
+                const norm = rough / pow;
+                let nice;
+                if (norm < 1.5) nice = 1;
+                else if (norm < 3) nice = 2;
+                else if (norm < 7) nice = 5;
+                else nice = 10;
+                return nice * pow;
+            }
+
+            function featureValueLabel(idx) {
+                if (idx === F_DAYS) return state.days + ' d';
+                if (idx === F_AGE) return state.age + ' yr';
+                if (idx === F_MUNI) return MUNI_LABELS[state.muni];
+                if (idx === F_SEX) return state.sexF ? 'Female' : 'Male';
+                return '';
+            }
+
+            // --- Beeswarm summary plot -----------------------------------------
+            // Precompute SHAP values for a population of 80 random cases.
+            const swarmData = [];
+            const rng2 = mulberry32(19900330);
+            for (let i = 0; i < 80; i++) {
+                const days = Math.floor(rng2() * 1800);
+                const age = 60 + Math.floor(rng2() * 40);
+                const muni = Math.floor(rng2() * 5);
+                const sexF = rng2() < 0.52 ? 1 : 0;
+                const xn = toNorm(days, age, muni, sexF);
+                const phi = shapValues(xn);
+                swarmData.push({ xn: xn, phi: phi });
+            }
+
+            const bwViewW = 420, bwViewH = 220;
+            const bwMargin = { top: 14, right: 14, bottom: 34, left: 150 };
+            const bwPlotW = bwViewW - bwMargin.left - bwMargin.right;
+            const bwPlotH = bwViewH - bwMargin.top - bwMargin.bottom;
+
+            function renderBeeswarm() {
+                while (beeSvg.firstChild) beeSvg.removeChild(beeSvg.firstChild);
+                // Feature rows ordered by mean |phi| (global importance).
+                const means = [0, 0, 0, 0];
+                for (const d of swarmData) {
+                    for (let k = 0; k < 4; k++) means[k] += Math.abs(d.phi[k]);
+                }
+                for (let k = 0; k < 4; k++) means[k] /= swarmData.length;
+                const order = [0, 1, 2, 3].slice().sort(function (a, b) {
+                    return means[b] - means[a];
+                });
+                // X range = max |phi| across all points/features.
+                let maxAbs = 0;
+                for (const d of swarmData) {
+                    for (let k = 0; k < 4; k++) {
+                        if (Math.abs(d.phi[k]) > maxAbs) maxAbs = Math.abs(d.phi[k]);
+                    }
+                }
+                maxAbs = Math.max(maxAbs, 0.5);
+                const sx = function (v) {
+                    return bwMargin.left + ((v + maxAbs) / (2 * maxAbs)) * bwPlotW;
+                };
+
+                // Vertical zero line.
+                beeSvg.appendChild(el('line', {
+                    x1: sx(0), y1: bwMargin.top,
+                    x2: sx(0), y2: bwMargin.top + bwPlotH,
+                    class: 'axis'
+                }));
+                // X axis.
+                beeSvg.appendChild(el('line', {
+                    x1: bwMargin.left, y1: bwMargin.top + bwPlotH,
+                    x2: bwMargin.left + bwPlotW, y2: bwMargin.top + bwPlotH,
+                    class: 'axis'
+                }));
+                // Ticks.
+                const tickVals = [-maxAbs, -maxAbs / 2, 0, maxAbs / 2, maxAbs];
+                for (const v of tickVals) {
+                    const xx = sx(v);
+                    beeSvg.appendChild(el('line', {
+                        x1: xx, y1: bwMargin.top + bwPlotH,
+                        x2: xx, y2: bwMargin.top + bwPlotH + 3, class: 'axis'
+                    }));
+                    const tl = el('text', {
+                        x: xx, y: bwMargin.top + bwPlotH + 13,
+                        'text-anchor': 'middle', class: 'tick'
+                    });
+                    tl.textContent = v.toFixed(1);
+                    beeSvg.appendChild(tl);
+                }
+                const axLab = el('text', {
+                    x: bwMargin.left + bwPlotW / 2,
+                    y: bwViewH - 4,
+                    'text-anchor': 'middle', class: 'axis-label'
+                });
+                axLab.textContent = 'SHAP value (log-odds contribution)';
+                beeSvg.appendChild(axLab);
+
+                // Rows.
+                const rowH = bwPlotH / order.length;
+                for (let k = 0; k < order.length; k++) {
+                    const idx = order[k];
+                    const yc = bwMargin.top + (k + 0.5) * rowH;
+                    // Feature label.
+                    const fl = el('text', {
+                        x: bwMargin.left - 8, y: yc - 2,
+                        'text-anchor': 'end', class: 'wf-label'
+                    });
+                    fl.textContent = FEATURES[idx].name;
+                    beeSvg.appendChild(fl);
+                    const ml = el('text', {
+                        x: bwMargin.left - 8, y: yc + 10,
+                        'text-anchor': 'end', class: 'wf-value'
+                    });
+                    ml.textContent = 'mean |phi| = ' + means[idx].toFixed(2);
+                    beeSvg.appendChild(ml);
+                    // Row divider.
+                    beeSvg.appendChild(el('line', {
+                        x1: bwMargin.left, y1: yc + rowH * 0.5,
+                        x2: bwMargin.left + bwPlotW, y2: yc + rowH * 0.5,
+                        class: 'bee-row'
+                    }));
+
+                    // Points, vertically jittered within the row.
+                    const jitterRng = mulberry32(1000 + idx);
+                    for (const d of swarmData) {
+                        const xx = sx(d.phi[idx]);
+                        const yy = yc + (jitterRng() - 0.5) * rowH * 0.65;
+                        const fv = d.xn[idx];
+                        const col = featureValueColor(fv);
+                        beeSvg.appendChild(el('circle', {
+                            cx: xx, cy: yy, r: 2.6,
+                            fill: col, class: 'bee-point'
+                        }));
+                    }
+                }
+
+                // Mini color legend for feature value.
+                const lgX = bwMargin.left + bwPlotW - 96;
+                const lgY = bwMargin.top;
+                beeSvg.appendChild(el('rect', {
+                    x: lgX - 6, y: lgY - 4, width: 100, height: 34,
+                    fill: '#ffffffd9', rx: 6, stroke: '#e2e8f0'
+                }));
+                for (let i = 0; i < 20; i++) {
+                    beeSvg.appendChild(el('rect', {
+                        x: lgX + i * 4, y: lgY + 5,
+                        width: 4, height: 8,
+                        fill: featureValueColor(i / 19)
+                    }));
+                }
+                const lo = el('text', {
+                    x: lgX, y: lgY + 24, class: 'legend-label'
+                });
+                lo.textContent = 'low';
+                beeSvg.appendChild(lo);
+                const hi = el('text', {
+                    x: lgX + 80, y: lgY + 24, 'text-anchor': 'end', class: 'legend-label'
+                });
+                hi.textContent = 'high';
+                beeSvg.appendChild(hi);
+            }
+
+            function featureValueColor(v) {
+                // Blue (low) -> neutral -> Amber (high), matching SHAP convention.
+                const r = Math.round(56 + v * (217 - 56));
+                const g = Math.round(125 + v * (119 - 125));
+                const b = Math.round(232 + v * (6 - 232));
+                return 'rgb(' + r + ',' + g + ',' + b + ')';
+            }
+
+            // --- Full render + prediction header update -------------------------
+            function render() {
+                const xn = toNorm(state.days, state.age, state.muni, state.sexF ? 1 : 0);
+                const phi = shapValues(xn);
+                state.phi = phi;
+                const predLogit = scoreLogit(xn);
+                const predP = sigmoid(predLogit);
+                const baseP = sigmoid(BASELINE_LOGIT);
+                predVal.textContent = Math.round(predP * 100) + '%';
+                const shiftPp = Math.round((predP - baseP) * 100);
+                predSub.textContent = 'baseline ' + Math.round(baseP * 100)
+                    + '% \u00B7 shift ' + (shiftPp >= 0 ? '+' : '') + shiftPp + ' pp';
+                renderWaterfall(xn, phi);
+                renderBeeswarm();
+            }
+
+            // --- Event wiring ---------------------------------------------------
+            daysInp.addEventListener('input', function () {
+                state.days = Number(daysInp.value);
+                syncLabels(); render();
+            });
+            ageInp.addEventListener('input', function () {
+                state.age = Number(ageInp.value);
+                syncLabels(); render();
+            });
+            muniInp.addEventListener('input', function () {
+                state.muni = Number(muniInp.value);
+                syncLabels(); render();
+            });
+            Array.prototype.forEach.call(
+                sexPills.querySelectorAll('button'),
+                function (b) {
+                    b.addEventListener('click', function () {
+                        state.sexF = b.getAttribute('data-shap-sex') === 'F';
+                        syncLabels(); render();
+                    });
+                }
+            );
+            document.querySelectorAll('[data-shap-preset]').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    const p = btn.getAttribute('data-shap-preset');
+                    if (p === 'easy') {
+                        state.days = 30; state.age = 65; state.muni = 4; state.sexF = true;
+                    } else if (p === 'average') {
+                        state.days = 300; state.age = 75; state.muni = 2; state.sexF = true;
+                    } else if (p === 'hard') {
+                        state.days = 1500; state.age = 92; state.muni = 0; state.sexF = false;
+                    }
+                    daysInp.value = state.days;
+                    ageInp.value = state.age;
+                    muniInp.value = state.muni;
+                    syncLabels(); render();
+                });
+            });
+
+            // Lazy initialization.
+            const section = document.getElementById('shap');
+            let initialized = false;
+            function boot() {
+                if (initialized) return;
+                initialized = true;
+                syncLabels();
+                render();
+            }
+            if ('IntersectionObserver' in window) {
+                const obs = new IntersectionObserver(function (entries) {
+                    for (const e of entries) {
+                        if (e.isIntersecting) { boot(); obs.disconnect(); return; }
+                    }
+                }, { threshold: 0.1 });
+                obs.observe(section);
+            } else {
+                boot();
+            }
         }
     </script>
 </body>
