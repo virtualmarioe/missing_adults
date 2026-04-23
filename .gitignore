@@ -6,3 +6,7 @@ Thumbs.db
 node_modules/
 .vscode/
 .idea/
+
+# Raw upstream data (regenerated via data-raw/preprocess.py)
+data-raw/*.csv
+

@@ -298,25 +298,9 @@
         }
 
         .tldr-icon {
+            font-size: 1.8rem;
             flex-shrink: 0;
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
-            color: #d97706;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .tldr-icon svg {
-            width: 26px;
-            height: 26px;
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
+            line-height: 1;
         }
 
         .tldr-text {
@@ -891,6 +875,431 @@
             }
         }
 
+        /* ===== Explorer ===== */
+        .explore-intro {
+            text-align: center;
+            color: #334155;
+            font-size: 1rem;
+            max-width: 840px;
+            margin: 0 auto 36px;
+        }
+
+        .explore-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        .explore-filters {
+            padding: 24px;
+            border-radius: 16px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            position: sticky;
+            top: 80px;
+        }
+
+        .filter-group {
+            margin-bottom: 22px;
+        }
+
+        .filter-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .filter-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #64748b;
+            margin-bottom: 10px;
+        }
+
+        .filter-label .filter-hint {
+            font-size: 0.7rem;
+            color: #94a3b8;
+            font-weight: 500;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .pill {
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #475569;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+
+        .pill:hover {
+            border-color: #cbd5e1;
+            color: #0f172a;
+        }
+
+        .pill.active {
+            background: #0f172a;
+            color: #fff;
+            border-color: #0f172a;
+        }
+
+        .pill.active.accent {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            border-color: #d97706;
+            color: #fff;
+        }
+
+        .range-box {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .range-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .range-row input[type="range"] {
+            flex: 1;
+            accent-color: #d97706;
+        }
+
+        .range-value {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #0f172a;
+            min-width: 46px;
+            font-variant-numeric: tabular-nums;
+            text-align: right;
+        }
+
+        .range-caption {
+            font-size: 0.78rem;
+            color: #475569;
+            text-align: center;
+        }
+
+        .reset-btn {
+            width: 100%;
+            margin-top: 4px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            border: 1px solid #cbd5e1;
+            background: #fff;
+            color: #475569;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .reset-btn:hover {
+            border-color: #0f172a;
+            color: #0f172a;
+        }
+
+        .explore-result {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .kpi-card {
+            padding: 22px 20px;
+            border-radius: 16px;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .kpi-card.accent {
+            background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
+            border-color: #fde68a;
+        }
+
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #0f172a;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .kpi-card.accent .kpi-value {
+            color: #b45309;
+        }
+
+        .kpi-label {
+            margin-top: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #64748b;
+        }
+
+        .kpi-card.accent .kpi-label {
+            color: #b45309;
+        }
+
+        .kpi-sub {
+            margin-top: 2px;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        .outcome-stack {
+            padding: 22px;
+            border-radius: 16px;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+        }
+
+        .outcome-stack h4 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .outcome-stack h4 .outcome-count {
+            font-weight: 500;
+            color: #64748b;
+            font-size: 0.78rem;
+        }
+
+        .stack-bar {
+            height: 28px;
+            border-radius: 999px;
+            background: #e2e8f0;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .stack-seg {
+            height: 100%;
+            transition: width 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 0.78rem;
+            font-weight: 700;
+            min-width: 0;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .stack-seg.found {
+            background: linear-gradient(90deg, #f59e0b, #d97706);
+        }
+
+        .stack-seg.still {
+            background: #64748b;
+        }
+
+        .stack-legend {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.78rem;
+            color: #475569;
+        }
+
+        .stack-legend .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+
+        .legend-swatch.found {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        .legend-swatch.still {
+            background: #64748b;
+        }
+
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .breakdown-card {
+            padding: 20px;
+            border-radius: 16px;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+        }
+
+        .breakdown-card h5 {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .breakdown-card .breakdown-sub {
+            font-size: 0.72rem;
+            color: #94a3b8;
+            margin-bottom: 14px;
+        }
+
+        .brk-row {
+            display: grid;
+            grid-template-columns: 120px 1fr 54px;
+            gap: 10px;
+            align-items: center;
+            padding: 5px 0;
+            font-size: 0.78rem;
+        }
+
+        .brk-label {
+            color: #334155;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .brk-track {
+            position: relative;
+            height: 12px;
+            background: #e2e8f0;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .brk-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #f59e0b, #d97706);
+            transition: width 0.4s ease;
+        }
+
+        .brk-fill.low {
+            background: #cbd5e1;
+        }
+
+        .brk-value {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #334155;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .brk-value .brk-n {
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .explore-empty {
+            padding: 40px 20px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .explore-note {
+            font-size: 0.78rem;
+            color: #64748b;
+            line-height: 1.6;
+            padding: 14px 18px;
+            background: #f8fafc;
+            border-left: 3px solid #f59e0b;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .explore-note strong {
+            color: #0f172a;
+        }
+
+        .explore-loading {
+            padding: 60px 20px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .explore-loading::before {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #cbd5e1;
+            border-top-color: #d97706;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 960px) {
+            .explore-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .explore-filters {
+                position: static;
+            }
+
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .breakdown-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .brk-row {
+                grid-template-columns: 90px 1fr 48px;
+            }
+        }
+
         /* ===== Animations ===== */
         .fade-in {
             opacity: 0;
@@ -974,6 +1383,7 @@
             <a href="#methods" class="nav-link">Methods</a>
             <a href="#features" class="nav-link">Key Features</a>
             <a href="#results" class="nav-link">Results</a>
+            <a href="#explore" class="nav-link">Explore</a>
             <a href="#authors" class="nav-link">Authors</a>
             <a href="#bibtex" class="nav-link">Cite</a>
         </div>
@@ -985,21 +1395,21 @@
             <h2 class="section-title">Overview</h2>
             <div class="tldr-grid fade-in">
                 <div class="tldr-card">
-                    <div class="tldr-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg></div>
+                    <div class="tldr-icon">??</div>
                     <div class="tldr-text">
                         Gradient-boosting classifiers predict whether a missing older adult will be found with up to
                         <strong>10% higher AUC</strong> than a data-informed reference model.
                     </div>
                 </div>
                 <div class="tldr-card">
-                    <div class="tldr-icon"><svg viewBox="0 0 24 24"><path d="M19.439 7.85c-.049.322.059.648.289.878l1.568 1.568c.47.47.706 1.087.706 1.704s-.235 1.233-.706 1.704l-1.611 1.611a.98.98 0 0 1-.837.276c-.47-.07-.802-.48-.968-.925a2.501 2.501 0 1 0-3.214 3.214c.446.166.855.497.925.968a.979.979 0 0 1-.276.837l-1.61 1.61a2.404 2.404 0 0 1-1.705.707 2.402 2.402 0 0 1-1.704-.706l-1.568-1.568a1.026 1.026 0 0 0-.877-.29c-.493.074-.84.504-1.02.968a2.5 2.5 0 1 1-3.237-3.237c.464-.18.894-.527.967-1.02a1.026 1.026 0 0 0-.289-.877l-1.568-1.568A2.402 2.402 0 0 1 1.998 12c0-.617.236-1.234.706-1.704L4.23 8.77c.24-.24.581-.353.917-.303.515.077.877.528 1.073 1.01a2.5 2.5 0 1 0 3.259-3.259c-.482-.196-.933-.558-1.01-1.073-.05-.336.062-.676.303-.917l1.525-1.525A2.402 2.402 0 0 1 12 2c.617 0 1.234.236 1.704.706l1.568 1.568c.23.23.556.338.877.29.493-.074.84-.504 1.02-.968a2.5 2.5 0 1 1 3.237 3.237c-.464.18-.894.527-.967 1.017Z"/></svg></div>
+                    <div class="tldr-icon">??</div>
                     <div class="tldr-text">
                         The outcome depends on both <strong>intrinsic</strong> (age, sex) and
                         <strong>extrinsic</strong> (time elapsed, place size) factors of missingness.
                     </div>
                 </div>
                 <div class="tldr-card">
-                    <div class="tldr-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                    <div class="tldr-icon">????</div>
                     <div class="tldr-text">
                         First study to characterize non-forced missingness in older adults in Colombia using open
                         SIRDEC data spanning <strong>90&nbsp;years</strong>.
@@ -1376,6 +1786,187 @@
         </div>
     </section>
 
+    <!-- ===== EXPLORE ===== -->
+    <section id="explore">
+        <div class="container">
+            <h2 class="section-title">Explore the Data</h2>
+            <p class="explore-intro">
+                Interact with the same cohort used in the paper&nbsp;&mdash;
+                <strong>7,855 cases</strong> of missing older adults
+                (&ge;&nbsp;60&nbsp;years) reported in Colombia between 1937 and
+                June&nbsp;2021. Apply filters on the left and watch how the
+                probability of being found alive changes across subgroups.
+            </p>
+
+            <div class="explore-grid fade-in">
+                <aside class="explore-filters">
+                    <div class="filter-group">
+                        <div class="filter-label">
+                            <span>Sex</span>
+                        </div>
+                        <div class="pill-row" data-filter="sex" data-mode="multi">
+                            <button class="pill active accent" data-value="M">Men</button>
+                            <button class="pill active accent" data-value="F">Women</button>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <div class="filter-label">
+                            <span>Age at missingness</span>
+                            <span class="filter-hint">years</span>
+                        </div>
+                        <div class="range-box">
+                            <div class="range-row">
+                                <span class="range-value" id="ageMinVal">60</span>
+                                <input type="range" id="ageMin" min="60" max="112" value="60" step="1">
+                            </div>
+                            <div class="range-row">
+                                <span class="range-value" id="ageMaxVal">112</span>
+                                <input type="range" id="ageMax" min="60" max="112" value="112" step="1">
+                            </div>
+                            <div class="range-caption" id="ageRangeLabel">60&nbsp;&ndash;&nbsp;112&nbsp;years</div>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <div class="filter-label">
+                            <span>Year reported</span>
+                        </div>
+                        <div class="range-box">
+                            <div class="range-row">
+                                <span class="range-value" id="yearMinVal">1937</span>
+                                <input type="range" id="yearMin" min="1937" max="2021" value="1937" step="1">
+                            </div>
+                            <div class="range-row">
+                                <span class="range-value" id="yearMaxVal">2021</span>
+                                <input type="range" id="yearMax" min="1937" max="2021" value="2021" step="1">
+                            </div>
+                            <div class="range-caption" id="yearRangeLabel">1937&nbsp;&ndash;&nbsp;2021</div>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <div class="filter-label">
+                            <span>Municipality size</span>
+                            <span class="filter-hint">inhabitants</span>
+                        </div>
+                        <div class="pill-row" data-filter="muni_pop_bucket" data-mode="multi">
+                            <!-- populated by JS -->
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <div class="filter-label">
+                            <span>Vulnerability factor</span>
+                        </div>
+                        <div class="pill-row" data-filter="vulnerability" data-mode="multi">
+                            <!-- populated by JS -->
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <div class="filter-label">
+                            <span>Education</span>
+                        </div>
+                        <div class="pill-row" data-filter="education" data-mode="multi">
+                            <!-- populated by JS -->
+                        </div>
+                    </div>
+
+                    <button class="reset-btn" id="resetFilters" type="button">Reset all filters</button>
+                </aside>
+
+                <div class="explore-result">
+                    <div class="explore-loading" id="exploreLoading">
+                        Loading cohort data&hellip;
+                    </div>
+
+                    <div id="exploreContent" style="display:none">
+                        <div class="kpi-grid">
+                            <div class="kpi-card">
+                                <div class="kpi-value" id="kpiTotal">&ndash;</div>
+                                <div class="kpi-label">Matching cases</div>
+                                <div class="kpi-sub" id="kpiShare">&ndash;</div>
+                            </div>
+                            <div class="kpi-card accent">
+                                <div class="kpi-value" id="kpiFoundRate">&ndash;</div>
+                                <div class="kpi-label">Found alive</div>
+                                <div class="kpi-sub" id="kpiFoundCount">&ndash;</div>
+                            </div>
+                            <div class="kpi-card">
+                                <div class="kpi-value" id="kpiStillRate">&ndash;</div>
+                                <div class="kpi-label">Still missing</div>
+                                <div class="kpi-sub" id="kpiStillCount">&ndash;</div>
+                            </div>
+                        </div>
+
+                        <div class="outcome-stack">
+                            <h4>
+                                Outcome mix for current selection
+                                <span class="outcome-count" id="stackCount"></span>
+                            </h4>
+                            <div class="stack-bar">
+                                <div class="stack-seg found" id="stackFound" style="width:0%"></div>
+                                <div class="stack-seg still" id="stackStill" style="width:0%"></div>
+                            </div>
+                            <div class="stack-legend">
+                                <span class="legend-item">
+                                    <span class="legend-swatch found"></span>
+                                    Found alive
+                                </span>
+                                <span class="legend-item">
+                                    <span class="legend-swatch still"></span>
+                                    Still missing
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="breakdown-grid">
+                            <div class="breakdown-card">
+                                <h5>Found rate by age group</h5>
+                                <div class="breakdown-sub">Share of each age band found alive</div>
+                                <div id="brkAge"></div>
+                            </div>
+                            <div class="breakdown-card">
+                                <h5>Found rate by municipality size</h5>
+                                <div class="breakdown-sub">Population of the municipality where the case was reported</div>
+                                <div id="brkMuni"></div>
+                            </div>
+                            <div class="breakdown-card">
+                                <h5>Found rate by reporting decade</h5>
+                                <div class="breakdown-sub">Decade in which the disappearance was reported</div>
+                                <div id="brkDecade"></div>
+                            </div>
+                            <div class="breakdown-card">
+                                <h5>Found rate by sex</h5>
+                                <div class="breakdown-sub">Share found alive among men and women</div>
+                                <div id="brkSex"></div>
+                            </div>
+                        </div>
+
+                        <p class="explore-note">
+                            <strong>How to read this.</strong> Bars show the
+                            empirical share of cases that were eventually
+                            found alive within each subgroup. Bands with
+                            fewer than 20&nbsp;cases are drawn in grey and
+                            should be interpreted with caution. These are
+                            descriptive associations&nbsp;&mdash; the paper&rsquo;s
+                            gradient-boosting model combines many of these
+                            variables (plus municipality population as a
+                            continuous feature) to produce calibrated
+                            individual-level probabilities.
+                        </p>
+                    </div>
+
+                    <div class="explore-empty" id="exploreEmpty" style="display:none">
+                        No cases match the current filters. Try widening the
+                        age or year ranges or re-enabling more categories.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ===== AUTHORS ===== -->
     <section id="authors" class="contributors-section">
         <div class="container">
@@ -1564,7 +2155,320 @@
                 });
             }, { threshold: 0.2 });
             document.querySelectorAll('.features-card').forEach(card => featObserver.observe(card));
+
+            // ===== Interactive data explorer =====
+            initExplorer();
         });
+
+        function initExplorer() {
+            const loadingEl = document.getElementById('exploreLoading');
+            const contentEl = document.getElementById('exploreContent');
+            const emptyEl = document.getElementById('exploreEmpty');
+            if (!loadingEl || !contentEl) return;
+
+            const state = {
+                records: null,
+                columns: null,
+                bucketOrders: null,
+                filters: {
+                    sex: new Set(['M', 'F']),
+                    muni_pop_bucket: new Set(),
+                    vulnerability: new Set(),
+                    education: new Set(),
+                },
+                ageMin: 60,
+                ageMax: 112,
+                yearMin: 1937,
+                yearMax: 2021,
+            };
+
+            const kpiFmt = n => n.toLocaleString('en-US');
+            const pct = (num, den) => den === 0 ? 0 : (100 * num / den);
+            const pctStr = p => p.toFixed(1) + '%';
+
+            function loadOnVisible() {
+                const target = document.getElementById('explore');
+                if (!target) return;
+                const io = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            io.disconnect();
+                            loadData();
+                        }
+                    });
+                }, { rootMargin: '200px' });
+                io.observe(target);
+            }
+
+            async function loadData() {
+                try {
+                    const resp = await fetch('data/cohort.json', { cache: 'force-cache' });
+                    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+                    const payload = await resp.json();
+                    state.records = payload.records;
+                    state.columns = payload.columns;
+                    state.bucketOrders = payload.bucket_orders;
+                    buildCategoryPills();
+                    wireUpControls();
+                    loadingEl.style.display = 'none';
+                    contentEl.style.display = 'block';
+                    update();
+                } catch (err) {
+                    loadingEl.innerHTML =
+                        'Could not load the cohort data. The interactive ' +
+                        'explorer requires the page to be served over HTTP ' +
+                        '(e.g. <code>python3 -m http.server</code>) rather ' +
+                        'than opened as a <code>file://</code> URL.';
+                    loadingEl.style.color = '#b91c1c';
+                    console.error('cohort fetch failed:', err);
+                }
+            }
+
+            function buildCategoryPills() {
+                const fields = ['muni_pop_bucket', 'vulnerability', 'education'];
+                fields.forEach(field => {
+                    const container = document.querySelector(
+                        '.pill-row[data-filter="' + field + '"]'
+                    );
+                    if (!container) return;
+                    const values = state.bucketOrders[field] || [];
+                    container.innerHTML = '';
+                    values.forEach(v => {
+                        state.filters[field].add(v);
+                        const btn = document.createElement('button');
+                        btn.className = 'pill active accent';
+                        btn.type = 'button';
+                        btn.dataset.value = v;
+                        btn.textContent = v;
+                        container.appendChild(btn);
+                    });
+                });
+            }
+
+            function wireUpControls() {
+                document.querySelectorAll('.pill-row[data-mode="multi"]').forEach(row => {
+                    const field = row.dataset.filter;
+                    row.addEventListener('click', (e) => {
+                        const btn = e.target.closest('.pill');
+                        if (!btn) return;
+                        const value = btn.dataset.value;
+                        if (state.filters[field].has(value)) {
+                            if (state.filters[field].size === 1) return;
+                            state.filters[field].delete(value);
+                            btn.classList.remove('active');
+                        } else {
+                            state.filters[field].add(value);
+                            btn.classList.add('active');
+                        }
+                        update();
+                    });
+                });
+
+                const bind = (id, key, labelId, unit) => {
+                    const el = document.getElementById(id);
+                    const valEl = document.getElementById(id + 'Val');
+                    el.addEventListener('input', () => {
+                        state[key] = parseInt(el.value, 10);
+                        if (key === 'ageMin' && state.ageMin > state.ageMax) {
+                            state.ageMax = state.ageMin;
+                            document.getElementById('ageMax').value = state.ageMax;
+                            document.getElementById('ageMaxVal').textContent = state.ageMax;
+                        }
+                        if (key === 'ageMax' && state.ageMax < state.ageMin) {
+                            state.ageMin = state.ageMax;
+                            document.getElementById('ageMin').value = state.ageMin;
+                            document.getElementById('ageMinVal').textContent = state.ageMin;
+                        }
+                        if (key === 'yearMin' && state.yearMin > state.yearMax) {
+                            state.yearMax = state.yearMin;
+                            document.getElementById('yearMax').value = state.yearMax;
+                            document.getElementById('yearMaxVal').textContent = state.yearMax;
+                        }
+                        if (key === 'yearMax' && state.yearMax < state.yearMin) {
+                            state.yearMin = state.yearMax;
+                            document.getElementById('yearMin').value = state.yearMin;
+                            document.getElementById('yearMinVal').textContent = state.yearMin;
+                        }
+                        valEl.textContent = state[key];
+                        document.getElementById('ageRangeLabel').innerHTML =
+                            state.ageMin + '\u00a0\u2013\u00a0' + state.ageMax + '\u00a0years';
+                        document.getElementById('yearRangeLabel').innerHTML =
+                            state.yearMin + '\u00a0\u2013\u00a0' + state.yearMax;
+                        update();
+                    });
+                };
+                bind('ageMin', 'ageMin');
+                bind('ageMax', 'ageMax');
+                bind('yearMin', 'yearMin');
+                bind('yearMax', 'yearMax');
+
+                document.getElementById('resetFilters').addEventListener('click', () => {
+                    state.filters.sex = new Set(['M', 'F']);
+                    ['muni_pop_bucket', 'vulnerability', 'education'].forEach(f => {
+                        state.filters[f] = new Set(state.bucketOrders[f]);
+                    });
+                    state.ageMin = 60; state.ageMax = 112;
+                    state.yearMin = 1937; state.yearMax = 2021;
+                    document.getElementById('ageMin').value = 60;
+                    document.getElementById('ageMax').value = 112;
+                    document.getElementById('ageMinVal').textContent = '60';
+                    document.getElementById('ageMaxVal').textContent = '112';
+                    document.getElementById('yearMin').value = 1937;
+                    document.getElementById('yearMax').value = 2021;
+                    document.getElementById('yearMinVal').textContent = '1937';
+                    document.getElementById('yearMaxVal').textContent = '2021';
+                    document.getElementById('ageRangeLabel').innerHTML = '60\u00a0\u2013\u00a0112\u00a0years';
+                    document.getElementById('yearRangeLabel').innerHTML = '1937\u00a0\u2013\u00a02021';
+                    document.querySelectorAll('.pill-row .pill').forEach(p => p.classList.add('active'));
+                    update();
+                });
+            }
+
+            function filterRecords() {
+                const cols = state.columns;
+                const iFound = cols.indexOf('found');
+                const iSex = cols.indexOf('sex');
+                const iAge = cols.indexOf('age');
+                const iYear = cols.indexOf('year');
+                const iMuni = cols.indexOf('muni_pop_bucket');
+                const iVuln = cols.indexOf('vulnerability');
+                const iEdu = cols.indexOf('education');
+
+                const sexes = state.filters.sex;
+                const munis = state.filters.muni_pop_bucket;
+                const vulns = state.filters.vulnerability;
+                const edus = state.filters.education;
+                const ageMin = state.ageMin, ageMax = state.ageMax;
+                const yMin = state.yearMin, yMax = state.yearMax;
+
+                const out = [];
+                const recs = state.records;
+                for (let k = 0; k < recs.length; k++) {
+                    const r = recs[k];
+                    if (!sexes.has(r[iSex])) continue;
+                    const a = r[iAge];
+                    if (a < ageMin || a > ageMax) continue;
+                    const y = r[iYear];
+                    if (y < yMin || y > yMax) continue;
+                    if (!munis.has(r[iMuni])) continue;
+                    if (!vulns.has(r[iVuln])) continue;
+                    if (!edus.has(r[iEdu])) continue;
+                    out.push(r);
+                }
+                return { out, iFound, iSex, iAge, iYear, iMuni };
+            }
+
+            function ageBucket(a) {
+                if (a < 70) return '60\u201369';
+                if (a < 80) return '70\u201379';
+                if (a < 90) return '80\u201389';
+                return '90+';
+            }
+
+            function decadeBucket(y) {
+                const d = Math.floor(y / 10) * 10;
+                return d + 's';
+            }
+
+            function renderBreakdown(containerId, buckets, order) {
+                const container = document.getElementById(containerId);
+                container.innerHTML = '';
+                if (order) {
+                    order = order.filter(k => buckets[k]);
+                } else {
+                    order = Object.keys(buckets).sort();
+                }
+                if (order.length === 0) {
+                    container.innerHTML = '<div class="explore-empty" style="padding:10px 0">No data</div>';
+                    return;
+                }
+                order.forEach(key => {
+                    const b = buckets[key];
+                    const rate = pct(b.found, b.total);
+                    const lowN = b.total < 20;
+                    const row = document.createElement('div');
+                    row.className = 'brk-row';
+                    const pctText = pctStr(rate);
+                    row.innerHTML =
+                        '<div class="brk-label">' + key + '</div>' +
+                        '<div class="brk-track"><div class="brk-fill' +
+                        (lowN ? ' low' : '') +
+                        '" style="width:' + rate.toFixed(1) + '%"></div></div>' +
+                        '<div class="brk-value">' + pctText +
+                        ' <span class="brk-n">(n=' + b.total + ')</span></div>';
+                    container.appendChild(row);
+                });
+            }
+
+            function update() {
+                if (!state.records) return;
+                const { out, iFound, iSex, iAge, iYear, iMuni } = filterRecords();
+                const total = out.length;
+                const totalAll = state.records.length;
+
+                if (total === 0) {
+                    contentEl.style.display = 'none';
+                    emptyEl.style.display = 'block';
+                    return;
+                }
+                contentEl.style.display = 'block';
+                emptyEl.style.display = 'none';
+
+                let found = 0;
+                const byAge = {}, byMuni = {}, byDecade = {}, bySex = {};
+                for (let k = 0; k < out.length; k++) {
+                    const r = out[k];
+                    const f = r[iFound];
+                    found += f;
+                    const ab = ageBucket(r[iAge]);
+                    const mb = r[iMuni];
+                    const db = decadeBucket(r[iYear]);
+                    const sb = r[iSex] === 'M' ? 'Men' : 'Women';
+                    (byAge[ab] = byAge[ab] || { found: 0, total: 0 });
+                    byAge[ab].total++; byAge[ab].found += f;
+                    (byMuni[mb] = byMuni[mb] || { found: 0, total: 0 });
+                    byMuni[mb].total++; byMuni[mb].found += f;
+                    (byDecade[db] = byDecade[db] || { found: 0, total: 0 });
+                    byDecade[db].total++; byDecade[db].found += f;
+                    (bySex[sb] = bySex[sb] || { found: 0, total: 0 });
+                    bySex[sb].total++; bySex[sb].found += f;
+                }
+
+                const still = total - found;
+                const foundRate = pct(found, total);
+                const stillRate = 100 - foundRate;
+                const shareOfCohort = pct(total, totalAll);
+
+                document.getElementById('kpiTotal').textContent = kpiFmt(total);
+                document.getElementById('kpiShare').textContent =
+                    shareOfCohort.toFixed(1) + '% of the 7,855-case cohort';
+                document.getElementById('kpiFoundRate').textContent = pctStr(foundRate);
+                document.getElementById('kpiFoundCount').textContent =
+                    kpiFmt(found) + ' cases';
+                document.getElementById('kpiStillRate').textContent = pctStr(stillRate);
+                document.getElementById('kpiStillCount').textContent =
+                    kpiFmt(still) + ' cases';
+
+                const stackFound = document.getElementById('stackFound');
+                const stackStill = document.getElementById('stackStill');
+                stackFound.style.width = foundRate.toFixed(1) + '%';
+                stackStill.style.width = stillRate.toFixed(1) + '%';
+                stackFound.textContent = foundRate >= 7 ? pctStr(foundRate) : '';
+                stackStill.textContent = stillRate >= 7 ? pctStr(stillRate) : '';
+                document.getElementById('stackCount').textContent =
+                    'n\u00a0=\u00a0' + kpiFmt(total);
+
+                renderBreakdown('brkAge', byAge,
+                    ['60\u201369', '70\u201379', '80\u201389', '90+']);
+                renderBreakdown('brkMuni', byMuni,
+                    state.bucketOrders.muni_pop_bucket);
+                renderBreakdown('brkDecade', byDecade,
+                    Object.keys(byDecade).sort());
+                renderBreakdown('brkSex', bySex, ['Men', 'Women']);
+            }
+
+            loadOnVisible();
+        }
     </script>
 </body>
 
