@@ -36,17 +36,25 @@ explanations and the data itself.
   only move the operating point, plus how precision reacts to class
   prevalence.
 - **Gradient Boosting in Action** &mdash; a full in-browser gradient
-  boosting classifier trained on a synthetic *days elapsed* &times;
-  *age at missingness* dataset. Sliders control the number of boosting
-  iterations, learning rate and tree depth; the decision surface and
-  training log-loss curve update in real time so readers can watch the
-  ensemble sharpen and the loss drop.
+  boosting classifier trained on *days elapsed* &times; *age at
+  missingness*. A **Training data** toggle switches between a 400-point
+  stratified sample of the real paper cohort (default) and a pure
+  synthetic demo, so readers can compare the decision surface the
+  paper's data actually produces against a textbook example. Sliders
+  control the number of boosting iterations, learning rate and tree
+  depth; the decision surface and training log-loss curve update in
+  real time. A dedicated **Reset to paper** button restores the paper
+  defaults (30 trees, &eta;=0.30, depth 1, paper cohort).
 - **Explaining Predictions with SHAP** &mdash; an exact-Shapley
   explainer over four user-tunable features (days elapsed, age,
-  municipality size, sex). A waterfall plot decomposes the live
-  prediction into feature-level contributions, while a beeswarm
-  summarizes SHAP values across 80 synthetic cases &mdash; the same
-  intuition the paper uses to rank its predictors in Fig.&nbsp;3.
+  municipality size, sex). A **Model & background** toggle switches the
+  scoring function between a toy analytical logistic model and a
+  logistic model fitted on the paper's 7,855-case cohort (four main
+  effects plus two interactions, IRLS-estimated); the background and
+  beeswarm populations follow suit. A waterfall plot decomposes the
+  live prediction into feature-level contributions, while a beeswarm
+  summarizes SHAP values across 80 cases. A **Reset to paper** button
+  restores the representative case under the paper model.
 
 ## Structure
 
@@ -54,7 +62,8 @@ explanations and the data itself.
 missing_adults/
 |-- index.html              # single-file website (HTML + inline CSS + JS)
 |-- data/
-|   `-- cohort.json         # compact cohort used by the interactive explorer
+|   |-- cohort.json         # compact cohort used by the interactive explorer
+|   `-- paper_demo.json     # precomputed GBC + SHAP artifacts (paper cohort)
 |-- data-raw/               # (not published) raw CSV + preprocessing script
 |   |-- desaparecidos_colombia.csv
 |   `-- preprocess.py
@@ -65,8 +74,9 @@ missing_adults/
 There are **no build steps and no runtime dependencies** for the
 website &mdash; the whole page is self-contained in `index.html`, uses
 Google Fonts (`Inter`) via CDN, ships with an inline SVG favicon and
-fetches `data/cohort.json` on demand. All four teaching demos (AUC,
-GBC, SHAP, data explorer) run entirely client-side in plain JavaScript.
+fetches `data/cohort.json` plus a small (~10&nbsp;KB)
+`data/paper_demo.json` on demand. All four teaching demos (AUC, GBC,
+SHAP, data explorer) run entirely client-side in plain JavaScript.
 
 ## Regenerating the cohort data
 
@@ -89,6 +99,24 @@ disappearance"), buckets municipalities by population and collapses
 the long tail of vulnerability factors into a handful of analytical
 groups. The resulting file is ~510 KB (pure ASCII, no personal
 identifiers).
+
+### Regenerating `paper_demo.json`
+
+The GBC and SHAP demos can optionally use a **paper cohort** data
+source. The artifacts they consume (logistic-model coefficients,
+stratified training sample, SHAP background and beeswarm populations)
+are precomputed once and saved into `data/paper_demo.json`. To
+reproduce the file deterministically from `cohort.json`:
+
+```bash
+python3 -m pip install --user numpy  # if not already installed
+python3 data-raw/build_paper_demo.py \
+  --in data/cohort.json \
+  --out data/paper_demo.json
+```
+
+The IRLS fit uses a fixed seed so the output is byte-identical across
+runs (~10 KB).
 
 ## Local preview
 

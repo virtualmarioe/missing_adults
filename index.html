@@ -2352,6 +2352,52 @@
             color: #0d9488;
         }
 
+        .gbc-presets button.gbc-reset {
+            background: #0f766e;
+            color: #fff;
+            border-color: #0f766e;
+        }
+
+        .gbc-presets button.gbc-reset:hover {
+            background: #0d9488;
+            border-color: #0d9488;
+            color: #fff;
+        }
+
+        .gbc-pillbar {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 2px;
+        }
+
+        .gbc-pillbar button {
+            padding: 6px 12px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            border: 1px solid #e2e8f0;
+            background: #fff;
+            color: #334155;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .gbc-pillbar button.active {
+            border-color: #0d9488;
+            color: #0f766e;
+            background: #f0fdfa;
+        }
+
+        .gbc-status {
+            font-size: 0.74rem;
+            color: #64748b;
+            line-height: 1.45;
+            margin-top: 4px;
+        }
+
+        .gbc-status strong { color: #0f766e; }
+
         .gbc-takeaway {
             margin-top: 28px;
             padding: 18px 22px;
@@ -2599,6 +2645,27 @@
             border-color: #7c3aed;
             color: #7c3aed;
         }
+
+        .shap-presets button.shap-reset {
+            background: #6d28d9;
+            color: #fff;
+            border-color: #6d28d9;
+        }
+
+        .shap-presets button.shap-reset:hover {
+            background: #7c3aed;
+            border-color: #7c3aed;
+            color: #fff;
+        }
+
+        .shap-status {
+            font-size: 0.74rem;
+            color: #64748b;
+            line-height: 1.45;
+            margin-top: 4px;
+        }
+
+        .shap-status strong { color: #6d28d9; }
 
         .shap-takeaway {
             margin-top: 28px;
@@ -3371,6 +3438,23 @@
 
                     <div class="gbc-slider">
                         <label>
+                            <span>Training data</span>
+                            <span id="gbcDataVal">Paper cohort</span>
+                        </label>
+                        <div class="gbc-pillbar" id="gbcDataPills">
+                            <button type="button" data-gbc-data="paper" class="active">Paper cohort</button>
+                            <button type="button" data-gbc-data="synthetic">Synthetic demo</button>
+                        </div>
+                        <div class="gbc-status" id="gbcDataStatus">
+                            Training on <strong>400</strong> stratified
+                            samples from the paper&rsquo;s
+                            <strong>7,855-case</strong> cohort (days
+                            elapsed &times; age at missingness).
+                        </div>
+                    </div>
+
+                    <div class="gbc-slider">
+                        <label>
                             <span>Number of trees <em>(boosting iterations)</em></span>
                             <span id="gbcTreesVal">30</span>
                         </label>
@@ -3412,6 +3496,7 @@
                         <button type="button" data-gbc-preset="underfit">Underfit (3 trees)</button>
                         <button type="button" data-gbc-preset="paper">Paper-like</button>
                         <button type="button" data-gbc-preset="overfit">Greedy (60 &middot; &eta;=1.0)</button>
+                        <button type="button" data-gbc-preset="reset" class="gbc-reset">Reset to paper</button>
                     </div>
                 </div>
             </div>
@@ -3516,6 +3601,23 @@
 
                     <div class="shap-slider">
                         <label>
+                            <span>Model &amp; background</span>
+                            <span id="shapDataVal">Paper cohort</span>
+                        </label>
+                        <div class="shap-pillbar" id="shapDataPills">
+                            <button type="button" data-shap-data="paper" class="active">Paper cohort</button>
+                            <button type="button" data-shap-data="toy">Toy model</button>
+                        </div>
+                        <div class="shap-status" id="shapDataStatus">
+                            Scoring function is a logistic model fitted on
+                            the <strong>7,855-case</strong> paper cohort
+                            (4 features + 2 interactions). Background and
+                            beeswarm samples are drawn from real cases.
+                        </div>
+                    </div>
+
+                    <div class="shap-slider">
+                        <label>
                             <span>Days elapsed since report <em>(feature 1)</em></span>
                             <span id="shapDaysVal">300 d</span>
                         </label>
@@ -3572,6 +3674,7 @@
                         <button type="button" data-shap-preset="easy">Easy case</button>
                         <button type="button" data-shap-preset="average">Average case</button>
                         <button type="button" data-shap-preset="hard">Hard case</button>
+                        <button type="button" data-shap-preset="reset" class="shap-reset">Reset to paper</button>
                     </div>
                 </div>
             </div>
@@ -5315,6 +5418,25 @@
         // =====================================================================
         // Gradient Boosting Classifier demo
         // =====================================================================
+        // ---- Shared paper-cohort preprocessed data (cached fetch) -------------
+        // paper_demo.json ships precomputed artifacts derived from the 7,855-case
+        // cohort on OSF: coefficients for a 7-term logistic model, a stratified
+        // 400-point sample for training the GBC surface, and 60/80 random draws
+        // for SHAP background and beeswarm populations. Fetched on first need.
+        let _paperDemoCache = null;
+        let _paperDemoPromise = null;
+        function loadPaperDemo() {
+            if (_paperDemoCache) return Promise.resolve(_paperDemoCache);
+            if (_paperDemoPromise) return _paperDemoPromise;
+            _paperDemoPromise = fetch('data/paper_demo.json', { cache: 'force-cache' })
+                .then(function (r) {
+                    if (!r.ok) throw new Error('HTTP ' + r.status);
+                    return r.json();
+                })
+                .then(function (p) { _paperDemoCache = p; return p; });
+            return _paperDemoPromise;
+        }
+
         function initGbcDemo() {
             const surfaceSvg = document.getElementById('gbcSurface');
             const lossSvg = document.getElementById('gbcLoss');
@@ -5368,8 +5490,12 @@
                 return { xs: xs, ys: ys };
             }
 
-            const DATA = buildDataset(90, 110, 20250423);
-            const N = DATA.xs.length;
+            // Two datasets are available at any time. DATA is a thin reference
+            // swapped in place when the user toggles the data-source pills.
+            const SYNTHETIC_DATA = buildDataset(90, 110, 20250423);
+            let PAPER_DATA = null;  // populated after fetch
+            let DATA = SYNTHETIC_DATA;
+            let daysMax = 1800;     // axis scale in days, flipped with the dataset
 
             // --- Decision-tree regressor on residuals. ---
             function fitBestSplit(xs, residuals, featureIdx, indices) {
@@ -5536,10 +5662,14 @@
                     x2: sMargin.left, y2: sMargin.top + sPlotH,
                     class: 'axis'
                 }));
+                const fmtD = function (n) {
+                    return n >= 1000 ? (n / 1000).toFixed(n % 1000 === 0 ? 0 : 1) + 'k d'
+                                     : n + ' d';
+                };
                 const xTicks = [
                     { v: 0, label: '0 d' },
-                    { v: 0.5, label: '~900 d' },
-                    { v: 1, label: '1800 d' }
+                    { v: 0.5, label: fmtD(Math.round(daysMax / 2)) },
+                    { v: 1, label: fmtD(daysMax) }
                 ];
                 for (const t of xTicks) {
                     const x = sMargin.left + t.v * sPlotW;
@@ -5750,7 +5880,15 @@
             }
 
             // --- State + wire up interactions. ---
-            const state = { trees: 30, eta: 0.30, depth: 1, model: null };
+            // "reset" = these default values + paper-cohort data.
+            const DEFAULTS = { trees: 30, eta: 0.30, depth: 1, dataSource: 'paper' };
+            const state = {
+                trees: DEFAULTS.trees,
+                eta: DEFAULTS.eta,
+                depth: DEFAULTS.depth,
+                model: null,
+                dataSource: DEFAULTS.dataSource
+            };
             const MAX_TREES = 60;
 
             function retrain() {
@@ -5809,22 +5947,130 @@
                 render();
             });
 
-            document.querySelectorAll('[data-gbc-preset]').forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    const p = btn.getAttribute('data-gbc-preset');
-                    if (p === 'underfit') {
-                        state.trees = 3; state.eta = 0.30; state.depth = 1;
-                    } else if (p === 'paper') {
-                        state.trees = 30; state.eta = 0.30; state.depth = 2;
-                    } else if (p === 'overfit') {
-                        state.trees = 60; state.eta = 1.00; state.depth = 3;
+            // --- Data-source toggle (paper vs synthetic) ------------------------
+            const dataPills = document.getElementById('gbcDataPills');
+            const dataValEl = document.getElementById('gbcDataVal');
+            const dataStatusEl = document.getElementById('gbcDataStatus');
+
+            function updateDataUi() {
+                if (dataPills) {
+                    Array.prototype.forEach.call(
+                        dataPills.querySelectorAll('button'),
+                        function (b) {
+                            if (b.getAttribute('data-gbc-data') === state.dataSource) {
+                                b.classList.add('active');
+                            } else {
+                                b.classList.remove('active');
+                            }
+                        }
+                    );
+                }
+                if (dataValEl) {
+                    dataValEl.textContent = state.dataSource === 'paper'
+                        ? 'Paper cohort' : 'Synthetic demo';
+                }
+                if (dataStatusEl) {
+                    if (state.dataSource === 'paper' && PAPER_DATA) {
+                        dataStatusEl.innerHTML =
+                            'Training on <strong>' + PAPER_DATA.xs.length + '</strong> '
+                            + 'stratified samples from the paper&rsquo;s '
+                            + '<strong>7,855-case</strong> cohort (SIRDEC / Datos '
+                            + 'Abiertos Colombia). Axis goes up to '
+                            + daysMax.toLocaleString() + ' d &asymp; '
+                            + (daysMax / 365).toFixed(0) + ' yr.';
+                    } else if (state.dataSource === 'paper') {
+                        dataStatusEl.textContent =
+                            'Loading paper cohort data\u2026';
+                    } else {
+                        dataStatusEl.innerHTML =
+                            'Training on <strong>' + SYNTHETIC_DATA.xs.length
+                            + '</strong> synthetic points drawn from a toy '
+                            + 'logistic data-generating process. Axis goes up to '
+                            + '1,800 d &asymp; 5 yr.';
                     }
-                    treesInp.value = state.trees;
-                    etaInp.value = Math.round(state.eta * 100);
-                    depthInp.value = state.depth;
-                    syncLabels();
+                }
+            }
+
+            function switchDataSource(src) {
+                if (src === state.dataSource) return;
+                if (src === 'paper') {
+                    if (PAPER_DATA) {
+                        DATA = PAPER_DATA;
+                        daysMax = _paperDemoCache && _paperDemoCache.meta
+                            ? _paperDemoCache.meta.days_max : 10000;
+                    } else {
+                        // Data not yet ready: keep synthetic visible, but update UI
+                        // so the user knows paper mode is selected and loading.
+                        state.dataSource = 'paper';
+                        updateDataUi();
+                        loadPaperDemo().then(applyPaperData).catch(function () {
+                            state.dataSource = 'synthetic';
+                            updateDataUi();
+                        });
+                        return;
+                    }
+                } else {
+                    DATA = SYNTHETIC_DATA;
+                    daysMax = 1800;
+                }
+                state.dataSource = src;
+                retrain();
+                render();
+                updateDataUi();
+            }
+
+            function applyPaperData(payload) {
+                PAPER_DATA = {
+                    xs: payload.gbc_sample.map(function (r) { return [r[0], r[1]]; }),
+                    ys: payload.gbc_sample.map(function (r) { return r[2]; })
+                };
+                if (state.dataSource === 'paper') {
+                    DATA = PAPER_DATA;
+                    daysMax = payload.meta.days_max;
                     retrain();
                     render();
+                    updateDataUi();
+                }
+            }
+
+            if (dataPills) {
+                Array.prototype.forEach.call(
+                    dataPills.querySelectorAll('button'),
+                    function (b) {
+                        b.addEventListener('click', function () {
+                            switchDataSource(b.getAttribute('data-gbc-data'));
+                        });
+                    }
+                );
+            }
+
+            function applyPreset(p) {
+                if (p === 'underfit') {
+                    state.trees = 3; state.eta = 0.30; state.depth = 1;
+                } else if (p === 'paper') {
+                    state.trees = 30; state.eta = 0.30; state.depth = 2;
+                } else if (p === 'overfit') {
+                    state.trees = 60; state.eta = 1.00; state.depth = 3;
+                } else if (p === 'reset') {
+                    state.trees = DEFAULTS.trees;
+                    state.eta = DEFAULTS.eta;
+                    state.depth = DEFAULTS.depth;
+                    // Reset also restores paper-cohort data.
+                    if (state.dataSource !== DEFAULTS.dataSource) {
+                        switchDataSource(DEFAULTS.dataSource);
+                    }
+                }
+                treesInp.value = state.trees;
+                etaInp.value = Math.round(state.eta * 100);
+                depthInp.value = state.depth;
+                syncLabels();
+                retrain();
+                render();
+            }
+
+            document.querySelectorAll('[data-gbc-preset]').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    applyPreset(btn.getAttribute('data-gbc-preset'));
                 });
             });
 
@@ -5835,8 +6081,26 @@
                 if (initialized) return;
                 initialized = true;
                 syncLabels();
+                // Render synthetic immediately for responsiveness; if the user
+                // wants the default (paper cohort), swap in paper data when ready.
                 retrain();
                 render();
+                updateDataUi();
+                if (state.dataSource === 'paper') {
+                    loadPaperDemo().then(applyPaperData).catch(function () {
+                        state.dataSource = 'synthetic';
+                        daysMax = 1800;
+                        DATA = SYNTHETIC_DATA;
+                        if (dataStatusEl) {
+                            dataStatusEl.innerHTML =
+                                '<strong>Paper cohort unavailable</strong> '
+                                + '(serve the site over HTTP to load '
+                                + 'data/paper_demo.json). Falling back to '
+                                + 'the synthetic demo.';
+                        }
+                        updateDataUi();
+                    });
+                }
             }
             if ('IntersectionObserver' in window) {
                 const obs = new IntersectionObserver(function (entries) {
@@ -5886,19 +6150,36 @@
             const MUNI_LABELS = ['<200k', '200-500k', '500k-1M', '1M-4M', '>4M'];
             const F_DAYS = 0, F_AGE = 1, F_MUNI = 2, F_SEX = 3;
 
+            // daysMax is a dynamic property of the current model / data source:
+            //   toy model   -> 0..1800 d   (~5 yr, typical recent cases)
+            //   paper model -> 0..10000 d  (~27 yr, full cohort range)
+            // It also drives the days slider's UI max.
+            let daysMax = 1800;
+
             function toNorm(days, age, muniIdx, sexF) {
                 return [
-                    Math.max(0, Math.min(1, days / 1800)),
+                    Math.max(0, Math.min(1, days / daysMax)),
                     Math.max(0, Math.min(1, (age - 60) / 40)),
                     Math.max(0, Math.min(1, muniIdx / 4)),
                     sexF ? 1 : 0
                 ];
             }
 
-            // Scoring function f(x) -> log-odds of "found alive".
-            // Includes a soft interaction between age and days to make SHAP
-            // values non-trivial even for a small model.
+            // Two scoring functions sit behind a single API. The toy model is an
+            // analytical teaching example; the paper model uses coefficients
+            // fitted on the full 7,855-case cohort via IRLS.
+            let paperCoef = null;  // set after fetch; non-null => paper mode
             function scoreLogit(xn) {
+                if (paperCoef) {
+                    const c = paperCoef;
+                    return c.b
+                        + c.dN * xn[F_DAYS]
+                        + c.aN * xn[F_AGE]
+                        + c.mN * xn[F_MUNI]
+                        + c.sF * xn[F_SEX]
+                        + c.dxa * xn[F_DAYS] * xn[F_AGE]
+                        + c.dxm * xn[F_DAYS] * xn[F_MUNI];
+                }
                 return 0.15
                     - 3.2 * xn[F_DAYS]
                     - 1.8 * (xn[F_AGE] - 0.45)
@@ -5909,7 +6190,6 @@
 
             function sigmoid(z) { return 1 / (1 + Math.exp(-z)); }
 
-            // --- Synthetic background population for Shapley marginalization --
             function mulberry32(a) {
                 return function () {
                     a |= 0; a = a + 0x6D2B79F5 | 0;
@@ -5918,21 +6198,34 @@
                     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
                 };
             }
-            const rng = mulberry32(20220412);
-            const BG_N = 60;
-            const BACKGROUND = [];
-            for (let i = 0; i < BG_N; i++) {
-                BACKGROUND.push([
-                    rng(), // days
-                    rng(), // age
-                    Math.floor(rng() * 5) / 4, // muni in {0,0.25,0.5,0.75,1}
-                    rng() < 0.52 ? 1 : 0 // slightly more women
-                ]);
-            }
-            // Baseline = mean prediction on background (in log-odds space).
+
+            // --- Background population for Shapley marginalization.
+            // Mutable: refilled from a synthetic RNG in toy mode, or from real
+            // cohort samples in paper mode.
+            let BACKGROUND = [];
             let BASELINE_LOGIT = 0;
-            for (const bx of BACKGROUND) BASELINE_LOGIT += scoreLogit(bx);
-            BASELINE_LOGIT /= BACKGROUND.length;
+            function recomputeBaseline() {
+                let s = 0;
+                for (const bx of BACKGROUND) s += scoreLogit(bx);
+                BASELINE_LOGIT = BACKGROUND.length ? s / BACKGROUND.length : 0;
+            }
+
+            function buildToyBackground() {
+                const rng = mulberry32(20220412);
+                const BG_N = 60;
+                const out = [];
+                for (let i = 0; i < BG_N; i++) {
+                    out.push([
+                        rng(),                         // days, normalized
+                        rng(),                         // age,  normalized
+                        Math.floor(rng() * 5) / 4,     // muni in {0,0.25,0.5,0.75,1}
+                        rng() < 0.52 ? 1 : 0           // slight female majority
+                    ]);
+                }
+                return out;
+            }
+            BACKGROUND = buildToyBackground();
+            recomputeBaseline();
 
             // --- Exact Shapley via weighted coalition average (4 features)
             // Uses marginal expectation approximation: for features outside a
@@ -5979,9 +6272,18 @@
             }
 
             // --- State & UI wiring ------------------------------------------------
-            const state = {
+            // Defaults describe the paper's "representative case" and double as
+            // the Reset button target. We start in paper mode (coefficients
+            // loaded asynchronously); if the fetch fails we fall back to toy.
+            const DEFAULTS = {
                 days: 300, age: 75, muni: 4, sexF: true,
-                phi: null
+                dataSource: 'paper'
+            };
+            const state = {
+                days: DEFAULTS.days, age: DEFAULTS.age,
+                muni: DEFAULTS.muni, sexF: DEFAULTS.sexF,
+                phi: null,
+                dataSource: DEFAULTS.dataSource
             };
 
             const daysInp = document.getElementById('shapDays');
@@ -6174,18 +6476,32 @@
             }
 
             // --- Beeswarm summary plot -----------------------------------------
-            // Precompute SHAP values for a population of 80 random cases.
-            const swarmData = [];
-            const rng2 = mulberry32(19900330);
-            for (let i = 0; i < 80; i++) {
-                const days = Math.floor(rng2() * 1800);
-                const age = 60 + Math.floor(rng2() * 40);
-                const muni = Math.floor(rng2() * 5);
-                const sexF = rng2() < 0.52 ? 1 : 0;
-                const xn = toNorm(days, age, muni, sexF);
-                const phi = shapValues(xn);
-                swarmData.push({ xn: xn, phi: phi });
+            // 80-case population. Regenerated whenever the data source or
+            // scoring function changes so feature importance bars remain
+            // consistent with the active model.
+            let swarmData = [];
+            function rebuildSwarmToy() {
+                const rng2 = mulberry32(19900330);
+                const out = [];
+                for (let i = 0; i < 80; i++) {
+                    const days = Math.floor(rng2() * 1800);
+                    const age = 60 + Math.floor(rng2() * 40);
+                    const muni = Math.floor(rng2() * 5);
+                    const sexF = rng2() < 0.52 ? 1 : 0;
+                    const xn = toNorm(days, age, muni, sexF);
+                    out.push({ xn: xn, phi: shapValues(xn) });
+                }
+                return out;
             }
+            function rebuildSwarmFromSample(sample) {
+                const out = [];
+                for (const row of sample) {
+                    const xn = [row[0], row[1], row[2], row[3]];
+                    out.push({ xn: xn, phi: shapValues(xn) });
+                }
+                return out;
+            }
+            swarmData = rebuildSwarmToy();
 
             const bwViewW = 420, bwViewH = 220;
             const bwMargin = { top: 14, right: 14, bottom: 34, left: 150 };
@@ -6361,20 +6677,165 @@
                     });
                 }
             );
+            // --- Data-source toggle (paper vs toy) -----------------------------
+            const dataPills = document.getElementById('shapDataPills');
+            const dataValEl = document.getElementById('shapDataVal');
+            const dataStatusEl = document.getElementById('shapDataStatus');
+            let _paperPayload = null; // cached after fetch
+
+            function updateDataUi() {
+                if (dataPills) {
+                    Array.prototype.forEach.call(
+                        dataPills.querySelectorAll('button'),
+                        function (b) {
+                            if (b.getAttribute('data-shap-data') === state.dataSource) {
+                                b.classList.add('active');
+                            } else {
+                                b.classList.remove('active');
+                            }
+                        }
+                    );
+                }
+                if (dataValEl) {
+                    dataValEl.textContent = state.dataSource === 'paper'
+                        ? 'Paper cohort' : 'Toy model';
+                }
+                if (dataStatusEl) {
+                    if (state.dataSource === 'paper' && paperCoef) {
+                        dataStatusEl.innerHTML =
+                            'Scoring function: logistic model fitted on the '
+                            + '<strong>7,855-case</strong> cohort (4 main effects '
+                            + '+ 2 interactions). Background/beeswarm draw from '
+                            + '<strong>60</strong> and <strong>80</strong> real '
+                            + 'cases. Days slider spans '
+                            + daysMax.toLocaleString() + ' d.';
+                    } else if (state.dataSource === 'paper') {
+                        dataStatusEl.textContent =
+                            'Loading paper cohort coefficients\u2026';
+                    } else {
+                        dataStatusEl.innerHTML =
+                            'Scoring function: a toy analytical logistic model. '
+                            + 'Background and beeswarm populations are drawn '
+                            + 'from a synthetic RNG. Days slider spans '
+                            + daysMax.toLocaleString() + ' d.';
+                    }
+                }
+            }
+
+            function configureToyMode() {
+                paperCoef = null;
+                daysMax = 1800;
+                BACKGROUND = buildToyBackground();
+                recomputeBaseline();
+                swarmData = rebuildSwarmToy();
+            }
+
+            function configurePaperMode(payload) {
+                paperCoef = payload.coef;
+                daysMax = payload.meta.days_max;
+                BACKGROUND = payload.bg_sample.map(function (r) {
+                    return [r[0], r[1], r[2], r[3]];
+                });
+                recomputeBaseline();
+                swarmData = rebuildSwarmFromSample(payload.bee_sample);
+            }
+
+            function applyDaysSliderRange() {
+                // Keep the slider's range consistent with the active daysMax,
+                // clamping the current value so render() stays well-defined.
+                if (!daysInp) return;
+                daysInp.max = String(daysMax);
+                daysInp.step = daysMax >= 5000 ? '50' : '10';
+                if (state.days > daysMax) state.days = daysMax;
+                daysInp.value = state.days;
+            }
+
+            function switchDataSource(src) {
+                if (src === state.dataSource) return;
+                if (src === 'paper') {
+                    state.dataSource = 'paper';
+                    updateDataUi();
+                    loadPaperDemo().then(function (payload) {
+                        _paperPayload = payload;
+                        configurePaperMode(payload);
+                        applyDaysSliderRange();
+                        syncLabels();
+                        render();
+                        updateDataUi();
+                    }).catch(function () {
+                        state.dataSource = 'toy';
+                        configureToyMode();
+                        applyDaysSliderRange();
+                        syncLabels();
+                        render();
+                        if (dataStatusEl) {
+                            dataStatusEl.innerHTML =
+                                '<strong>Paper cohort unavailable</strong> '
+                                + '(serve the site over HTTP to load '
+                                + 'data/paper_demo.json). Falling back to '
+                                + 'the toy model.';
+                        }
+                        updateDataUi();
+                    });
+                    return;
+                }
+                // toy mode
+                state.dataSource = 'toy';
+                configureToyMode();
+                applyDaysSliderRange();
+                syncLabels();
+                render();
+                updateDataUi();
+            }
+
+            if (dataPills) {
+                Array.prototype.forEach.call(
+                    dataPills.querySelectorAll('button'),
+                    function (b) {
+                        b.addEventListener('click', function () {
+                            switchDataSource(b.getAttribute('data-shap-data'));
+                        });
+                    }
+                );
+            }
+
+            function applyPreset(p) {
+                if (p === 'easy') {
+                    state.days = Math.min(30, daysMax);
+                    state.age = 65; state.muni = 4; state.sexF = true;
+                } else if (p === 'average') {
+                    // In paper mode the cohort average is ~4160 d; in toy mode
+                    // keep the short-delay "average" at 300 d.
+                    state.days = state.dataSource === 'paper'
+                        ? (_paperPayload && _paperPayload.meta
+                            ? _paperPayload.meta.mean_days : 4160)
+                        : 300;
+                    state.age = 75; state.muni = 2; state.sexF = true;
+                } else if (p === 'hard') {
+                    state.days = state.dataSource === 'paper'
+                        ? Math.min(9000, daysMax) : 1500;
+                    state.age = 92; state.muni = 0; state.sexF = false;
+                } else if (p === 'reset') {
+                    state.days = DEFAULTS.days;
+                    state.age = DEFAULTS.age;
+                    state.muni = DEFAULTS.muni;
+                    state.sexF = DEFAULTS.sexF;
+                    if (state.dataSource !== DEFAULTS.dataSource) {
+                        switchDataSource(DEFAULTS.dataSource);
+                        // switchDataSource already syncs UI + renders once data
+                        // is ready; push current defaults as well.
+                    }
+                }
+                daysInp.value = state.days;
+                ageInp.value = state.age;
+                muniInp.value = state.muni;
+                syncLabels();
+                render();
+            }
+
             document.querySelectorAll('[data-shap-preset]').forEach(function (btn) {
                 btn.addEventListener('click', function () {
-                    const p = btn.getAttribute('data-shap-preset');
-                    if (p === 'easy') {
-                        state.days = 30; state.age = 65; state.muni = 4; state.sexF = true;
-                    } else if (p === 'average') {
-                        state.days = 300; state.age = 75; state.muni = 2; state.sexF = true;
-                    } else if (p === 'hard') {
-                        state.days = 1500; state.age = 92; state.muni = 0; state.sexF = false;
-                    }
-                    daysInp.value = state.days;
-                    ageInp.value = state.age;
-                    muniInp.value = state.muni;
-                    syncLabels(); render();
+                    applyPreset(btn.getAttribute('data-shap-preset'));
                 });
             });
 
@@ -6384,8 +6845,33 @@
             function boot() {
                 if (initialized) return;
                 initialized = true;
+                // Render toy model immediately so the plots are never empty
+                // while paper coefficients are fetched in the background.
+                configureToyMode();
+                applyDaysSliderRange();
                 syncLabels();
                 render();
+                updateDataUi();
+                if (state.dataSource === 'paper') {
+                    loadPaperDemo().then(function (payload) {
+                        _paperPayload = payload;
+                        configurePaperMode(payload);
+                        applyDaysSliderRange();
+                        syncLabels();
+                        render();
+                        updateDataUi();
+                    }).catch(function () {
+                        state.dataSource = 'toy';
+                        if (dataStatusEl) {
+                            dataStatusEl.innerHTML =
+                                '<strong>Paper cohort unavailable</strong> '
+                                + '(serve the site over HTTP to load '
+                                + 'data/paper_demo.json). Falling back to '
+                                + 'the toy model.';
+                        }
+                        updateDataUi();
+                    });
+                }
             }
             if ('IntersectionObserver' in window) {
                 const obs = new IntersectionObserver(function (entries) {
