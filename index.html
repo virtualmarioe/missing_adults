@@ -1153,6 +1153,226 @@
             background: #64748b;
         }
 
+        .histogram-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .histogram-card {
+            padding: 22px 22px 18px;
+            border-radius: 16px;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+        }
+
+        .histogram-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+
+        .histogram-head h5 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0;
+        }
+
+        .histogram-sub {
+            font-size: 0.72rem;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+
+        .hist-legend {
+            display: flex;
+            gap: 12px;
+            font-size: 0.72rem;
+            color: #475569;
+        }
+
+        .hist-legend .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hist-legend .legend-swatch {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+        }
+
+        .hist-legend .legend-swatch.found {
+            background: linear-gradient(135deg, #fbbf24, #d97706);
+        }
+
+        .hist-legend .legend-swatch.still {
+            background: #94a3b8;
+        }
+
+        .histogram-plot {
+            position: relative;
+        }
+
+        .histogram-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 1px;
+            height: 150px;
+            padding: 4px 0 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .histogram-bar {
+            flex: 1;
+            min-width: 2px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .histogram-bar::before {
+            content: '';
+            position: absolute;
+            inset: -2px -1px 0 -1px;
+            background: transparent;
+            border-radius: 3px;
+            transition: background 0.15s ease;
+        }
+
+        .histogram-bar:hover::before {
+            background: rgba(15, 23, 42, 0.06);
+        }
+
+        .histogram-bar .seg {
+            width: 100%;
+            transition: height 0.4s ease;
+        }
+
+        .histogram-bar .seg-found {
+            background: linear-gradient(180deg, #fbbf24 0%, #d97706 100%);
+        }
+
+        .histogram-bar .seg-still {
+            background: #94a3b8;
+        }
+
+        .histogram-bar .seg-found:first-child {
+            border-radius: 2px 2px 0 0;
+        }
+
+        .histogram-bar .seg-still:first-child {
+            border-radius: 2px 2px 0 0;
+        }
+
+        .histogram-axis {
+            position: relative;
+            height: 18px;
+            margin-top: 4px;
+            font-size: 0.7rem;
+            color: #94a3b8;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .histogram-axis .tick {
+            position: absolute;
+            transform: translateX(-50%);
+            top: 2px;
+            white-space: nowrap;
+        }
+
+        .histogram-axis .tick::before {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 50%;
+            top: -5px;
+            width: 1px;
+            height: 4px;
+            background: #cbd5e1;
+        }
+
+        .histogram-footer {
+            margin-top: 10px;
+            font-size: 0.72rem;
+            color: #94a3b8;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .histogram-tooltip {
+            position: fixed;
+            background: #0f172a;
+            color: #fff;
+            padding: 9px 12px;
+            border-radius: 8px;
+            font-size: 0.73rem;
+            line-height: 1.4;
+            pointer-events: none;
+            z-index: 100;
+            white-space: nowrap;
+            transform: translate(-50%, calc(-100% - 10px));
+            opacity: 0;
+            transition: opacity 0.12s ease;
+            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.25);
+        }
+
+        .histogram-tooltip.visible {
+            opacity: 1;
+        }
+
+        .histogram-tooltip::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 100%;
+            margin-left: -5px;
+            border: 5px solid transparent;
+            border-top-color: #0f172a;
+        }
+
+        .histogram-tooltip .tip-title {
+            font-weight: 700;
+            font-size: 0.78rem;
+            margin-bottom: 4px;
+            color: #fbbf24;
+        }
+
+        .histogram-tooltip .tip-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .histogram-tooltip .tip-swatch {
+            width: 9px;
+            height: 9px;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        .histogram-tooltip .tip-swatch.found {
+            background: linear-gradient(135deg, #fbbf24, #d97706);
+        }
+
+        .histogram-tooltip .tip-swatch.still {
+            background: #94a3b8;
+        }
+
+        .histogram-tooltip .tip-muted {
+            color: #94a3b8;
+            margin-top: 4px;
+            font-size: 0.68rem;
+        }
+
         .breakdown-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -1290,6 +1510,10 @@
             }
 
             .breakdown-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .histogram-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -1921,6 +2145,58 @@
                             </div>
                         </div>
 
+                        <div class="histogram-grid">
+                            <div class="histogram-card">
+                                <div class="histogram-head">
+                                    <div>
+                                        <h5>Age distribution</h5>
+                                        <div class="histogram-sub">Cases per year of age &middot; stacked by outcome</div>
+                                    </div>
+                                    <div class="hist-legend">
+                                        <span class="legend-item">
+                                            <span class="legend-swatch found"></span>Found
+                                        </span>
+                                        <span class="legend-item">
+                                            <span class="legend-swatch still"></span>Missing
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="histogram-plot">
+                                    <div class="histogram-bars" id="histAge" data-kind="age"></div>
+                                    <div class="histogram-axis" id="histAgeAxis"></div>
+                                </div>
+                                <div class="histogram-footer">
+                                    <span id="histAgeMedian">&nbsp;</span>
+                                    <span id="histAgeRange">&nbsp;</span>
+                                </div>
+                            </div>
+
+                            <div class="histogram-card">
+                                <div class="histogram-head">
+                                    <div>
+                                        <h5>Year reported</h5>
+                                        <div class="histogram-sub">Cases per reporting year &middot; stacked by outcome</div>
+                                    </div>
+                                    <div class="hist-legend">
+                                        <span class="legend-item">
+                                            <span class="legend-swatch found"></span>Found
+                                        </span>
+                                        <span class="legend-item">
+                                            <span class="legend-swatch still"></span>Missing
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="histogram-plot">
+                                    <div class="histogram-bars" id="histYear" data-kind="year"></div>
+                                    <div class="histogram-axis" id="histYearAxis"></div>
+                                </div>
+                                <div class="histogram-footer">
+                                    <span id="histYearMedian">&nbsp;</span>
+                                    <span id="histYearRange">&nbsp;</span>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="breakdown-grid">
                             <div class="breakdown-card">
                                 <h5>Found rate by age group</h5>
@@ -2400,6 +2676,130 @@
                 });
             }
 
+            // Shared histogram tooltip element and state
+            let histTooltip = null;
+            function getHistTooltip() {
+                if (!histTooltip) {
+                    histTooltip = document.createElement('div');
+                    histTooltip.className = 'histogram-tooltip';
+                    document.body.appendChild(histTooltip);
+                }
+                return histTooltip;
+            }
+
+            function renderHistogram(barsId, axisId, footerIds, bins, domainMin, domainMax, tickValues, formatKey, unit) {
+                const barsEl = document.getElementById(barsId);
+                const axisEl = document.getElementById(axisId);
+                if (!barsEl || !axisEl) return;
+
+                const fullBins = [];
+                for (let v = domainMin; v <= domainMax; v++) {
+                    fullBins.push(bins[v] || { found: 0, total: 0 });
+                }
+                const maxTotal = Math.max.apply(null, fullBins.map(b => b.total)) || 1;
+
+                barsEl.innerHTML = '';
+                fullBins.forEach((b, i) => {
+                    const bar = document.createElement('div');
+                    bar.className = 'histogram-bar';
+                    const value = domainMin + i;
+                    bar.dataset.value = String(value);
+                    bar.dataset.found = String(b.found);
+                    bar.dataset.total = String(b.total);
+                    if (b.total > 0) {
+                        const totalH = (b.total / maxTotal) * 100;
+                        const foundH = totalH * (b.found / b.total);
+                        const stillH = totalH - foundH;
+                        if (foundH > 0) {
+                            const f = document.createElement('div');
+                            f.className = 'seg seg-found';
+                            f.style.height = foundH.toFixed(2) + '%';
+                            bar.appendChild(f);
+                        }
+                        if (stillH > 0) {
+                            const s = document.createElement('div');
+                            s.className = 'seg seg-still';
+                            s.style.height = stillH.toFixed(2) + '%';
+                            bar.appendChild(s);
+                        }
+                    }
+                    barsEl.appendChild(bar);
+                });
+
+                // Axis ticks
+                axisEl.innerHTML = '';
+                tickValues.forEach(t => {
+                    if (t < domainMin || t > domainMax) return;
+                    const tick = document.createElement('span');
+                    tick.className = 'tick';
+                    const pct = (t - domainMin) / (domainMax - domainMin) * 100;
+                    tick.style.left = pct.toFixed(2) + '%';
+                    tick.textContent = String(t);
+                    axisEl.appendChild(tick);
+                });
+
+                // Footer summary: median and range of non-empty bins
+                if (footerIds) {
+                    const nonEmpty = fullBins
+                        .map((b, i) => ({ v: domainMin + i, n: b.total }))
+                        .filter(x => x.n > 0);
+                    const totalN = nonEmpty.reduce((s, x) => s + x.n, 0);
+                    const medianEl = document.getElementById(footerIds.median);
+                    const rangeEl = document.getElementById(footerIds.range);
+                    if (totalN === 0) {
+                        if (medianEl) medianEl.innerHTML = '&nbsp;';
+                        if (rangeEl) rangeEl.innerHTML = '&nbsp;';
+                    } else {
+                        let cum = 0;
+                        let median = nonEmpty[0].v;
+                        for (const x of nonEmpty) {
+                            cum += x.n;
+                            if (cum >= totalN / 2) { median = x.v; break; }
+                        }
+                        const lo = nonEmpty[0].v;
+                        const hi = nonEmpty[nonEmpty.length - 1].v;
+                        if (medianEl) {
+                            medianEl.textContent = 'median \u00b7 ' + formatKey(median);
+                        }
+                        if (rangeEl) {
+                            rangeEl.textContent = 'range \u00b7 ' +
+                                formatKey(lo) + ' \u2013 ' + formatKey(hi);
+                        }
+                    }
+                }
+
+                // Wire hover tooltip (once per render)
+                const tip = getHistTooltip();
+                const onEnter = (e) => {
+                    const bar = e.target.closest('.histogram-bar');
+                    if (!bar || !barsEl.contains(bar)) return;
+                    const total = parseInt(bar.dataset.total, 10);
+                    if (total === 0) return;
+                    const found = parseInt(bar.dataset.found, 10);
+                    const still = total - found;
+                    const rate = (100 * found / total).toFixed(1);
+                    const v = parseInt(bar.dataset.value, 10);
+                    tip.innerHTML =
+                        '<div class="tip-title">' + formatKey(v) + (unit ? ' ' + unit : '') + '</div>' +
+                        '<div class="tip-row"><span class="tip-swatch found"></span>' +
+                        found.toLocaleString('en-US') + ' found (' + rate + '%)</div>' +
+                        '<div class="tip-row"><span class="tip-swatch still"></span>' +
+                        still.toLocaleString('en-US') + ' still missing</div>' +
+                        '<div class="tip-muted">n = ' + total.toLocaleString('en-US') + ' cases</div>';
+                    const rect = bar.getBoundingClientRect();
+                    tip.style.left = (rect.left + rect.width / 2) + 'px';
+                    tip.style.top = rect.top + 'px';
+                    tip.classList.add('visible');
+                };
+                const onLeave = (e) => {
+                    if (!e.relatedTarget || !barsEl.contains(e.relatedTarget)) {
+                        tip.classList.remove('visible');
+                    }
+                };
+                barsEl.onmousemove = onEnter;
+                barsEl.onmouseleave = onLeave;
+            }
+
             function update() {
                 if (!state.records) return;
                 const { out, iFound, iSex, iAge, iYear, iMuni } = filterRecords();
@@ -2416,13 +2816,16 @@
 
                 let found = 0;
                 const byAge = {}, byMuni = {}, byDecade = {}, bySex = {};
+                const byAgeInt = {}, byYearInt = {};
                 for (let k = 0; k < out.length; k++) {
                     const r = out[k];
                     const f = r[iFound];
                     found += f;
-                    const ab = ageBucket(r[iAge]);
+                    const age = r[iAge];
+                    const yr = r[iYear];
+                    const ab = ageBucket(age);
                     const mb = r[iMuni];
-                    const db = decadeBucket(r[iYear]);
+                    const db = decadeBucket(yr);
                     const sb = r[iSex] === 'M' ? 'Men' : 'Women';
                     (byAge[ab] = byAge[ab] || { found: 0, total: 0 });
                     byAge[ab].total++; byAge[ab].found += f;
@@ -2432,6 +2835,10 @@
                     byDecade[db].total++; byDecade[db].found += f;
                     (bySex[sb] = bySex[sb] || { found: 0, total: 0 });
                     bySex[sb].total++; bySex[sb].found += f;
+                    (byAgeInt[age] = byAgeInt[age] || { found: 0, total: 0 });
+                    byAgeInt[age].total++; byAgeInt[age].found += f;
+                    (byYearInt[yr] = byYearInt[yr] || { found: 0, total: 0 });
+                    byYearInt[yr].total++; byYearInt[yr].found += f;
                 }
 
                 const still = total - found;
@@ -2465,6 +2872,23 @@
                 renderBreakdown('brkDecade', byDecade,
                     Object.keys(byDecade).sort());
                 renderBreakdown('brkSex', bySex, ['Men', 'Women']);
+
+                renderHistogram(
+                    'histAge', 'histAgeAxis',
+                    { median: 'histAgeMedian', range: 'histAgeRange' },
+                    byAgeInt, state.ageMin, state.ageMax,
+                    [60, 70, 80, 90, 100, 110],
+                    v => String(v),
+                    'years'
+                );
+                renderHistogram(
+                    'histYear', 'histYearAxis',
+                    { median: 'histYearMedian', range: 'histYearRange' },
+                    byYearInt, state.yearMin, state.yearMax,
+                    [1940, 1960, 1980, 2000, 2020],
+                    v => String(v),
+                    ''
+                );
             }
 
             loadOnVisible();

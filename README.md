@@ -2,9 +2,9 @@
 
 Project website for the open-access article:
 
-> Ruiz-Rizzo, A. L., Archila-Mel√àndez, M. E., & Gonz¬∑lez Veloza, J. J. F. (2022).
+> Ruiz-Rizzo, A. L., Archila-Melùndez, M. E., & Gonzùlez Veloza, J. J. F. (2022).
 > **Predicting the probability of finding missing older adults based on machine learning.**
-> *Journal of Computational Social Science*, 5(2), 1303√±1321.
+> *Journal of Computational Social Science*, 5(2), 1303ù1321.
 > <https://doi.org/10.1007/s42001-022-00171-x>
 
 The site summarizes the paper's motivation, data pipeline, feature
@@ -14,6 +14,9 @@ the layout of project pages such as
 includes an **interactive data explorer** that loads the exact
 7,855-case cohort from the paper and lets readers slice the *found-alive*
 rate by age, sex, municipality size, vulnerability factor and education.
+Every change to the filters live-updates the KPIs, outcome stack bar,
+per-subgroup breakdowns and two color-coded stacked histograms (age at
+missingness and year reported) with hover tooltips.
 
 ## Structure
 
@@ -30,7 +33,7 @@ missing_adults/
 ```
 
 There are **no build steps and no runtime dependencies** for the
-website √≥ the whole page is self-contained in `index.html`, uses
+website ù the whole page is self-contained in `index.html`, uses
 Google Fonts (`Inter`) via CDN, ships with an inline SVG favicon and
 fetches `data/cohort.json` on demand.
 
@@ -80,7 +83,7 @@ opening `index.html` directly via `file://` will load everything
 
 - Paper: <https://link.springer.com/article/10.1007/s42001-022-00171-x>
 - Data & code (OSF): <https://osf.io/agz5e/>
-- Original open data: [Datos Abiertos Colombia √≥ SIRDEC](https://www.datos.gov.co/Justicia-y-Derecho/Desaparecidos-Colombia-hist-rico-a-os-1930-a-junio/8hqm-7fdt)
+- Original open data: [Datos Abiertos Colombia ù SIRDEC](https://www.datos.gov.co/Justicia-y-Derecho/Desaparecidos-Colombia-hist-rico-a-os-1930-a-junio/8hqm-7fdt)
 
 ## License
 
