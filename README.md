@@ -16,6 +16,17 @@ interactive data explorer so readers can build up intuition for every
 key concept in the paper &mdash; the metric, the model, the
 explanations and the data itself.
 
+> **For teaching &amp; exploration only.** The four live demos are
+> deliberately simplified pedagogical tools &mdash; toy models,
+> synthetic datasets and in-browser re-fits designed to build intuition
+> for the concepts in the paper. They are **not** the production model
+> from the article and should **not** be used for inference,
+> decision-making or policy. The peer-reviewed methodology is
+> documented in the paper
+> (<https://doi.org/10.1007/s42001-022-00171-x>) and all data and code
+> are open access at the authors&rsquo; OSF repository
+> (<https://osf.io/agz5e/>).
+
 ## Interactive sections
 
 - **Explore the Data** &mdash; loads the exact 7,855-case cohort from
