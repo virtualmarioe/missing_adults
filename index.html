@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predicting the probability of finding missing older adults &mdash; Ruiz-Rizzo, Archila-Mel&eacute;ndez, Gonz&aacute;lez Veloza (2022)</title>
+    <title>Predicting the probability of finding missing older adults &middot; Ruiz-Rizzo, Archila-Mel&eacute;ndez, Gonz&aacute;lez Veloza (2022)</title>
     <meta name="description"
         content="A supervised machine learning study identifying individual and environmental factors that predict whether a missing older adult reported missing in Colombia (1930&ndash;2021) will be found.">
     <meta property="og:title" content="Predicting the probability of finding missing older adults based on machine learning">
@@ -3003,8 +3003,8 @@
             <div class="findings-grid fade-in">
                 <div class="finding-card">
                     <div class="finding-label">Environmental (extrinsic)</div>
-                    <p><strong>Date of missingness</strong> &mdash; days elapsed since the report until 30 July 2021.</p>
-                    <p style="margin-top:8px;"><strong>Place of missingness</strong> &mdash; municipality population size in Colombia.</p>
+                    <p><strong>Date of missingness</strong>: days elapsed since the report until 30 July 2021.</p>
+                    <p style="margin-top:8px;"><strong>Place of missingness</strong>: municipality population size in Colombia.</p>
                 </div>
                 <div class="finding-card">
                     <div class="finding-label">Individual (intrinsic)</div>
@@ -3180,7 +3180,7 @@
                 <!-- Recall on Found -->
                 <div class="chart-card fade-in">
                     <div class="chart-header">
-                        <span class="chart-title">Recall &mdash; &ldquo;Found&rdquo; class</span>
+                        <span class="chart-title">Recall on the &ldquo;Found&rdquo; class</span>
                         <span class="chart-metric">? Higher is better</span>
                     </div>
                     <div class="bar-group">
@@ -3215,7 +3215,7 @@
                 <!-- F1 -->
                 <div class="chart-card fade-in">
                     <div class="chart-header">
-                        <span class="chart-title">F1-score &mdash; &ldquo;Found&rdquo; class</span>
+                        <span class="chart-title">F1-score on the &ldquo;Found&rdquo; class</span>
                         <span class="chart-metric">? Higher is better</span>
                     </div>
                     <div class="bar-group">
@@ -3284,9 +3284,9 @@
                 For teaching &amp; exploration only
             </div>
             <p>
-                The four live demos below &mdash; <strong>ROC-AUC</strong>,
+                The four live demos below, namely <strong>ROC-AUC</strong>,
                 <strong>Gradient Boosting</strong>, <strong>SHAP</strong> and
-                the <strong>Data Explorer</strong> &mdash; are
+                the <strong>Data Explorer</strong>, are
                 <strong>simplified pedagogical tools</strong> designed to build
                 intuition for the concepts in the paper. The toy models,
                 synthetic datasets and in-browser re-fits are <em>not</em> the
@@ -3321,7 +3321,7 @@
                 higher score to the found case?</em> A perfect model scores
                 <strong>1.0</strong>; random guessing scores <strong>0.5</strong>.
                 Drag the sliders below to see how the three most-confused factors
-                &mdash; separation, threshold and class balance &mdash; each
+                (separation, threshold and class balance) each
                 influence what you see.
             </p>
 
@@ -3417,7 +3417,7 @@
                         <input type="range" id="aucThr" min="-400" max="400" value="0" step="1">
                         <div class="auc-slider-hint">
                             Slides the operating point along the ROC curve.
-                            AUC stays the same &mdash; only recall and
+                            AUC stays the same; only recall and
                             false-alarm swap.
                         </div>
                     </div>
@@ -3431,7 +3431,7 @@
                         <div class="auc-slider-hint">
                             Share of cases that are truly &ldquo;found.&rdquo;
                             Watch precision collapse when the positive class
-                            becomes rare &mdash; even at the same AUC.
+                            becomes rare, even at the same AUC.
                         </div>
                     </div>
 
@@ -3448,11 +3448,11 @@
                 <strong>In the paper&rsquo;s language:</strong> the Gradient
                 Boosting Classifier pushes AUC from the
                 mean-elapsed-time baseline (&asymp;0.63) up to
-                &asymp;0.73 &mdash; exactly the kind of separation change you
+                &asymp;0.73: exactly the kind of separation change you
                 can produce with the first slider. Undersampling the dominant
                 &ldquo;still missing&rdquo; class doesn&rsquo;t move AUC, but
                 it lets the team pick a more generous threshold that keeps
-                recall on the minority &ldquo;found&rdquo; class high &mdash;
+                recall on the minority &ldquo;found&rdquo; class high,
                 the trade-off the middle slider reveals.
             </div>
         </div>
@@ -3465,7 +3465,7 @@
             <p class="gbc-intro">
                 The paper&rsquo;s best model is a
                 <em>Gradient Boosting Classifier</em> (GBC): it builds a
-                <em>sequence</em> of very simple decision trees &mdash; each
+                <em>sequence</em> of very simple decision trees, each
                 one trained to fix the mistakes of the ensemble built so far.
                 With a small synthetic dataset inspired by the paper
                 (<em>days elapsed</em> vs. <em>age at missingness</em>),
@@ -3487,8 +3487,8 @@
                     <h4>2. Fit the <em>residuals</em></h4>
                     <p>
                         At step <em>m</em>, the new tree is fit on the
-                        gradient of the log-loss at the current prediction
-                        &mdash; in practice, the <em>residuals</em>
+                        gradient of the log-loss at the current prediction;
+                        in practice, the <em>residuals</em>
                         <em>y&nbsp;&minus;&nbsp;p</em>. That is what &ldquo;gradient
                         boosting&rdquo; literally means.
                     </p>
@@ -3643,7 +3643,7 @@
                         SHAP values are defined so that
                         <em>baseline&nbsp;+&nbsp;&sum;&nbsp;&phi;<sub>i</sub>&nbsp;=&nbsp;prediction</em>.
                         That means every explanation is guaranteed to add
-                        up exactly &mdash; no hand-waving.
+                        up exactly: no hand-waving.
                     </p>
                 </div>
                 <div class="shap-card">
@@ -3652,7 +3652,7 @@
                         &phi;<sub>i</sub> is the <em>average marginal
                         contribution</em> of feature&nbsp;<em>i</em> over
                         every possible order in which features could enter
-                        the model &mdash; the Shapley value from
+                        the model, i.e. the Shapley value from
                         cooperative game theory.
                     </p>
                 </div>
@@ -3728,8 +3728,8 @@
                         </label>
                         <input type="range" id="shapDays" min="0" max="1800" value="300" step="10">
                         <div class="shap-slider-hint">
-                            Longer delays make cases harder to solve
-                            &mdash; this is the strongest negative driver
+                            Longer delays make cases harder to solve;
+                            this is the strongest negative driver
                             in the paper&rsquo;s SHAP ranking.
                         </div>
                     </div>
@@ -3791,7 +3791,7 @@
                 <em>time elapsed</em> since the disappearance was reported,
                 the <em>population size</em> of the municipality where the
                 case was opened, the person&rsquo;s <em>sex</em>, and
-                their <em>age</em> &mdash; in that order. Marital status,
+                their <em>age</em>, in that order. Marital status,
                 education and vulnerability factors tune the answer but
                 rarely dominate it.
             </div>
@@ -3803,7 +3803,7 @@
         <div class="container">
             <h2 class="section-title">Explore the Data</h2>
             <p class="explore-intro">
-                Interact with the same cohort used in the paper&nbsp;&mdash;
+                Interact with the same cohort used in the paper:
                 <strong>7,855 cases</strong> of missing older adults
                 (&ge;&nbsp;60&nbsp;years) reported in Colombia between 1937 and
                 June&nbsp;2021. Apply filters on the left and watch how the
@@ -3960,8 +3960,8 @@
                                     </p>
                                 </div>
                                 <div class="identity-badge" id="identityBadge">
-                                    selection found-rate <strong id="identityRate">&mdash;</strong>
-                                    &middot; baseline <strong id="identityBaseline">&mdash;</strong>
+                                    selection found-rate <strong id="identityRate">&hellip;</strong>
+                                    &middot; baseline <strong id="identityBaseline">&hellip;</strong>
                                 </div>
                             </div>
                             <div class="identity-layout">
@@ -4054,7 +4054,7 @@
                             found alive within each subgroup. Bands with
                             fewer than 20&nbsp;cases are drawn in grey and
                             should be interpreted with caution. These are
-                            descriptive associations&nbsp;&mdash; the paper&rsquo;s
+                            descriptive associations; the paper&rsquo;s
                             gradient-boosting model combines many of these
                             variables (plus municipality population as a
                             continuous feature) to produce calibrated
@@ -4086,7 +4086,7 @@
                     Ludwig-Maximilians-Universit&auml;t M&uuml;nchen &middot;
                     Department of Neurology, Jena University Hospital<br>
                     <em>Conceptualization, data curation, formal analysis, funding acquisition, methodology, software,
-                        visualization, writing&mdash;original draft.</em><br>
+                        visualization, writing &ndash; original draft.</em><br>
                     <a href="mailto:adriana.ruiz@lmu.de" style="color:#d97706; text-decoration:none; border-bottom:1px dotted #d97706;">adriana.ruiz@lmu.de</a>
                 </div>
             </div>
@@ -4099,7 +4099,7 @@
                 <div class="contributor-affiliation">
                     Department of Diagnostic and Interventional Neuroradiology and TUM Neuroimaging Center,
                     Klinikum rechts der Isar, School of Medicine, Technical University of Munich, Germany<br>
-                    <em>Resources, writing&mdash;review and editing.</em>
+                    <em>Resources, writing &ndash; review and editing.</em>
                 </div>
             </div>
 
@@ -4111,7 +4111,7 @@
                 <div class="contributor-affiliation">
                     Department of Engineering and Basic Sciences,
                     Fundaci&oacute;n Universitaria Los Libertadores, Bogot&aacute;, Colombia<br>
-                    <em>Methodology, software, supervision, writing&mdash;review and editing.</em>
+                    <em>Methodology, software, supervision, writing &ndash; review and editing.</em>
                 </div>
             </div>
 

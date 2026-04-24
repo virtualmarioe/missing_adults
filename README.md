@@ -13,11 +13,11 @@ the layout of project pages such as
 [vision-banana.github.io](https://vision-banana.github.io/). Alongside
 the narrative, it ships **four live teaching demos** and an
 interactive data explorer so readers can build up intuition for every
-key concept in the paper &mdash; the metric, the model, the
+key concept in the paper: the metric, the model, the
 explanations and the data itself.
 
 > **For teaching &amp; exploration only.** The four live demos are
-> deliberately simplified pedagogical tools &mdash; toy models,
+> deliberately simplified pedagogical tools: toy models,
 > synthetic datasets and in-browser re-fits designed to build intuition
 > for the concepts in the paper. They are **not** the production model
 > from the article and should **not** be used for inference,
@@ -29,7 +29,7 @@ explanations and the data itself.
 
 ## Interactive sections
 
-- **Explore the Data** &mdash; loads the exact 7,855-case cohort from
+- **Explore the Data**: loads the exact 7,855-case cohort from
   the paper and lets readers slice the *found-alive* rate by age, sex,
   municipality size, vulnerability factor and education. Every filter
   change live-updates KPIs, an outcome stack bar, a **subgroup parity
@@ -40,13 +40,13 @@ explanations and the data itself.
   count, vertical whisker = 95% Wilson confidence interval, a thin
   guide line tying each bubble to its baseline position on the diagonal,
   and a hollow marker at that baseline.
-- **Understanding ROC-AUC** &mdash; a dummy-model demo of two
+- **Understanding ROC-AUC**: a dummy-model demo of two
   overlapping score distributions plus the ROC curve, driven by sliders
   for class separation, decision threshold and positive-class
   prevalence. Readers see first-hand which factors move AUC and which
   only move the operating point, plus how precision reacts to class
   prevalence.
-- **Gradient Boosting in Action** &mdash; a full in-browser gradient
+- **Gradient Boosting in Action**: a full in-browser gradient
   boosting classifier trained on *days elapsed* &times; *age at
   missingness*. A **Training data** toggle switches between a 400-point
   stratified sample of the real paper cohort (default) and a pure
@@ -56,7 +56,7 @@ explanations and the data itself.
   depth; the decision surface and training log-loss curve update in
   real time. A dedicated **Reset to paper** button restores the paper
   defaults (30 trees, &eta;=0.30, depth 1, paper cohort).
-- **Explaining Predictions with SHAP** &mdash; an exact-Shapley
+- **Explaining Predictions with SHAP**: an exact-Shapley
   explainer over four user-tunable features (days elapsed, age,
   municipality size, sex). A **Model & background** toggle switches the
   scoring function between a toy analytical logistic model and a
@@ -83,7 +83,7 @@ missing_adults/
 ```
 
 There are **no build steps and no runtime dependencies** for the
-website &mdash; the whole page is self-contained in `index.html`, uses
+website: the whole page is self-contained in `index.html`, uses
 Google Fonts (`Inter`) via CDN, ships with an inline SVG favicon and
 fetches `data/cohort.json` plus a small (~10&nbsp;KB)
 `data/paper_demo.json` on demand. All four teaching demos (AUC, GBC,
@@ -153,7 +153,7 @@ opening `index.html` directly via `file://` will load everything
 
 - Paper: <https://link.springer.com/article/10.1007/s42001-022-00171-x>
 - Data & code (OSF): <https://osf.io/agz5e/>
-- Original open data: [Datos Abiertos Colombia &mdash; SIRDEC](https://www.datos.gov.co/Justicia-y-Derecho/Desaparecidos-Colombia-hist-rico-a-os-1930-a-junio/8hqm-7fdt)
+- Original open data: [Datos Abiertos Colombia &middot; SIRDEC](https://www.datos.gov.co/Justicia-y-Derecho/Desaparecidos-Colombia-hist-rico-a-os-1930-a-junio/8hqm-7fdt)
 
 ## License
 
