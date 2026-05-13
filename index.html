@@ -59,12 +59,14 @@
         .nav {
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.06);
             transition: box-shadow 0.3s ease;
+            /* Establish a new stacking context so dropdowns layer above page content */
+            isolation: isolate;
         }
 
         .nav.scrolled {
@@ -77,13 +79,8 @@
             justify-content: center;
             gap: 8px;
             padding: 14px 0;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-        }
-
-        .nav-inner::-webkit-scrollbar {
-            display: none;
+            /* overflow must stay visible so dropdown menus aren't clipped */
+            overflow: visible;
         }
 
         .nav-link {
@@ -106,6 +103,98 @@
             color: #0f172a;
             background: #f1f5f9;
             font-weight: 600;
+        }
+
+        /* ===== Grouped nav dropdowns ===== */
+        .nav-group {
+            position: relative;
+        }
+
+        .nav-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 7px 14px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #334155;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease, transform 0.2s ease;
+            white-space: nowrap;
+            font-family: inherit;
+            line-height: 1;
+            transform: translateY(0);
+        }
+
+        .nav-trigger:hover {
+            color: #0f172a;
+            background: #f1f5f9;
+            transform: translateY(-1px);
+        }
+
+        .nav-trigger[aria-expanded="true"],
+        .nav-trigger.has-active {
+            color: #0f172a;
+            background: #f1f5f9;
+            font-weight: 600;
+        }
+
+        .nav-trigger .nav-chevron {
+            width: 12px;
+            height: 12px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: transform 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .nav-trigger[aria-expanded="true"] .nav-chevron {
+            transform: rotate(180deg);
+        }
+
+        .nav-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%) translateY(-6px);
+            min-width: 160px;
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.07);
+            border-radius: 14px;
+            box-shadow: 0 8px 28px rgba(15, 23, 42, 0.11), 0 2px 6px rgba(15, 23, 42, 0.05);
+            padding: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.15s ease, transform 0.15s ease;
+            z-index: 200;
+        }
+
+        .nav-menu.open {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .nav-menu .nav-link {
+            border-radius: 8px;
+            display: block;
+            text-align: left;
+            padding: 8px 16px;
+            width: 100%;
+            transform: none;
+        }
+
+        .nav-menu .nav-link:hover {
+            transform: translateX(2px);
         }
 
         /* ===== Hero ===== */
@@ -2773,6 +2862,144 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* ===== Drag affordance hints ===== */
+        #aucDist, #aucRoc, #gbcLoss, #shapWaterfall {
+            cursor: crosshair;
+        }
+        .auc-svg .threshold-line {
+            cursor: ew-resize;
+            stroke-width: 3; /* fatter hit area */
+        }
+        .auc-svg .roc-dot {
+            cursor: grab;
+        }
+        .auc-svg .roc-dot:active {
+            cursor: grabbing;
+        }
+        .gbc-svg .loss-dot {
+            cursor: ew-resize;
+        }
+
+        /* ===== Micro-interactions ===== */
+        @keyframes gentle-float {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-4px); }
+        }
+
+        @keyframes subtle-pulse {
+            0%, 100% { box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18); }
+            50%       { box-shadow: 0 16px 36px rgba(15, 23, 42, 0.26); }
+        }
+
+        /* Hero logo floats gently */
+        .hero-logo {
+            animation: gentle-float 3.6s ease-in-out infinite,
+                       subtle-pulse 3.6s ease-in-out infinite;
+        }
+
+        /* Nav links: lift slightly on hover */
+        .nav-link {
+            transform: translateY(0);
+            transition: all 0.2s ease, transform 0.2s ease;
+        }
+        .nav-link:hover {
+            transform: translateY(-1px);
+        }
+
+        /* Hero buttons: press sink + lift on hover */
+        .hero-btn {
+            transform: translateY(0);
+        }
+        .hero-btn:active {
+            transform: translateY(1px) scale(0.97);
+            box-shadow: none;
+            transition-duration: 0.08s;
+        }
+
+        /* TL;DR & finding cards: subtle scale on hover */
+        .tldr-card:hover {
+            transform: translateY(-2px) scale(1.012);
+        }
+        .finding-card:hover {
+            transform: translateY(-2px) scale(1.012);
+        }
+
+        /* Pills: press feedback */
+        .pill:active {
+            transform: scale(0.94);
+            transition-duration: 0.08s;
+        }
+        .pill:hover {
+            transform: translateY(-1px);
+        }
+
+        /* Reset button: lift + press */
+        .reset-btn:hover {
+            transform: translateY(-1px);
+        }
+        .reset-btn:active {
+            transform: scale(0.97);
+            transition-duration: 0.08s;
+        }
+
+        /* Copy button: press feedback */
+        .copy-btn:active {
+            transform: scale(0.90);
+            transition-duration: 0.08s;
+        }
+
+        /* AUC / GBC / SHAP preset buttons */
+        .auc-presets button:hover,
+        .gbc-presets button:hover,
+        .shap-presets button:hover {
+            transform: translateY(-1px);
+        }
+        .auc-presets button:active,
+        .gbc-presets button:active,
+        .shap-presets button:active {
+            transform: scale(0.94);
+            transition-duration: 0.08s;
+        }
+
+        /* Pillbar toggle buttons (GBC data / SHAP sex) */
+        .gbc-pillbar button:hover,
+        .shap-pillbar button:hover {
+            transform: translateY(-1px);
+        }
+        .gbc-pillbar button:active,
+        .shap-pillbar button:active {
+            transform: scale(0.94);
+            transition-duration: 0.08s;
+        }
+
+        /* Range slider thumbs: grow on hover/focus */
+        .auc-slider input[type="range"]::-webkit-slider-thumb:hover,
+        .gbc-slider input[type="range"]::-webkit-slider-thumb:hover,
+        .shap-slider input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.25);
+        }
+        .auc-slider input[type="range"]:focus::-webkit-slider-thumb,
+        .gbc-slider input[type="range"]:focus::-webkit-slider-thumb,
+        .shap-slider input[type="range"]:focus::-webkit-slider-thumb {
+            transform: scale(1.2);
+        }
+        .auc-slider input[type="range"]::-webkit-slider-thumb,
+        .gbc-slider input[type="range"]::-webkit-slider-thumb,
+        .shap-slider input[type="range"]::-webkit-slider-thumb {
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        /* Explore filter range inputs */
+        .range-row input[type="range"]::-webkit-slider-thumb {
+            transition: transform 0.15s ease;
+        }
+        .range-row input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.25);
+        }
+        .range-row input[type="range"]:focus::-webkit-slider-thumb {
+            transform: scale(1.2);
+        }
     </style>
 </head>
 
@@ -2840,17 +3067,43 @@
     <!-- ===== NAVIGATION ===== -->
     <nav class="nav" id="main-nav">
         <div class="nav-inner container">
-            <a href="#overview" class="nav-link active">Overview</a>
-            <a href="#abstract" class="nav-link">Abstract</a>
-            <a href="#methods" class="nav-link">Methods</a>
-            <a href="#features" class="nav-link">Key Features</a>
-            <a href="#results" class="nav-link">Results</a>
-            <a href="#auc" class="nav-link">AUC</a>
-            <a href="#gbc" class="nav-link">GBC</a>
-            <a href="#shap" class="nav-link">SHAP</a>
-            <a href="#explore" class="nav-link">Explore</a>
-            <a href="#authors" class="nav-link">Authors</a>
-            <a href="#bibtex" class="nav-link">Cite</a>
+            <a href="#" class="nav-link active" id="nav-home">Home</a>
+
+            <!-- Science group -->
+            <div class="nav-group" id="nav-group-paper">
+                <button class="nav-trigger" id="nav-trigger-paper"
+                        aria-expanded="false" aria-haspopup="true">
+                    Science
+                    <svg class="nav-chevron" viewBox="0 0 24 24" aria-hidden="true">
+                        <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                </button>
+                <div class="nav-menu" id="nav-menu-paper" role="menu">
+                    <a href="#abstract" class="nav-link" role="menuitem">Abstract</a>
+                    <a href="#methods"  class="nav-link" role="menuitem">Methods</a>
+                    <a href="#features" class="nav-link" role="menuitem">Key Features</a>
+                    <a href="#results"  class="nav-link" role="menuitem">Results</a>
+                    <a href="#authors"  class="nav-link" role="menuitem">Authors</a>
+                    <a href="#bibtex"   class="nav-link" role="menuitem">Cite</a>
+                </div>
+            </div>
+
+            <!-- Interactive group -->
+            <div class="nav-group" id="nav-group-interactive">
+                <button class="nav-trigger" id="nav-trigger-interactive"
+                        aria-expanded="false" aria-haspopup="true">
+                    Education
+                    <svg class="nav-chevron" viewBox="0 0 24 24" aria-hidden="true">
+                        <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                </button>
+                <div class="nav-menu" id="nav-menu-interactive" role="menu">
+                    <a href="#auc"     class="nav-link" role="menuitem">AUC Explorer</a>
+                    <a href="#gbc"     class="nav-link" role="menuitem">GBC Explainer</a>
+                    <a href="#shap"    class="nav-link" role="menuitem">SHAP Values</a>
+                    <a href="#explore" class="nav-link" role="menuitem">Explore Data</a>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -4179,9 +4432,65 @@
                 nav.classList.toggle('scrolled', window.scrollY > 10);
             });
 
-            // Active nav link on scroll
+            // Home link → scroll to absolute top
+            const homeLink = document.getElementById('nav-home');
+            if (homeLink) {
+                homeLink.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // ── Grouped nav dropdowns ──────────────────────────────────────
+            const groups = [
+                { trigger: document.getElementById('nav-trigger-paper'),
+                  menu:    document.getElementById('nav-menu-paper') },
+                { trigger: document.getElementById('nav-trigger-interactive'),
+                  menu:    document.getElementById('nav-menu-interactive') }
+            ];
+
+            function openGroup(g) {
+                g.trigger.setAttribute('aria-expanded', 'true');
+                g.menu.classList.add('open');
+            }
+            function closeGroup(g) {
+                g.trigger.setAttribute('aria-expanded', 'false');
+                g.menu.classList.remove('open');
+            }
+            function closeAll() { groups.forEach(closeGroup); }
+
+            groups.forEach(g => {
+                g.trigger.addEventListener('click', e => {
+                    e.stopPropagation();
+                    const isOpen = g.menu.classList.contains('open');
+                    closeAll();
+                    if (!isOpen) openGroup(g);
+                });
+
+                // Close and navigate when a sub-link is clicked
+                g.menu.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', () => closeGroup(g));
+                });
+            });
+
+            // Close on outside click or Escape
+            document.addEventListener('click', closeAll);
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape') closeAll();
+            });
+
+            // ── Scroll-spy (group-aware) ───────────────────────────────────
             const sections = document.querySelectorAll('section[id], header[id]');
             const navLinks = document.querySelectorAll('.nav-link');
+
+            // Map section ids → which group trigger owns them
+            const groupMap = {
+                abstract: groups[0], methods: groups[0],
+                features: groups[0], results: groups[0],
+                authors:  groups[0], bibtex:  groups[0],
+                auc: groups[1], gbc: groups[1],
+                shap: groups[1], explore: groups[1]
+            };
 
             function updateActiveNav() {
                 const scrollY = window.scrollY + 120;
@@ -4193,12 +4502,19 @@
                         current = section.getAttribute('id');
                     }
                 });
+
                 navLinks.forEach(link => {
                     link.classList.toggle(
                         'active',
                         link.getAttribute('href') === '#' + current
                     );
                 });
+
+                // Mark parent trigger if any child section is active
+                groups.forEach(g => g.trigger.classList.remove('has-active'));
+                if (current && groupMap[current]) {
+                    groupMap[current].trigger.classList.add('has-active');
+                }
             }
 
             window.addEventListener('scroll', updateActiveNav, { passive: true });
@@ -4665,6 +4981,98 @@
             });
 
             rerender();
+
+            // ── Drag interactivity ────────────────────────────────────────────
+            // Shared SVG-coordinate helper.
+            function svgPt(svg, e) {
+                const r = svg.getBoundingClientRect();
+                const vb = svg.viewBox.baseVal;
+                return {
+                    x: (e.clientX - r.left) / r.width * vb.width,
+                    y: (e.clientY - r.top) / r.height * vb.height
+                };
+            }
+
+            // -- Dist SVG drag: threshold line + distribution peaks --
+            let distDragMode = null; // 'thr' | 'sep-pos' | 'sep-neg'
+            distSvg.style.touchAction = 'none';
+            distSvg.addEventListener('pointerdown', function (e) {
+                const pt = svgPt(distSvg, e);
+                const thr = state.thr, d = state.d;
+                const thrPx  = distSx(thr);
+                const peakPos = distSx(d / 2);
+                const peakNeg = distSx(-d / 2);
+                if (Math.abs(pt.x - thrPx) < 16) {
+                    distDragMode = 'thr';
+                } else if (Math.abs(pt.x - peakPos) < 20) {
+                    distDragMode = 'sep-pos';
+                } else if (Math.abs(pt.x - peakNeg) < 20) {
+                    distDragMode = 'sep-neg';
+                } else { return; }
+                e.preventDefault();
+                distSvg.setPointerCapture(e.pointerId);
+                distSvg.style.cursor = 'ew-resize';
+            });
+            distSvg.addEventListener('pointermove', function (e) {
+                if (!distDragMode) return;
+                const pt = svgPt(distSvg, e);
+                const rawX = X_MIN + (pt.x - DIST.padL) / (DIST.w - DIST.padL - DIST.padR) * (X_MAX - X_MIN);
+                if (distDragMode === 'thr') {
+                    state.thr = Math.max(-4, Math.min(4, rawX));
+                    thrEl.value = Math.round(state.thr * 100);
+                } else if (distDragMode === 'sep-pos') {
+                    state.d = Math.max(0, Math.min(4, rawX * 2));
+                    sepEl.value = Math.round(state.d * 100);
+                } else if (distDragMode === 'sep-neg') {
+                    state.d = Math.max(0, Math.min(4, -rawX * 2));
+                    sepEl.value = Math.round(state.d * 100);
+                }
+                rerender();
+            });
+            distSvg.addEventListener('pointerup', function () {
+                distDragMode = null;
+                distSvg.style.cursor = '';
+            });
+
+            // -- ROC SVG drag: operating-point dot → updates threshold --
+            let rocDragActive = false;
+            rocSvg.style.touchAction = 'none';
+            rocSvg.addEventListener('pointerdown', function (e) {
+                const pt = svgPt(rocSvg, e);
+                const d = state.d, thr = state.thr;
+                const muN = -d / 2, muP = d / 2;
+                const fprNow = 1 - Phi(thr - muN);
+                const tprNow = 1 - Phi(thr - muP);
+                const dx = pt.x - rocSx(fprNow);
+                const dy = pt.y - rocSy(tprNow);
+                if (Math.sqrt(dx * dx + dy * dy) > 20) return;
+                e.preventDefault();
+                rocSvg.setPointerCapture(e.pointerId);
+                rocDragActive = true;
+                rocSvg.style.cursor = 'grabbing';
+            });
+            rocSvg.addEventListener('pointermove', function (e) {
+                if (!rocDragActive) return;
+                const pt = svgPt(rocSvg, e);
+                const fpr = Math.max(0.001, Math.min(0.999,
+                    (pt.x - ROC.padL) / (ROC.w - ROC.padL - ROC.padR)));
+                const d = state.d;
+                const muN = -d / 2;
+                // Binary-search for threshold that yields this FPR.
+                // 1 - Phi(t - muN) = fpr  =>  Phi(t - muN) = 1 - fpr
+                let lo = -6, hi = 6;
+                for (let i = 0; i < 40; i++) {
+                    const mid = (lo + hi) / 2;
+                    if (Phi(mid - muN) < 1 - fpr) lo = mid; else hi = mid;
+                }
+                state.thr = Math.max(-4, Math.min(4, (lo + hi) / 2));
+                thrEl.value = Math.round(state.thr * 100);
+                rerender();
+            });
+            rocSvg.addEventListener('pointerup', function () {
+                rocDragActive = false;
+                rocSvg.style.cursor = '';
+            });
         }
 
         function initExplorer() {
@@ -6034,6 +6442,43 @@
                 depthVal.textContent = state.depth;
             }
 
+            // ── Drag: loss-dot → trees slider ────────────────────────────────
+            const lossSvgEl = document.getElementById('gbcLoss');
+            let lossDragActive = false;
+            if (lossSvgEl) {
+                lossSvgEl.style.touchAction = 'none';
+                lossSvgEl.addEventListener('pointerdown', function (e) {
+                    if (!state.model) return;
+                    const r = lossSvgEl.getBoundingClientRect();
+                    const vb = lossSvgEl.viewBox.baseVal;
+                    const px = (e.clientX - r.left) / r.width * vb.width;
+                    const total = state.model.losses.length - 1;
+                    const curDotX = lMargin.left + (Math.min(state.trees, total) / total) * lPlotW;
+                    if (Math.abs(px - curDotX) > 22) return;
+                    e.preventDefault();
+                    lossSvgEl.setPointerCapture(e.pointerId);
+                    lossDragActive = true;
+                    lossSvgEl.style.cursor = 'ew-resize';
+                });
+                lossSvgEl.addEventListener('pointermove', function (e) {
+                    if (!lossDragActive || !state.model) return;
+                    const r = lossSvgEl.getBoundingClientRect();
+                    const vb = lossSvgEl.viewBox.baseVal;
+                    const px = (e.clientX - r.left) / r.width * vb.width;
+                    const total = state.model.losses.length - 1;
+                    const rawK = (px - lMargin.left) / lPlotW * total;
+                    const newK = Math.max(1, Math.min(MAX_TREES, Math.round(rawK)));
+                    state.trees = newK;
+                    treesInp.value = newK;
+                    syncLabels();
+                    render();
+                });
+                lossSvgEl.addEventListener('pointerup', function () {
+                    lossDragActive = false;
+                    lossSvgEl.style.cursor = '';
+                });
+            }
+
             treesInp.addEventListener('input', function () {
                 state.trees = Number(treesInp.value);
                 syncLabels();
@@ -6448,6 +6893,11 @@
                     return wfMargin.left + ((v - minV) / (maxV - minV)) * wfPlotW;
                 };
                 const rowHeight = wfPlotH / (order.length + 2);
+                _wfRowHeight = rowHeight;
+                _wfOrder = order.slice();
+                _wfRowMap = order.map(function (idx, k) {
+                    return { idx: idx, yTop: wfMargin.top + k * rowHeight, yBot: wfMargin.top + (k + 1) * rowHeight };
+                });
 
                 // X axis with ticks at nicely rounded log-odds values.
                 const xAxisY = wfMargin.top + wfPlotH + 4;
@@ -6585,6 +7035,9 @@
             // scoring function changes so feature importance bars remain
             // consistent with the active model.
             let swarmData = [];
+            let _wfRowMap = []; // filled each render; used by drag handler
+            let _wfRowHeight = 0;
+            let _wfOrder = [];
             function rebuildSwarmToy() {
                 const rng2 = mulberry32(19900330);
                 const out = [];
@@ -6607,6 +7060,54 @@
                 return out;
             }
             swarmData = rebuildSwarmToy();
+
+            // ── Drag: waterfall rows → feature sliders ────────────────────────
+            let wfDragRow = null;
+            wfSvg.style.touchAction = 'none';
+            wfSvg.addEventListener('pointerdown', function (e) {
+                const r = wfSvg.getBoundingClientRect();
+                const vb = wfSvg.viewBox.baseVal;
+                const px = (e.clientX - r.left) / r.width * vb.width;
+                const py = (e.clientY - r.top) / r.height * vb.height;
+                if (px < wfMargin.left || px > wfMargin.left + wfPlotW) return;
+                if (!_wfRowMap.length) return;
+                let hit = null;
+                for (let i = 0; i < _wfRowMap.length; i++) {
+                    const row = _wfRowMap[i];
+                    if (py >= row.yTop && py < row.yBot) { hit = row; break; }
+                }
+                if (!hit) return;
+                if (hit.idx === 3) return; // sex is a pill, not a slider
+                e.preventDefault();
+                wfSvg.setPointerCapture(e.pointerId);
+                wfDragRow = hit;
+                wfSvg.style.cursor = 'ew-resize';
+            });
+            wfSvg.addEventListener('pointermove', function (e) {
+                if (!wfDragRow) return;
+                const r = wfSvg.getBoundingClientRect();
+                const vb = wfSvg.viewBox.baseVal;
+                const px = (e.clientX - r.left) / r.width * vb.width;
+                const t = Math.max(0, Math.min(1, (px - wfMargin.left) / wfPlotW));
+                const idx = wfDragRow.idx;
+                if (idx === 0) { // days
+                    state.days = Math.round(t * daysMax / 10) * 10;
+                    state.days = Math.max(0, Math.min(daysMax, state.days));
+                    daysInp.value = state.days;
+                } else if (idx === 1) { // age
+                    state.age = Math.max(60, Math.min(100, Math.round(60 + t * 40)));
+                    ageInp.value = state.age;
+                } else if (idx === 2) { // municipality size
+                    state.muni = Math.max(0, Math.min(4, Math.round(t * 4)));
+                    muniInp.value = state.muni;
+                }
+                syncLabels();
+                render();
+            });
+            wfSvg.addEventListener('pointerup', function () {
+                wfDragRow = null;
+                wfSvg.style.cursor = '';
+            });
 
             const bwViewW = 420, bwViewH = 220;
             const bwMargin = { top: 14, right: 14, bottom: 34, left: 150 };
