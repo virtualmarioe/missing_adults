@@ -2863,6 +2863,62 @@
             transform: translateY(0);
         }
 
+        /* ===== Glass-card hover tooltips ===== */
+        .graph-tip {
+            position: fixed;
+            z-index: 9999;
+            padding: 13px 16px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.76);
+            backdrop-filter: blur(20px) saturate(1.9);
+            -webkit-backdrop-filter: blur(20px) saturate(1.9);
+            border: 1px solid rgba(255, 255, 255, 0.62);
+            box-shadow:
+                0 10px 36px rgba(15, 23, 42, 0.11),
+                0 2px 8px rgba(15, 23, 42, 0.07),
+                inset 0 1px 0 rgba(255, 255, 255, 0.85);
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(5px);
+            transition: opacity 0.14s ease, transform 0.14s ease;
+            font-family: 'Inter', -apple-system, sans-serif;
+            font-size: 0.81rem;
+            color: #0f172a;
+            min-width: 152px;
+            white-space: nowrap;
+            user-select: none;
+        }
+        .graph-tip.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .graph-tip-title {
+            font-size: 0.69rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: #64748b;
+            margin-bottom: 9px;
+            padding-bottom: 7px;
+            border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+        }
+        .graph-tip-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 18px;
+            margin-top: 5px;
+        }
+        .graph-tip-label {
+            color: #475569;
+            font-weight: 500;
+        }
+        .graph-tip-value {
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            color: #0f172a;
+        }
+
         /* ===== Drag affordance hints ===== */
         #aucDist, #aucRoc, #gbcLoss, #shapWaterfall {
             cursor: crosshair;
@@ -4589,6 +4645,51 @@
             initShapDemo();
         });
 
+        // ── Shared glass-card tooltip utility ────────────────────────────────
+        let _graphTip = null;
+        function getGraphTip() {
+            if (!_graphTip) {
+                _graphTip = document.createElement('div');
+                _graphTip.className = 'graph-tip';
+                document.body.appendChild(_graphTip);
+            }
+            return _graphTip;
+        }
+        function showGraphTip(e, title, rows) {
+            const tip = getGraphTip();
+            let html = title
+                ? '<div class="graph-tip-title">' + title + '</div>'
+                : '';
+            for (const row of rows) {
+                const label = row[0], value = row[1], color = row[2] || '';
+                if (!value && value !== 0) continue; // skip empty rows
+                html += '<div class="graph-tip-row">'
+                    + '<span class="graph-tip-label">' + label + '</span>'
+                    + '<span class="graph-tip-value"'
+                    + (color ? ' style="color:' + color + '"' : '') + '>'
+                    + value + '</span>'
+                    + '</div>';
+            }
+            tip.innerHTML = html;
+            tip.classList.add('visible');
+            moveGraphTip(e);
+        }
+        function moveGraphTip(e) {
+            const tip = getGraphTip();
+            if (!tip.classList.contains('visible')) return;
+            const gap = 16;
+            let x = e.clientX + gap;
+            let y = e.clientY - tip.offsetHeight / 2;
+            if (x + tip.offsetWidth > window.innerWidth - 8)
+                x = e.clientX - tip.offsetWidth - gap;
+            y = Math.max(8, Math.min(window.innerHeight - tip.offsetHeight - 8, y));
+            tip.style.left = x + 'px';
+            tip.style.top  = y + 'px';
+        }
+        function hideGraphTip() {
+            if (_graphTip) _graphTip.classList.remove('visible');
+        }
+
         function initAucExplainer() {
             const distSvg = document.getElementById('aucDist');
             const rocSvg = document.getElementById('aucRoc');
@@ -5073,6 +5174,57 @@
                 rocDragActive = false;
                 rocSvg.style.cursor = '';
             });
+
+            // ── Glass-card hover tooltips ────────────────────────────────────
+            // Distribution SVG: show live metrics at current state
+            distSvg.addEventListener('pointermove', function (e) {
+                const pt = svgPt(distSvg, e);
+                if (pt.y < DIST.padT || pt.y > DIST.h - DIST.padB) { hideGraphTip(); return; }
+                const rawX = X_MIN + (pt.x - DIST.padL) /
+                    (DIST.w - DIST.padL - DIST.padR) * (X_MAX - X_MIN);
+                if (rawX < X_MIN || rawX > X_MAX) { hideGraphTip(); return; }
+                const d = state.d, thr = state.thr, pi = state.prev;
+                const muN = -d / 2, muP = d / 2;
+                const tpr = 1 - Phi(thr - muP);
+                const fpr = 1 - Phi(thr - muN);
+                const auc = Phi(d / Math.SQRT2);
+                showGraphTip(e, 'Score distributions', [
+                    ['AUC', auc.toFixed(3), '#d97706'],
+                    ['Sensitivity (TPR)', (tpr * 100).toFixed(1) + '%'],
+                    ['1 − Specificity (FPR)', (fpr * 100).toFixed(1) + '%', '#64748b'],
+                    ['Separation d′', d.toFixed(2)],
+                    ['Threshold t', thr.toFixed(2)]
+                ]);
+            });
+            distSvg.addEventListener('pointermove', moveGraphTip);
+            distSvg.addEventListener('pointerleave', hideGraphTip);
+
+            // ROC SVG: show card near operating-point dot, or always while dragging
+            rocSvg.addEventListener('pointermove', function (e) {
+                const pt = svgPt(rocSvg, e);
+                const d = state.d, thr = state.thr, pi = state.prev;
+                const muN = -d / 2, muP = d / 2;
+                const fprNow = 1 - Phi(thr - muN);
+                const tprNow = 1 - Phi(thr - muP);
+                const dx = pt.x - rocSx(fprNow);
+                const dy = pt.y - rocSy(tprNow);
+                if (rocDragActive || Math.sqrt(dx * dx + dy * dy) < 30) {
+                    const auc = Phi(d / Math.SQRT2);
+                    const denom = pi * tprNow + (1 - pi) * fprNow;
+                    const prec = denom > 0 ? (pi * tprNow) / denom : 0;
+                    showGraphTip(e, 'Operating point', [
+                        ['AUC', auc.toFixed(3), '#d97706'],
+                        ['TPR (recall)', (tprNow * 100).toFixed(1) + '%'],
+                        ['FPR', (fprNow * 100).toFixed(1) + '%', '#64748b'],
+                        ['Precision', (prec * 100).toFixed(1) + '%'],
+                        ['Threshold t', thr.toFixed(2)]
+                    ]);
+                } else {
+                    hideGraphTip();
+                }
+            });
+            rocSvg.addEventListener('pointermove', moveGraphTip);
+            rocSvg.addEventListener('pointerleave', hideGraphTip);
         }
 
         function initExplorer() {
@@ -6477,6 +6629,37 @@
                     lossDragActive = false;
                     lossSvgEl.style.cursor = '';
                 });
+
+                // ── Glass-card hover on loss curve ───────────────────────────
+                lossSvgEl.addEventListener('pointermove', function (e) {
+                    if (!state.model) { hideGraphTip(); return; }
+                    const r = lossSvgEl.getBoundingClientRect();
+                    const vb = lossSvgEl.viewBox.baseVal;
+                    const px = (e.clientX - r.left) / r.width * vb.width;
+                    // While dragging use the current state.trees; otherwise follow cursor
+                    const total = state.model.losses.length - 1;
+                    const k = lossDragActive
+                        ? Math.min(state.trees, total)
+                        : Math.max(0, Math.min(total,
+                            Math.round((px - lMargin.left) / lPlotW * total)));
+                    if (!lossDragActive && (px < lMargin.left || px > lMargin.left + lPlotW)) {
+                        hideGraphTip(); return;
+                    }
+                    const loss = state.model.losses[k];
+                    let correct = 0;
+                    for (let i = 0; i < DATA.xs.length; i++) {
+                        const p = scorePoint(state.model, DATA.xs[i], k);
+                        if ((p >= 0.5 ? 1 : 0) === DATA.ys[i]) correct++;
+                    }
+                    const acc = (100 * correct / DATA.xs.length).toFixed(0) + '%';
+                    showGraphTip(e, k + ' tree' + (k !== 1 ? 's' : ''), [
+                        ['Training loss', loss.toFixed(4), '#0d9488'],
+                        ['Training accuracy', acc],
+                        [lossDragActive ? '← dragging' : '← drag dot to explore', '']
+                    ]);
+                });
+                lossSvgEl.addEventListener('pointermove', moveGraphTip);
+                lossSvgEl.addEventListener('pointerleave', hideGraphTip);
             }
 
             treesInp.addEventListener('input', function () {
@@ -7109,6 +7292,38 @@
                 wfSvg.style.cursor = '';
             });
 
+            // ── Glass-card hover on waterfall ────────────────────────────────
+            wfSvg.addEventListener('pointermove', function (e) {
+                const r = wfSvg.getBoundingClientRect();
+                const vb = wfSvg.viewBox.baseVal;
+                const px = (e.clientX - r.left) / r.width * vb.width;
+                const py = (e.clientY - r.top) / r.height * vb.height;
+                if (!_wfRowMap.length || !state.phi) { hideGraphTip(); return; }
+                if (px < wfMargin.left || px > wfMargin.left + wfPlotW) { hideGraphTip(); return; }
+                let hit = null;
+                for (const row of _wfRowMap) {
+                    if (py >= row.yTop && py < row.yBot) { hit = row; break; }
+                }
+                if (!hit) { hideGraphTip(); return; }
+                const idx = hit.idx;
+                const phi = state.phi[idx];
+                const feat = FEATURES[idx];
+                let valStr = '';
+                if (idx === 0) valStr = state.days + ' d';
+                else if (idx === 1) valStr = state.age + ' yr';
+                else if (idx === 2) valStr = MUNI_LABELS[state.muni];
+                else valStr = state.sexF ? 'Female' : 'Male';
+                const dir = phi >= 0 ? '+' : '';
+                showGraphTip(e, feat.name, [
+                    ['Feature value', valStr],
+                    ['SHAP (log-odds)', dir + phi.toFixed(3),
+                        phi >= 0 ? '#d97706' : '#475569'],
+                    [idx < 3 ? '← Drag row to adjust' : 'Toggle sex pill above', '']
+                ]);
+            });
+            wfSvg.addEventListener('pointermove', moveGraphTip);
+            wfSvg.addEventListener('pointerleave', hideGraphTip);
+
             const bwViewW = 420, bwViewH = 220;
             const bwMargin = { top: 14, right: 14, bottom: 34, left: 150 };
             const bwPlotW = bwViewW - bwMargin.left - bwMargin.right;
@@ -7260,6 +7475,46 @@
                 renderWaterfall(xn, phi);
                 renderBeeswarm();
             }
+
+            // ── Glass-card hover on beeswarm ─────────────────────────────────
+            beeSvg.style.touchAction = 'none';
+            beeSvg.addEventListener('pointermove', function (e) {
+                const r = beeSvg.getBoundingClientRect();
+                const vb = beeSvg.viewBox.baseVal;
+                const px = (e.clientX - r.left) / r.width * vb.width;
+                const py = (e.clientY - r.top) / r.height * vb.height;
+                if (!swarmData.length || !_wfOrder.length) { hideGraphTip(); return; }
+                const rowH = bwPlotH / _wfOrder.length;
+                const rowIdx = Math.floor((py - bwMargin.top) / rowH);
+                if (rowIdx < 0 || rowIdx >= _wfOrder.length) { hideGraphTip(); return; }
+                const featIdx = _wfOrder[rowIdx];
+                const feat = FEATURES[featIdx];
+                // Compute maxAbs to replicate the beeswarm x-scale
+                let maxAbs = 0;
+                for (const d of swarmData)
+                    for (let k = 0; k < 4; k++)
+                        if (Math.abs(d.phi[k]) > maxAbs) maxAbs = Math.abs(d.phi[k]);
+                maxAbs = Math.max(maxAbs, 0.5);
+                const sxBee = function (v) {
+                    return bwMargin.left + ((v + maxAbs) / (2 * maxAbs)) * bwPlotW;
+                };
+                // Find nearest dot in this row
+                let nearest = null, nearDist = 14;
+                for (const d of swarmData) {
+                    const dd = Math.abs(px - sxBee(d.phi[featIdx]));
+                    if (dd < nearDist) { nearest = d; nearDist = dd; }
+                }
+                if (!nearest) { hideGraphTip(); return; }
+                const phi = nearest.phi[featIdx];
+                const dir = phi >= 0 ? '+' : '';
+                showGraphTip(e, feat.name + ' · population', [
+                    ['SHAP contribution', dir + phi.toFixed(3) + ' log-odds',
+                        phi >= 0 ? '#d97706' : '#475569'],
+                    ['Normalised feature', nearest.xn[featIdx].toFixed(2)]
+                ]);
+            });
+            beeSvg.addEventListener('pointermove', moveGraphTip);
+            beeSvg.addEventListener('pointerleave', hideGraphTip);
 
             // --- Event wiring ---------------------------------------------------
             daysInp.addEventListener('input', function () {

@@ -8,9 +8,7 @@ Project website for the open-access article:
 > <https://doi.org/10.1007/s42001-022-00171-x>
 
 The site summarizes the paper's motivation, data pipeline, feature
-importance and results in a single, responsive HTML page inspired by
-the layout of project pages such as
-[vision-banana.github.io](https://vision-banana.github.io/). Alongside
+importance and results in a single, responsive HTML page. Alongside
 the narrative, it ships **four live teaching demos** and an
 interactive data explorer so readers can build up intuition for every
 key concept in the paper: the metric, the model, the
