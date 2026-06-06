@@ -11,6 +11,17 @@
     <meta property="og:description"
         content="Gradient boosting models outperform a data-driven reference baseline by up to 10% AUC in predicting outcomes of missing older adult cases in Colombia.">
     <meta property="og:type" content="article">
+    <meta property="og:url" content="https://virtualmarioe.github.io/missing_adults/">
+    <meta property="og:image" content="https://virtualmarioe.github.io/missing_adults/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt"
+        content="Predicting the probability of finding missing older adults based on machine learning — Journal of Computational Social Science, 2022.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Predicting the probability of finding missing older adults">
+    <meta name="twitter:description"
+        content="Machine learning on 7,855 open-data cases in Colombia reveals what predicts whether a missing older adult is found.">
+    <meta name="twitter:image" content="https://virtualmarioe.github.io/missing_adults/og-image.png">
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕵️</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -215,10 +226,8 @@
             justify-content: center;
             border-radius: 22px;
             background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: #f59e0b;
-            font-size: 2.2rem;
-            font-weight: 800;
-            letter-spacing: -0.04em;
+            font-size: 2.7rem;
+            line-height: 1;
             box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
         }
 
@@ -409,6 +418,99 @@
             color: #334155;
             line-height: 1.6;
         }
+
+        /* ===== Plain-language lead ===== */
+        .lead {
+            max-width: 880px;
+            margin: 0 auto 48px;
+        }
+        .lead-text {
+            font-size: 1.18rem;
+            line-height: 1.7;
+            color: #1e293b;
+            text-align: center;
+        }
+        .lead-text + .lead-text {
+            margin-top: 16px;
+            font-size: 1.05rem;
+            color: #475569;
+        }
+        .lead-text strong { color: #0f172a; }
+
+        /* ===== Headline findings (plain language) ===== */
+        .headline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+        .headline-card {
+            padding: 28px 24px;
+            border-radius: 16px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-top: 3px solid #d97706;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .headline-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(15, 23, 42, 0.07);
+        }
+        .headline-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            color: #b45309;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        .headline-icon svg { width: 26px; height: 26px; display: block; }
+        .headline-card h4 {
+            font-size: 1.06rem;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.01em;
+            margin-bottom: 8px;
+        }
+        .headline-card p {
+            font-size: 0.93rem;
+            line-height: 1.62;
+            color: #475569;
+        }
+
+        /* ===== Responsible-use note ===== */
+        .responsible-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            max-width: 960px;
+            margin: 32px auto 0;
+            padding: 20px 24px;
+            border-radius: 14px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+        }
+        .responsible-note-icon {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: #0f172a;
+            color: #fbbf24;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .responsible-note-icon svg { width: 22px; height: 22px; display: block; }
+        .responsible-note p {
+            font-size: 0.9rem;
+            line-height: 1.62;
+            color: #475569;
+            margin: 0;
+        }
+        .responsible-note strong { color: #0f172a; }
 
         /* ===== Abstract ===== */
         .abstract-card {
@@ -2235,7 +2337,7 @@
             line-height: 1.7;
         }
 
-        .gbc-intro em { color: #0f766e; font-style: normal; font-weight: 600; }
+        .gbc-intro em { color: #b45309; font-style: normal; font-weight: 600; }
 
         .gbc-cards {
             display: grid;
@@ -2245,8 +2347,8 @@
         }
 
         .gbc-card {
-            background: #f0fdfa;
-            border: 1px solid #99f6e4;
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
             border-radius: 12px;
             padding: 20px 22px;
             line-height: 1.55;
@@ -2255,16 +2357,16 @@
         .gbc-card h4 {
             margin: 0 0 8px;
             font-size: 1rem;
-            color: #0f766e;
+            color: #b45309;
             font-weight: 700;
         }
 
-        .gbc-card h4 em { color: #0d9488; font-style: normal; }
+        .gbc-card h4 em { color: #d97706; font-style: normal; }
 
         .gbc-card p {
             margin: 0;
             font-size: 0.88rem;
-            color: #134e4a;
+            color: #7c2d12;
         }
 
         .gbc-demo {
@@ -2312,10 +2414,10 @@
         .gbc-svg .axis-label { font-size: 10px; fill: #475569; font-weight: 600; }
         .gbc-svg .tick { font-size: 9px; fill: #64748b; }
         .gbc-svg .grid { stroke: #e2e8f0; stroke-width: 0.6; stroke-dasharray: 2 3; }
-        .gbc-svg .loss-line { fill: none; stroke: #0d9488; stroke-width: 2; stroke-linejoin: round; }
-        .gbc-svg .loss-area { fill: #14b8a6; opacity: 0.16; }
-        .gbc-svg .loss-dot { fill: #0f766e; stroke: #fff; stroke-width: 2; }
-        .gbc-svg .loss-guide { stroke: #0f766e; stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.55; }
+        .gbc-svg .loss-line { fill: none; stroke: #334155; stroke-width: 2; stroke-linejoin: round; }
+        .gbc-svg .loss-area { fill: #94a3b8; opacity: 0.16; }
+        .gbc-svg .loss-dot { fill: #0f172a; stroke: #fff; stroke-width: 2; }
+        .gbc-svg .loss-guide { stroke: #94a3b8; stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.55; }
         .gbc-svg .pt-pos { fill: #d97706; stroke: #fff; stroke-width: 1; }
         .gbc-svg .pt-neg { fill: #475569; stroke: #fff; stroke-width: 1; }
         .gbc-svg .legend-label { font-size: 10px; fill: #475569; }
@@ -2352,7 +2454,7 @@
             margin-top: 3px;
             font-size: 1.12rem;
             font-weight: 700;
-            color: #0f766e;
+            color: #b45309;
             font-variant-numeric: tabular-nums;
         }
 
@@ -2378,7 +2480,7 @@
         }
 
         .gbc-slider label span:last-child {
-            color: #0f766e;
+            color: #b45309;
             font-variant-numeric: tabular-nums;
         }
 
@@ -2398,7 +2500,7 @@
             appearance: none;
             width: 16px; height: 16px;
             border-radius: 50%;
-            background: #0d9488;
+            background: #d97706;
             border: 2px solid #fff;
             box-shadow: 0 1px 3px rgba(15, 23, 42, 0.2);
             cursor: pointer;
@@ -2407,7 +2509,7 @@
         .gbc-slider input[type="range"]::-moz-range-thumb {
             width: 16px; height: 16px;
             border-radius: 50%;
-            background: #0d9488;
+            background: #d97706;
             border: 2px solid #fff;
             cursor: pointer;
         }
@@ -2437,19 +2539,19 @@
         }
 
         .gbc-presets button:hover {
-            border-color: #0d9488;
-            color: #0d9488;
+            border-color: #d97706;
+            color: #d97706;
         }
 
         .gbc-presets button.gbc-reset {
-            background: #0f766e;
+            background: #b45309;
             color: #fff;
-            border-color: #0f766e;
+            border-color: #b45309;
         }
 
         .gbc-presets button.gbc-reset:hover {
-            background: #0d9488;
-            border-color: #0d9488;
+            background: #d97706;
+            border-color: #d97706;
             color: #fff;
         }
 
@@ -2473,9 +2575,9 @@
         }
 
         .gbc-pillbar button.active {
-            border-color: #0d9488;
-            color: #0f766e;
-            background: #f0fdfa;
+            border-color: #d97706;
+            color: #b45309;
+            background: #fffbeb;
         }
 
         .gbc-status {
@@ -2485,20 +2587,20 @@
             margin-top: 4px;
         }
 
-        .gbc-status strong { color: #0f766e; }
+        .gbc-status strong { color: #b45309; }
 
         .gbc-takeaway {
             margin-top: 28px;
             padding: 18px 22px;
-            background: linear-gradient(135deg, #ccfbf1, #f0fdfa);
-            border-left: 4px solid #0d9488;
+            background: linear-gradient(135deg, #fef3c7, #fffbeb);
+            border-left: 4px solid #d97706;
             border-radius: 10px;
             font-size: 0.88rem;
-            color: #134e4a;
+            color: #7c2d12;
             line-height: 1.6;
         }
 
-        .gbc-takeaway strong { color: #0f766e; }
+        .gbc-takeaway strong { color: #b45309; }
 
         /* ===== Educational-use disclaimer (gateway to interactive demos) ===== */
         .edu-disclaimer {
@@ -2508,12 +2610,12 @@
             display: flex;
             gap: 18px;
             align-items: flex-start;
-            background: linear-gradient(135deg, #eef2ff, #f5f3ff);
+            background: linear-gradient(135deg, #fffbeb, #fffbeb);
             border: 1px solid #c7d2fe;
-            border-left: 5px solid #4f46e5;
+            border-left: 5px solid #d97706;
             border-radius: 14px;
             box-shadow: 0 4px 18px rgba(79, 70, 229, 0.08);
-            color: #1e1b4b;
+            color: #7c2d12;
             line-height: 1.6;
             font-size: 0.92rem;
         }
@@ -2523,7 +2625,7 @@
             width: 38px;
             height: 38px;
             border-radius: 50%;
-            background: #4f46e5;
+            background: #d97706;
             color: #fff;
             display: flex;
             align-items: center;
@@ -2541,7 +2643,7 @@
             font-weight: 700;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: #4338ca;
+            color: #b45309;
             margin-bottom: 6px;
         }
 
@@ -2552,7 +2654,7 @@
         .edu-disclaimer p:last-child { margin-bottom: 0; }
 
         .edu-disclaimer a {
-            color: #4338ca;
+            color: #b45309;
             text-decoration: underline;
             text-decoration-thickness: 1.5px;
             text-underline-offset: 2px;
@@ -2560,7 +2662,7 @@
             transition: color 0.15s ease;
         }
 
-        .edu-disclaimer a:hover { color: #1e1b4b; }
+        .edu-disclaimer a:hover { color: #7c2d12; }
 
         @media (max-width: 640px) {
             .edu-disclaimer {
@@ -2590,7 +2692,7 @@
             line-height: 1.7;
         }
 
-        .shap-intro em { color: #7c3aed; font-style: normal; font-weight: 600; }
+        .shap-intro em { color: #d97706; font-style: normal; font-weight: 600; }
 
         .shap-cards {
             display: grid;
@@ -2600,8 +2702,8 @@
         }
 
         .shap-card {
-            background: #f5f3ff;
-            border: 1px solid #ddd6fe;
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
             border-radius: 12px;
             padding: 20px 22px;
             line-height: 1.55;
@@ -2610,16 +2712,16 @@
         .shap-card h4 {
             margin: 0 0 8px;
             font-size: 1rem;
-            color: #6d28d9;
+            color: #b45309;
             font-weight: 700;
         }
 
-        .shap-card h4 em { color: #7c3aed; font-style: normal; }
+        .shap-card h4 em { color: #d97706; font-style: normal; }
 
         .shap-card p {
             margin: 0;
             font-size: 0.88rem;
-            color: #4c1d95;
+            color: #7c2d12;
         }
 
         .shap-demo {
@@ -2661,8 +2763,8 @@
         .shap-svg .wf-connector { stroke: #94a3b8; stroke-width: 1; stroke-dasharray: 2 3; }
         .shap-svg .wf-label { font-size: 10px; fill: #0f172a; font-weight: 600; }
         .shap-svg .wf-value { font-size: 10px; fill: #475569; font-variant-numeric: tabular-nums; }
-        .shap-svg .wf-baseline-line { stroke: #7c3aed; stroke-width: 1.4; stroke-dasharray: 4 3; }
-        .shap-svg .wf-final-line { stroke: #0f766e; stroke-width: 1.6; }
+        .shap-svg .wf-baseline-line { stroke: #94a3b8; stroke-width: 1.4; stroke-dasharray: 4 3; }
+        .shap-svg .wf-final-line { stroke: #d97706; stroke-width: 1.6; }
         .shap-svg .bee-point { stroke: #fff; stroke-width: 0.5; }
         .shap-svg .bee-row { stroke: #e2e8f0; stroke-width: 0.6; stroke-dasharray: 1 2; }
 
@@ -2678,8 +2780,8 @@
             gap: 6px;
             padding: 14px 16px;
             border-radius: 12px;
-            background: linear-gradient(135deg, #f5f3ff, #ede9fe);
-            border: 1px solid #ddd6fe;
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border: 1px solid #fcd34d;
         }
 
         .shap-prediction-label {
@@ -2687,19 +2789,19 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.06em;
-            color: #6d28d9;
+            color: #b45309;
         }
 
         .shap-prediction-value {
             font-size: 1.6rem;
             font-weight: 700;
-            color: #5b21b6;
+            color: #7c2d12;
             font-variant-numeric: tabular-nums;
         }
 
         .shap-prediction-sub {
             font-size: 0.78rem;
-            color: #6b21a8;
+            color: #b45309;
         }
 
         .shap-slider {
@@ -2724,7 +2826,7 @@
         }
 
         .shap-slider label span:last-child {
-            color: #7c3aed;
+            color: #d97706;
             font-variant-numeric: tabular-nums;
         }
 
@@ -2744,7 +2846,7 @@
             appearance: none;
             width: 16px; height: 16px;
             border-radius: 50%;
-            background: #7c3aed;
+            background: #d97706;
             border: 2px solid #fff;
             box-shadow: 0 1px 3px rgba(15, 23, 42, 0.2);
             cursor: pointer;
@@ -2753,7 +2855,7 @@
         .shap-slider input[type="range"]::-moz-range-thumb {
             width: 16px; height: 16px;
             border-radius: 50%;
-            background: #7c3aed;
+            background: #d97706;
             border: 2px solid #fff;
             cursor: pointer;
         }
@@ -2778,9 +2880,9 @@
         }
 
         .shap-pillbar button.active {
-            border-color: #7c3aed;
-            color: #5b21b6;
-            background: #f5f3ff;
+            border-color: #d97706;
+            color: #7c2d12;
+            background: #fffbeb;
         }
 
         .shap-presets {
@@ -2802,19 +2904,19 @@
         }
 
         .shap-presets button:hover {
-            border-color: #7c3aed;
-            color: #7c3aed;
+            border-color: #d97706;
+            color: #d97706;
         }
 
         .shap-presets button.shap-reset {
-            background: #6d28d9;
+            background: #b45309;
             color: #fff;
-            border-color: #6d28d9;
+            border-color: #b45309;
         }
 
         .shap-presets button.shap-reset:hover {
-            background: #7c3aed;
-            border-color: #7c3aed;
+            background: #d97706;
+            border-color: #d97706;
             color: #fff;
         }
 
@@ -2825,20 +2927,20 @@
             margin-top: 4px;
         }
 
-        .shap-status strong { color: #6d28d9; }
+        .shap-status strong { color: #b45309; }
 
         .shap-takeaway {
             margin-top: 28px;
             padding: 18px 22px;
-            background: linear-gradient(135deg, #ede9fe, #f5f3ff);
-            border-left: 4px solid #7c3aed;
+            background: linear-gradient(135deg, #fef3c7, #fffbeb);
+            border-left: 4px solid #d97706;
             border-radius: 10px;
             font-size: 0.88rem;
-            color: #4c1d95;
+            color: #7c2d12;
             line-height: 1.6;
         }
 
-        .shap-takeaway strong { color: #6d28d9; }
+        .shap-takeaway strong { color: #b45309; }
 
         @media (max-width: 960px) {
             .shap-cards { grid-template-columns: 1fr; }
@@ -3056,6 +3158,196 @@
         .range-row input[type="range"]:focus::-webkit-slider-thumb {
             transform: scale(1.2);
         }
+
+        /* ===== "Try this" guided prompts ===== */
+        .try-this {
+            display: flex;
+            align-items: flex-start;
+            gap: 11px;
+            margin: 22px 0 4px;
+            padding: 13px 17px;
+            border-radius: 11px;
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            font-size: 0.9rem;
+            color: #475569;
+            line-height: 1.55;
+        }
+        .try-this-tag {
+            flex-shrink: 0;
+            font-size: 0.63rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            color: #92400e;
+            background: #fde68a;
+            border-radius: 999px;
+            padding: 4px 10px;
+            margin-top: 1px;
+        }
+        .try-this strong { color: #0f172a; font-weight: 700; }
+
+        /* ===== Inline glossary terms ===== */
+        .term {
+            border-bottom: 1px dotted #94a3b8;
+            cursor: help;
+            text-decoration: none;
+        }
+        .term:hover { border-bottom-color: #d97706; }
+
+        /* ===== Shared color legend (found vs still-missing) ===== */
+        .color-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 22px;
+            justify-content: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4px 24px 0;
+        }
+        .color-legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.84rem;
+            color: #475569;
+        }
+        .color-legend .swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .swatch-found { background: #d97706; }
+        .swatch-missing { background: #64748b; }
+        .color-legend strong { color: #0f172a; }
+
+        /* ===== AUC confusion matrix ===== */
+        .auc-confusion {
+            margin-top: 4px;
+            padding: 14px;
+            border-radius: 12px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+        }
+        .auc-confusion-title {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #475569;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .auc-confusion-title span {
+            color: #94a3b8;
+            font-weight: 600;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+        .cm-grid {
+            display: grid;
+            grid-template-columns: auto 1fr 1fr;
+            gap: 6px;
+            align-items: stretch;
+        }
+        .cm-colhead,
+        .cm-rowhead {
+            font-size: 0.62rem;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1.15;
+        }
+        .cm-cell {
+            border-radius: 9px;
+            padding: 10px 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 58px;
+        }
+        .cm-n {
+            font-size: 1.28rem;
+            font-weight: 800;
+            font-variant-numeric: tabular-nums;
+            line-height: 1;
+        }
+        .cm-tag {
+            font-size: 0.59rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 5px;
+            opacity: 0.85;
+        }
+        .cm-tp { background: #fef3c7; color: #92400e; }
+        .cm-tn { background: #f1f5f9; color: #334155; }
+        .cm-fn,
+        .cm-fp {
+            background: #ffffff;
+            border: 1px dashed #cbd5e1;
+            color: #94a3b8;
+        }
+        .auc-confusion-note {
+            font-size: 0.78rem;
+            color: #64748b;
+            margin-top: 10px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        /* ===== Respect reduced-motion preferences ===== */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+            .hero-logo {
+                animation: none !important;
+            }
+            /* Reveal scroll-in content immediately, no slide */
+            .fade-in {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+            /* Suppress hover/active micro-movements */
+            .nav-link:hover,
+            .nav-trigger:hover,
+            .hero-btn:active,
+            .tldr-card:hover,
+            .finding-card:hover,
+            .pill:hover,
+            .pill:active,
+            .reset-btn:hover,
+            .reset-btn:active,
+            .copy-btn:active,
+            .auc-presets button:hover,
+            .gbc-presets button:hover,
+            .shap-presets button:hover,
+            .auc-presets button:active,
+            .gbc-presets button:active,
+            .shap-presets button:active,
+            .gbc-pillbar button:hover,
+            .shap-pillbar button:hover,
+            .gbc-pillbar button:active,
+            .shap-pillbar button:active {
+                transform: none !important;
+            }
+        }
     </style>
 </head>
 
@@ -3167,6 +3459,24 @@
     <section id="overview">
         <div class="container">
             <h2 class="section-title">Overview</h2>
+
+            <!-- Plain-language lead: human framing before the technical summary -->
+            <div class="lead fade-in">
+                <p class="lead-text">
+                    When an older adult goes missing, the hours and days that follow can
+                    decide everything. This study asks a painfully practical question:
+                    <strong>from only what is known the moment a person is reported
+                    missing, how likely are they to be found?</strong>
+                </p>
+                <p class="lead-text">
+                    Drawing on <strong>7,855 real cases</strong> reported across Colombia
+                    over nine decades, we trained machine-learning models to weigh the
+                    factors that matter most &mdash; so that search teams, caregivers and
+                    families can better understand the odds, and where attention is most
+                    urgently needed.
+                </p>
+            </div>
+
             <div class="tldr-grid fade-in">
                 <div class="tldr-card">
                     <div class="tldr-icon" aria-hidden="true">
@@ -3220,7 +3530,7 @@
                 <div class="method-card">
                     <div class="method-stat"><span>7,855</span></div>
                     <div class="method-label">Cases analyzed</div>
-                    <div class="method-desc">Older adults (age ? 60) reported missing in Colombia between 1930 and June 2021.</div>
+                    <div class="method-desc">Older adults (age &ge; 60) reported missing in Colombia between 1930 and June 2021.</div>
                 </div>
                 <div class="method-card">
                     <div class="method-stat"><span>65.8% / 34.2%</span></div>
@@ -3237,6 +3547,82 @@
                     <div class="method-label">Best GBC model</div>
                     <div class="method-desc">vs. 0.69 AUC for the mean-elapsed-time reference (base) model.</div>
                 </div>
+            </div>
+
+            <!-- Headline findings in plain language -->
+            <h3 class="subsection-title">What we found, in plain language</h3>
+            <div class="headline-grid fade-in">
+                <div class="headline-card">
+                    <div class="headline-icon" aria-hidden="true">
+                        <!-- clock -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9"/>
+                            <path d="M12 7v5l3 2"/>
+                        </svg>
+                    </div>
+                    <h4>Time is decisive</h4>
+                    <p>
+                        The longer a person stays missing, the steeper the drop in the
+                        chance of being found. Elapsed time outweighs every other factor
+                        in the model &mdash; by a wide margin.
+                    </p>
+                </div>
+                <div class="headline-card">
+                    <div class="headline-icon" aria-hidden="true">
+                        <!-- buildings -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 21h18"/>
+                            <path d="M5 21V7l6-4v18"/>
+                            <path d="M11 21V11l8 3v7"/>
+                            <path d="M8 9v.01M8 13v.01M8 17v.01"/>
+                        </svg>
+                    </div>
+                    <h4>Smaller places, harder searches</h4>
+                    <p>
+                        People who go missing in smaller municipalities are found less
+                        often than those in large cities, where reporting and search
+                        resources are concentrated.
+                    </p>
+                </div>
+                <div class="headline-card">
+                    <div class="headline-icon" aria-hidden="true">
+                        <!-- people -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="9" cy="8" r="3"/>
+                            <path d="M3.5 20a5.5 5.5 0 0 1 11 0"/>
+                            <path d="M16 6.5a3 3 0 0 1 0 5.8"/>
+                            <path d="M18.5 20a5.5 5.5 0 0 0-3-4.9"/>
+                        </svg>
+                    </div>
+                    <h4>Who is found differs</h4>
+                    <p>
+                        Sex and age both shift the odds: in this cohort, missing men and
+                        the oldest individuals were less likely to be found than women and
+                        the &ldquo;younger old.&rdquo;
+                    </p>
+                </div>
+            </div>
+
+            <!-- Responsible-use callout -->
+            <div class="responsible-note fade-in" role="note">
+                <div class="responsible-note-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3l8 4v5c0 5-3.5 7.7-8 9-4.5-1.3-8-4-8-9V7z"/>
+                        <path d="M9.5 12l2 2 3.5-3.5"/>
+                    </svg>
+                </div>
+                <p>
+                    <strong>How to read this responsibly.</strong> These models describe
+                    population-level patterns in historical data; they do not judge any
+                    individual case and must never automate decisions about a real person.
+                    The patterns also reflect how cases were reported and recorded &mdash;
+                    not only what happened. The goal is understanding and prioritization,
+                    not prediction of any one person&rsquo;s fate.
+                </p>
             </div>
         </div>
     </section>
@@ -3420,7 +3806,7 @@
                 <div class="chart-card fade-in">
                     <div class="chart-header">
                         <span class="chart-title">Test Accuracy</span>
-                        <span class="chart-metric">? Higher is better</span>
+                        <span class="chart-metric">&uarr; Higher is better</span>
                     </div>
                     <div class="bar-group">
                         <div class="bar-col baseline-col" data-height="78.8%">
@@ -3455,7 +3841,7 @@
                 <div class="chart-card fade-in">
                     <div class="chart-header">
                         <span class="chart-title">ROC&ndash;AUC</span>
-                        <span class="chart-metric">? Higher is better</span>
+                        <span class="chart-metric">&uarr; Higher is better</span>
                     </div>
                     <div class="bar-group">
                         <div class="bar-col baseline-col" data-height="87.3%">
@@ -3490,7 +3876,7 @@
                 <div class="chart-card fade-in">
                     <div class="chart-header">
                         <span class="chart-title">Recall on the &ldquo;Found&rdquo; class</span>
-                        <span class="chart-metric">? Higher is better</span>
+                        <span class="chart-metric">&uarr; Higher is better</span>
                     </div>
                     <div class="bar-group">
                         <div class="bar-col baseline-col" data-height="60.2%">
@@ -3525,7 +3911,7 @@
                 <div class="chart-card fade-in">
                     <div class="chart-header">
                         <span class="chart-title">F1-score on the &ldquo;Found&rdquo; class</span>
-                        <span class="chart-metric">? Higher is better</span>
+                        <span class="chart-metric">&uarr; Higher is better</span>
                     </div>
                     <div class="bar-group">
                         <div class="bar-col baseline-col" data-height="69.8%">
@@ -3618,6 +4004,12 @@
         </div>
     </aside>
 
+    <!-- Shared color key for all interactive demos -->
+    <div class="color-legend fade-in">
+        <span class="color-legend-item"><span class="swatch swatch-found"></span> Amber &rarr; toward <strong>found</strong></span>
+        <span class="color-legend-item"><span class="swatch swatch-missing"></span> Slate &rarr; toward <strong>still missing</strong></span>
+    </div>
+
     <!-- ===== AUC EXPLAINER ===== -->
     <section id="auc">
         <div class="container">
@@ -3663,6 +4055,13 @@
                 </div>
             </div>
 
+            <div class="try-this">
+                <span class="try-this-tag">Try this</span>
+                <span>Drag <strong>Class separation</strong> down to 0 &mdash; the two score
+                clouds merge and AUC collapses to <strong>0.5</strong>, a model that knows
+                nothing. Then slide it right and watch the curve bow toward the corner.</span>
+            </div>
+
             <div class="auc-demo fade-in">
                 <div class="auc-plots">
                     <div class="auc-panel">
@@ -3686,23 +4085,43 @@
 
                 <div class="auc-controls">
                     <div class="auc-kpis">
-                        <div class="auc-kpi auc-kpi-hero">
+                        <div class="auc-kpi auc-kpi-hero" role="status" aria-live="polite" aria-atomic="true">
                             <div class="auc-kpi-label">AUC</div>
                             <div class="auc-kpi-value" id="aucAucVal">0.857</div>
                         </div>
                         <div class="auc-kpi-row">
                             <div class="auc-kpi">
-                                <div class="auc-kpi-label">Recall (TPR)</div>
+                                <div class="auc-kpi-label"><abbr class="term" title="True Positive Rate: of all truly-found people, the share the model correctly flags as found.">Recall (TPR)</abbr></div>
                                 <div class="auc-kpi-value" id="aucTprVal">77.3%</div>
                             </div>
                             <div class="auc-kpi">
-                                <div class="auc-kpi-label">False alarm (FPR)</div>
+                                <div class="auc-kpi-label"><abbr class="term" title="False Positive Rate: of all truly-still-missing people, the share the model wrongly flags as found.">False alarm (FPR)</abbr></div>
                                 <div class="auc-kpi-value" id="aucFprVal">22.7%</div>
                             </div>
                             <div class="auc-kpi">
-                                <div class="auc-kpi-label">Precision</div>
+                                <div class="auc-kpi-label"><abbr class="term" title="Of everyone the model flags as found, the share that truly are found. Falls sharply when the found class is rare.">Precision</abbr></div>
                                 <div class="auc-kpi-value" id="aucPrecVal">59.3%</div>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="auc-confusion" role="status" aria-live="polite"
+                         aria-label="Confusion matrix for a hypothetical cohort of 1,000 cases at the current settings">
+                        <div class="auc-confusion-title">Confusion matrix <span>&middot; per 1,000 cases</span></div>
+                        <div class="cm-grid">
+                            <div></div>
+                            <div class="cm-colhead">Model says<br>&ldquo;found&rdquo;</div>
+                            <div class="cm-colhead">Model says<br>&ldquo;missing&rdquo;</div>
+                            <div class="cm-rowhead">Truly<br>found</div>
+                            <div class="cm-cell cm-tp"><span class="cm-n" id="aucCmTP">232</span><span class="cm-tag">True +</span></div>
+                            <div class="cm-cell cm-fn"><span class="cm-n" id="aucCmFN">68</span><span class="cm-tag">False &minus;</span></div>
+                            <div class="cm-rowhead">Truly<br>missing</div>
+                            <div class="cm-cell cm-fp"><span class="cm-n" id="aucCmFP">159</span><span class="cm-tag">False +</span></div>
+                            <div class="cm-cell cm-tn"><span class="cm-n" id="aucCmTN">541</span><span class="cm-tag">True &minus;</span></div>
+                        </div>
+                        <div class="auc-confusion-note">
+                            Recall = TP &divide; (TP + FN) &middot; Precision = TP &divide; (TP + FP).
+                            Move the prevalence slider and watch precision shift while the columns stay fixed.
                         </div>
                     </div>
 
@@ -3796,8 +4215,8 @@
                     <h4>2. Fit the <em>residuals</em></h4>
                     <p>
                         At step <em>m</em>, the new tree is fit on the
-                        gradient of the log-loss at the current prediction;
-                        in practice, the <em>residuals</em>
+                        gradient of the <abbr class="term" title="Log-loss (cross-entropy): a penalty that grows as the predicted probability drifts from the true label. Lower is better.">log-loss</abbr> at the current prediction;
+                        in practice, the <abbr class="term" title="Residual: the gap between the true label y and the current predicted probability p — what the next tree tries to correct.">residuals</abbr>
                         <em>y&nbsp;&minus;&nbsp;p</em>. That is what &ldquo;gradient
                         boosting&rdquo; literally means.
                     </p>
@@ -3811,6 +4230,13 @@
                         quickly but can overshoot and overfit.
                     </p>
                 </div>
+            </div>
+
+            <div class="try-this">
+                <span class="try-this-tag">Try this</span>
+                <span>Set <strong>Number of trees</strong> to 1, then drag it slowly to the
+                right. Watch the amber &ldquo;found&rdquo; region sharpen and the training
+                log-loss fall with every tree you add.</span>
             </div>
 
             <div class="gbc-demo fade-in">
@@ -3840,7 +4266,7 @@
                             <div class="gbc-kpi-label">Trees</div>
                             <div class="gbc-kpi-value" id="gbcTreesKpi">30</div>
                         </div>
-                        <div class="gbc-kpi">
+                        <div class="gbc-kpi" role="status" aria-live="polite" aria-atomic="true">
                             <div class="gbc-kpi-label">Log-loss</div>
                             <div class="gbc-kpi-value" id="gbcLossKpi">0.42</div>
                         </div>
@@ -3882,7 +4308,7 @@
 
                     <div class="gbc-slider">
                         <label>
-                            <span>Learning rate <em>(shrinkage)</em></span>
+                            <span>Learning rate <em>(<abbr class="term" title="Shrinkage: each tree's contribution is scaled down by the learning rate so the ensemble improves in small, careful steps.">shrinkage</abbr>)</em></span>
                             <span id="gbcEtaVal">0.30</span>
                         </label>
                         <input type="range" id="gbcEta" min="5" max="100" value="30" step="1">
@@ -3961,7 +4387,7 @@
                         &phi;<sub>i</sub> is the <em>average marginal
                         contribution</em> of feature&nbsp;<em>i</em> over
                         every possible order in which features could enter
-                        the model, i.e. the Shapley value from
+                        the model, i.e. the <abbr class="term" title="Shapley value: from cooperative game theory — the unique fair way to split a payout among players (here, features) by averaging each one's contribution across every join order.">Shapley value</abbr> from
                         cooperative game theory.
                     </p>
                 </div>
@@ -3975,6 +4401,14 @@
                         Features figure.
                     </p>
                 </div>
+            </div>
+
+            <div class="try-this">
+                <span class="try-this-tag">Try this</span>
+                <span>Drag <strong>Days elapsed</strong> from low to high. The
+                <strong>amber</strong> bars (pushing toward &ldquo;found&rdquo;) shrink and
+                the <strong>slate</strong> bars (pushing toward &ldquo;still missing&rdquo;)
+                take over &mdash; the prediction follows.</span>
             </div>
 
             <div class="shap-demo fade-in">
@@ -4005,7 +4439,7 @@
                 </div>
 
                 <div class="shap-controls">
-                    <div class="shap-prediction">
+                    <div class="shap-prediction" role="status" aria-live="polite" aria-atomic="true">
                         <span class="shap-prediction-label">Model prediction</span>
                         <span class="shap-prediction-value" id="shapPredVal">52%</span>
                         <span class="shap-prediction-sub" id="shapPredSub">
@@ -5036,6 +5470,19 @@
                 document.getElementById('aucThrVal').textContent = t.toFixed(2);
                 document.getElementById('aucPrevVal').textContent =
                     Math.round(pi * 100) + '%';
+
+                // Confusion matrix over a hypothetical cohort of 1,000 cases.
+                const N = 1000;
+                const nPos = Math.round(N * pi);
+                const nNeg = N - nPos;
+                const tp = Math.round(tpr * nPos);
+                const fn = nPos - tp;
+                const fp = Math.round(fpr * nNeg);
+                const tn = nNeg - fp;
+                document.getElementById('aucCmTP').textContent = tp;
+                document.getElementById('aucCmFN').textContent = fn;
+                document.getElementById('aucCmFP').textContent = fp;
+                document.getElementById('aucCmTN').textContent = tn;
             }
 
             function rerender() {
@@ -6653,7 +7100,7 @@
                     }
                     const acc = (100 * correct / DATA.xs.length).toFixed(0) + '%';
                     showGraphTip(e, k + ' tree' + (k !== 1 ? 's' : ''), [
-                        ['Training loss', loss.toFixed(4), '#0d9488'],
+                        ['Training loss', loss.toFixed(4), '#334155'],
                         ['Training accuracy', acc],
                         [lossDragActive ? '← dragging' : '← drag dot to explore', '']
                     ]);
@@ -7122,7 +7569,7 @@
                 const bLab = el('text', {
                     x: xBase, y: wfMargin.top - 4,
                     'text-anchor': 'middle', class: 'wf-label',
-                    fill: '#7c3aed'
+                    fill: '#64748b'
                 });
                 bLab.textContent = 'baseline';
                 wfSvg.appendChild(bLab);
@@ -7137,7 +7584,7 @@
                 const fLab = el('text', {
                     x: xFinal, y: wfMargin.top - 4,
                     'text-anchor': 'middle', class: 'wf-label',
-                    fill: '#0f766e'
+                    fill: '#b45309'
                 });
                 fLab.textContent = 'prediction';
                 wfSvg.appendChild(fLab);

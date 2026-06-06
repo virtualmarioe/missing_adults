@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#1e293b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.82" cy="0.12" r="0.9">
+      <stop offset="0" stop-color="#d97706" stop-opacity="0.28"/>
+      <stop offset="0.55" stop-color="#d97706" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e293b"/>
+      <stop offset="1" stop-color="#0b1220"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- accent rule -->
+  <rect x="80" y="120" width="64" height="6" rx="3" fill="#d97706"/>
+
+  <!-- venue chip -->
+  <text x="80" y="96" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700"
+        letter-spacing="3" fill="#fbbf24">JOURNAL OF COMPUTATIONAL SOCIAL SCIENCE · 2022</text>
+
+  <!-- title -->
+  <text font-family="Inter, Arial, sans-serif" font-weight="800" fill="#ffffff" letter-spacing="-1">
+    <tspan x="80" y="225" font-size="62">Predicting the probability of</tspan>
+    <tspan x="80" y="297" font-size="62">finding <tspan fill="#fbbf24">missing older adults</tspan></tspan>
+    <tspan x="80" y="369" font-size="62">based on machine learning</tspan>
+  </text>
+
+  <!-- subtitle -->
+  <text x="80" y="445" font-family="Inter, Arial, sans-serif" font-size="27" fill="#cbd5e1">
+    Supervised ML on 7,855 open-data cases in Colombia (1930–2021)
+  </text>
+
+  <!-- authors -->
+  <text x="80" y="556" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="600" fill="#94a3b8">
+    Ruiz-Rizzo · Archila-Meléndez · González Veloza
+  </text>
+
+  <!-- app-icon tile with magnifying-glass (search) mark -->
+  <g transform="translate(992, 96)">
+    <rect width="120" height="120" rx="30" fill="url(#tile)" stroke="#334155" stroke-width="1.5"/>
+    <g transform="translate(60,60)" fill="none" stroke="#fbbf24" stroke-width="7"
+       stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="-6" cy="-6" r="26"/>
+      <line x1="13" y1="13" x2="34" y2="34"/>
+    </g>
+  </g>
+</svg>
