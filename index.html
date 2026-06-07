@@ -3303,6 +3303,54 @@
             text-align: center;
         }
 
+        /* ===== Borderless card restyle =====
+           Replace every solid-colour card/callout border with soft elevation.
+           Functional UI (buttons, sliders, nav, dividers, chart axes,
+           tooltips, confusion-matrix error cells) keeps its own borders. */
+        .tldr-card,
+        .headline-card,
+        .abstract-card,
+        .finding-card,
+        .features-card,
+        .chart-card,
+        .method-card,
+        .pipeline-step,
+        .bibtex-card,
+        .kpi-card,
+        .breakdown-card,
+        .identity-card,
+        .identity-legend,
+        .auc-card,
+        .gbc-card,
+        .shap-card,
+        .responsible-note,
+        .auc-confusion,
+        .auc-takeaway,
+        .gbc-takeaway,
+        .shap-takeaway,
+        .edu-disclaimer,
+        .try-this,
+        .explore-note,
+        .explore-filters,
+        .outcome-stack,
+        .histogram-card {
+            border: none;
+            box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 10px 28px rgba(15, 23, 42, 0.05);
+        }
+
+        /* Inner panels & KPI chips: borderless with a lighter lift */
+        .auc-panel,
+        .auc-controls,
+        .gbc-demo,
+        .shap-demo,
+        .auc-kpi-hero,
+        .auc-kpi-row .auc-kpi,
+        .gbc-kpi,
+        .shap-prediction {
+            border: none;
+            box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 14px rgba(15, 23, 42, 0.04);
+        }
+
         /* ===== Respect reduced-motion preferences ===== */
         @media (prefers-reduced-motion: reduce) {
             html {
@@ -4552,6 +4600,15 @@
                 June&nbsp;2021. Apply filters on the left and watch how the
                 probability of being found alive changes across subgroups.
             </p>
+
+            <div class="try-this">
+                <span class="try-this-tag">Try this</span>
+                <span>Click <strong>Women</strong> off to keep only <strong>Men</strong>,
+                then under <strong>Municipality size</strong> select just the smallest
+                bucket. Watch the found-alive rate drop below the dashed full-cohort
+                baseline on the parity plot &mdash; smaller places, harder searches. Press
+                <strong>Reset all filters</strong> to return to the whole cohort.</span>
+            </div>
 
             <div class="explore-grid fade-in">
                 <aside class="explore-filters">
