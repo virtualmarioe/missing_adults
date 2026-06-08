@@ -5276,7 +5276,36 @@
                     'El artículo reporta tasas de hallazgo más altas para las mujeres que para los hombres; SHAP lo hace visible para cualquier caso individual.',
                 'Easy case': 'Caso fácil',
                 'Average case': 'Caso promedio',
-                'Hard case': 'Caso difícil'
+                'Hard case': 'Caso difícil',
+
+                /* ---- Explore: filters & captions ---- */
+                'Sex': 'Sexo',
+                'Men': 'Hombres',
+                'Women': 'Mujeres',
+                'years': 'años',
+                'Year reported': 'Año del reporte',
+                'Municipality size': 'Tamaño del municipio',
+                'inhabitants': 'habitantes',
+                'Vulnerability factor': 'Factor de vulnerabilidad',
+                'Education': 'Educación',
+                'Reset all filters': 'Restablecer todos los filtros',
+                'Loading cohort data…': 'Cargando datos de la cohorte…',
+                'Matching cases': 'Casos coincidentes',
+                'Found alive': 'Encontrados con vida',
+                'Still missing': 'Aún desaparecidos',
+                'Cases per year of age · stacked by outcome': 'Casos por año de edad · apilados por desenlace',
+                'Cases per reporting year · stacked by outcome': 'Casos por año de reporte · apilados por desenlace',
+                'Share of each age band found alive': 'Proporción de cada franja de edad encontrada con vida',
+                'Population of the municipality where the case was reported': 'Población del municipio donde se reportó el caso',
+                'Decade in which the disappearance was reported': 'Década en que se reportó la desaparición',
+                'Share found alive among men and women': 'Proporción encontrada con vida entre hombres y mujeres',
+                'No cases match the current filters. Try widening the age or year ranges or re-enabling more categories.':
+                    'Ningún caso coincide con los filtros actuales. Prueba a ampliar los rangos de edad o de año, o a reactivar más categorías.',
+
+                /* ---- Authors: plain labels ---- */
+                'Corresponding Author': 'Autora de correspondencia',
+                'Co-author': 'Coautor',
+                'Acknowledgements': 'Agradecimientos'
             },
 
             /* Rich blocks — matched by normalized innerHTML (no tagging). */
@@ -5358,7 +5387,27 @@
                     'La función de puntuación es un modelo logístico ajustado sobre la cohorte de <strong>7,855 casos</strong> del artículo (4 variables + 2 interacciones). Las muestras de fondo y del enjambre provienen de casos reales.',
                 'Days elapsed since report <em>(feature 1)</em>': 'Días transcurridos desde el reporte <em>(variable 1)</em>',
                 '<strong>What the paper learns from SHAP:</strong> averaged across all 7,855 cases, the four biggest drivers of <em>“found alive”</em> probability are the <em>time elapsed</em> since the disappearance was reported, the <em>population size</em> of the municipality where the case was opened, the person’s <em>sex</em>, and their <em>age</em>, in that order. Marital status, education and vulnerability factors tune the answer but rarely dominate it.':
-                    '<strong>Lo que el artículo aprende de SHAP:</strong> promediado sobre los 7,855 casos, los cuatro factores que más impulsan la probabilidad de <em>«encontrado con vida»</em> son el <em>tiempo transcurrido</em> desde que se reportó la desaparición, el <em>tamaño de la población</em> del municipio donde se abrió el caso, el <em>sexo</em> de la persona y su <em>edad</em>, en ese orden. El estado civil, la educación y los factores de vulnerabilidad ajustan la respuesta, pero rara vez la dominan.'
+                    '<strong>Lo que el artículo aprende de SHAP:</strong> promediado sobre los 7,855 casos, los cuatro factores que más impulsan la probabilidad de <em>«encontrado con vida»</em> son el <em>tiempo transcurrido</em> desde que se reportó la desaparición, el <em>tamaño de la población</em> del municipio donde se abrió el caso, el <em>sexo</em> de la persona y su <em>edad</em>, en ese orden. El estado civil, la educación y los factores de vulnerabilidad ajustan la respuesta, pero rara vez la dominan.',
+
+                /* ===== Explore ===== */
+                'Interact with the same cohort used in the paper: <strong>7,855 cases</strong> of missing older adults (≥&nbsp;60&nbsp;years) reported in Colombia between 1937 and June&nbsp;2021. Apply filters on the left and watch how the probability of being found alive changes across subgroups.':
+                    'Interactúa con la misma cohorte usada en el artículo: <strong>7,855 casos</strong> de adultos mayores desaparecidos (≥&nbsp;60&nbsp;años) reportados en Colombia entre 1937 y junio&nbsp;de&nbsp;2021. Aplica los filtros de la izquierda y observa cómo cambia la probabilidad de ser encontrado con vida entre subgrupos.',
+                'Click <strong>Women</strong> off to keep only <strong>Men</strong>, then under <strong>Municipality size</strong> select just the smallest bucket. Watch the found-alive rate drop below the dashed full-cohort baseline on the parity plot — smaller places, harder searches. Press <strong>Reset all filters</strong> to return to the whole cohort.':
+                    'Desactiva <strong>Mujeres</strong> para dejar solo <strong>Hombres</strong> y luego, en <strong>Tamaño del municipio</strong>, selecciona solo la categoría más pequeña. Observa cómo la tasa de hallazgo con vida cae por debajo de la línea base discontinua de la cohorte completa en el gráfico de paridad: lugares más pequeños, búsquedas más difíciles. Pulsa <strong>Restablecer todos los filtros</strong> para volver a toda la cohorte.',
+                'Each subgroup (sex, age band, municipality size, reporting decade, education or vulnerability) is encoded on <strong>seven dimensions</strong>: its full-cohort rate on the <strong>x</strong> axis, its current-selection rate on the <strong>y</strong> axis, feature family as <strong>color</strong>, selected-case count as bubble <strong>area</strong>, a 95% Wilson confidence interval as a vertical <strong>whisker</strong>, a thin <strong>guide line</strong> connecting the baseline (on the diagonal) to the current point, and a hollow <strong>baseline marker</strong> at the starting position. Dots above the dashed diagonal find more people than the overall baseline; dots below find fewer.':
+                    'Cada subgrupo (sexo, franja de edad, tamaño del municipio, década del reporte, educación o vulnerabilidad) se codifica en <strong>siete dimensiones</strong>: su tasa en la cohorte completa en el eje <strong>x</strong>, su tasa en la selección actual en el eje <strong>y</strong>, la familia de la variable como <strong>color</strong>, el número de casos seleccionados como <strong>área</strong> de la burbuja, un intervalo de confianza de Wilson del 95% como <strong>bigote</strong> vertical, una fina <strong>línea guía</strong> que conecta la línea base (sobre la diagonal) con el punto actual, y un <strong>marcador de base</strong> hueco en la posición inicial. Los puntos por encima de la diagonal discontinua encuentran a más personas que la línea base general; los de abajo, a menos.',
+                '<strong>How to read this.</strong> Bars show the empirical share of cases that were eventually found alive within each subgroup. Bands with fewer than 20&nbsp;cases are drawn in grey and should be interpreted with caution. These are descriptive associations; the paper’s gradient-boosting model combines many of these variables (plus municipality population as a continuous feature) to produce calibrated individual-level probabilities.':
+                    '<strong>Cómo leer esto.</strong> Las barras muestran la proporción empírica de casos que finalmente fueron encontrados con vida dentro de cada subgrupo. Las franjas con menos de 20&nbsp;casos se dibujan en gris y deben interpretarse con cautela. Son asociaciones descriptivas; el modelo de gradient boosting del artículo combina muchas de estas variables (más la población del municipio como variable continua) para producir probabilidades calibradas a nivel individual.',
+
+                /* ===== Authors ===== */
+                'General and Experimental Psychology Unit, Department of Psychology, Ludwig-Maximilians-Universität München · Department of Neurology, Jena University Hospital<br> <em>Conceptualization, data curation, formal analysis, funding acquisition, methodology, software, visualization, writing – original draft.</em><br> <a href="mailto:adriana.ruiz@lmu.de" style="color:#d97706; text-decoration:none; border-bottom:1px dotted #d97706;">adriana.ruiz@lmu.de</a>':
+                    'General and Experimental Psychology Unit, Department of Psychology, Ludwig-Maximilians-Universität München · Department of Neurology, Jena University Hospital<br> <em>Conceptualización, curación de datos, análisis formal, obtención de financiación, metodología, software, visualización, redacción del borrador original.</em><br> <a href="mailto:adriana.ruiz@lmu.de" style="color:#d97706; text-decoration:none; border-bottom:1px dotted #d97706;">adriana.ruiz@lmu.de</a>',
+                'Department of Diagnostic and Interventional Neuroradiology and TUM Neuroimaging Center, Klinikum rechts der Isar, School of Medicine, Technical University of Munich, Germany<br> <em>Resources, writing – review and editing.</em>':
+                    'Department of Diagnostic and Interventional Neuroradiology and TUM Neuroimaging Center, Klinikum rechts der Isar, School of Medicine, Technical University of Munich, Germany<br> <em>Recursos, redacción: revisión y edición.</em>',
+                'Department of Engineering and Basic Sciences, Fundación Universitaria Los Libertadores, Bogotá, Colombia<br> <em>Methodology, software, supervision, writing – review and editing.</em>':
+                    'Department of Engineering and Basic Sciences, Fundación Universitaria Los Libertadores, Bogotá, Colombia<br> <em>Metodología, software, supervisión, redacción: revisión y edición.</em>',
+                'The authors thank <em>Datos Abiertos Colombia</em> and the <em>Sistema de Información Red de Desaparecidos y Cadáveres</em> (SIRDEC) for granting access to the data. Funded by the EU Framework Programme for Research and Innovation Horizon&nbsp;2020 under the Marie Sk?odowska-Curie Grant Agreement No. 754388 (LMUResearchFellows) and by LMUexcellent (BMBF &amp; Free State of Bavaria under the Excellence Strategy of the German Federal and State Governments). Open Access funding enabled by Projekt&nbsp;DEAL.':
+                    'Los autores agradecen a <em>Datos Abiertos Colombia</em> y al <em>Sistema de Información Red de Desaparecidos y Cadáveres</em> (SIRDEC) por permitir el acceso a los datos. Financiado por el Programa Marco de Investigación e Innovación de la UE Horizonte&nbsp;2020 mediante el Acuerdo de Subvención Marie Skłodowska-Curie n.º 754388 (LMUResearchFellows) y por LMUexcellent (BMBF &amp; Estado Libre de Baviera bajo la Estrategia de Excelencia de los Gobiernos Federal y Estatales de Alemania). Financiación de acceso abierto habilitada por Projekt&nbsp;DEAL.'
             }
         };
 
