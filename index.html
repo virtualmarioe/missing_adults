@@ -22,6 +22,11 @@
     <meta name="twitter:description"
         content="Machine learning on 7,855 open-data cases in Colombia reveals what predicts whether a missing older adult is found.">
     <meta name="twitter:image" content="https://virtualmarioe.github.io/missing_adults/og-image.png">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="es_CO">
+    <link rel="alternate" hreflang="en" href="https://virtualmarioe.github.io/missing_adults/">
+    <link rel="alternate" hreflang="es" href="https://virtualmarioe.github.io/missing_adults/?lang=es">
+    <link rel="alternate" hreflang="x-default" href="https://virtualmarioe.github.io/missing_adults/">
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕵️</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -92,6 +97,45 @@
             padding: 14px 0;
             /* overflow must stay visible so dropdown menus aren't clipped */
             overflow: visible;
+            position: relative;
+        }
+
+        /* ===== Language toggle (EN / ES) ===== */
+        .lang-toggle {
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: inline-flex;
+            gap: 2px;
+            padding: 3px;
+            border-radius: 999px;
+            background: #f1f5f9;
+        }
+        .lang-toggle button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: #64748b;
+            padding: 5px 11px;
+            border-radius: 999px;
+            line-height: 1;
+            transition: color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+        }
+        .lang-toggle button:hover { color: #0f172a; }
+        .lang-toggle button.active {
+            background: #ffffff;
+            color: #0f172a;
+            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.12);
+        }
+        .lang-toggle button:active { transform: scale(0.94); }
+
+        @media (max-width: 768px) {
+            .lang-toggle { right: 16px; }
         }
 
         .nav-link {
@@ -3406,8 +3450,8 @@
         <div class="container">
             <div class="hero-logo">🕵️</div>
             <div class="hero-venue">Journal of Computational Social Science &middot; 2022</div>
-            <h1 class="hero-title">Predicting the probability of finding<br>missing older adults based on machine learning</h1>
-            <p class="hero-subtitle">
+            <h1 class="hero-title" data-i18n="hero.title">Predicting the probability of finding<br>missing older adults based on machine learning</h1>
+            <p class="hero-subtitle" data-i18n="hero.subtitle">
                 Supervised machine learning on 7,855 open-data missing older adult cases in Colombia
                 (1930&ndash;June&nbsp;2021) identifies the individual and environmental factors that predict
                 whether a missing older person will later be found.
@@ -3436,7 +3480,7 @@
                         <line x1="16" y1="13" x2="8" y2="13" />
                         <line x1="16" y1="17" x2="8" y2="17" />
                     </svg>
-                    Paper (Open Access)
+                    <span data-i18n="hero.btn.paper">Paper (Open Access)</span>
                 </a>
                 <a href="https://osf.io/agz5e/" class="hero-btn secondary" target="_blank" rel="noopener">
                     <svg viewBox="0 0 24 24">
@@ -3447,14 +3491,14 @@
                         <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
                         <line x1="12" y1="22.08" x2="12" y2="12" />
                     </svg>
-                    Code &amp; Data (OSF)
+                    <span data-i18n="hero.btn.code">Code &amp; Data (OSF)</span>
                 </a>
                 <a href="#bibtex" class="hero-btn secondary">
                     <svg viewBox="0 0 24 24">
                         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
                         <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
                     </svg>
-                    Cite
+                    <span data-i18n="hero.btn.cite">Cite</span>
                 </a>
             </div>
         </div>
@@ -3463,24 +3507,24 @@
     <!-- ===== NAVIGATION ===== -->
     <nav class="nav" id="main-nav">
         <div class="nav-inner container">
-            <a href="#" class="nav-link active" id="nav-home">Home</a>
+            <a href="#" class="nav-link active" id="nav-home" data-i18n="nav.home">Home</a>
 
             <!-- Science group -->
             <div class="nav-group" id="nav-group-paper">
                 <button class="nav-trigger" id="nav-trigger-paper"
                         aria-expanded="false" aria-haspopup="true">
-                    Science
+                    <span data-i18n="nav.science">Science</span>
                     <svg class="nav-chevron" viewBox="0 0 24 24" aria-hidden="true">
                         <polyline points="6 9 12 15 18 9"/>
                     </svg>
                 </button>
                 <div class="nav-menu" id="nav-menu-paper" role="menu">
-                    <a href="#abstract" class="nav-link" role="menuitem">Abstract</a>
-                    <a href="#methods"  class="nav-link" role="menuitem">Methods</a>
-                    <a href="#features" class="nav-link" role="menuitem">Key Features</a>
-                    <a href="#results"  class="nav-link" role="menuitem">Results</a>
-                    <a href="#authors"  class="nav-link" role="menuitem">Authors</a>
-                    <a href="#bibtex"   class="nav-link" role="menuitem">Cite</a>
+                    <a href="#abstract" class="nav-link" role="menuitem" data-i18n="nav.abstract">Abstract</a>
+                    <a href="#methods"  class="nav-link" role="menuitem" data-i18n="nav.methods">Methods</a>
+                    <a href="#features" class="nav-link" role="menuitem" data-i18n="nav.features">Key Features</a>
+                    <a href="#results"  class="nav-link" role="menuitem" data-i18n="nav.results">Results</a>
+                    <a href="#authors"  class="nav-link" role="menuitem" data-i18n="nav.authors">Authors</a>
+                    <a href="#bibtex"   class="nav-link" role="menuitem" data-i18n="nav.cite">Cite</a>
                 </div>
             </div>
 
@@ -3488,17 +3532,22 @@
             <div class="nav-group" id="nav-group-interactive">
                 <button class="nav-trigger" id="nav-trigger-interactive"
                         aria-expanded="false" aria-haspopup="true">
-                    Education
+                    <span data-i18n="nav.education">Education</span>
                     <svg class="nav-chevron" viewBox="0 0 24 24" aria-hidden="true">
                         <polyline points="6 9 12 15 18 9"/>
                     </svg>
                 </button>
                 <div class="nav-menu" id="nav-menu-interactive" role="menu">
-                    <a href="#auc"     class="nav-link" role="menuitem">AUC Explorer</a>
-                    <a href="#gbc"     class="nav-link" role="menuitem">GBC Explainer</a>
-                    <a href="#shap"    class="nav-link" role="menuitem">SHAP Values</a>
-                    <a href="#explore" class="nav-link" role="menuitem">Explore Data</a>
+                    <a href="#auc"     class="nav-link" role="menuitem" data-i18n="nav.auc">AUC Explorer</a>
+                    <a href="#gbc"     class="nav-link" role="menuitem" data-i18n="nav.gbc">GBC Explainer</a>
+                    <a href="#shap"    class="nav-link" role="menuitem" data-i18n="nav.shap">SHAP Values</a>
+                    <a href="#explore" class="nav-link" role="menuitem" data-i18n="nav.explore">Explore Data</a>
                 </div>
+            </div>
+
+            <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+                <button type="button" data-lang="en" class="active" aria-pressed="true">EN</button>
+                <button type="button" data-lang="es" aria-pressed="false">ES</button>
             </div>
         </div>
     </nav>
@@ -4971,6 +5020,113 @@
     </footer>
 
     <script>
+        /* =====================================================================
+           i18n engine (single-file, no build step)
+           - English is the source of truth, harvested from the DOM.
+           - Spanish lives in the I18N.es dictionary below.
+           - Static nodes carry data-i18n="key" (innerHTML) and/or
+             data-i18n-attr="attr:key|attr2:key2" (attributes).
+           - Dynamic JS strings call t('key', 'English fallback').
+           - Demos register their render fn via registerI18nRerender so charts
+             redraw in the active language when the toggle flips.
+           ===================================================================== */
+        const I18N = {
+            es: {
+                /* ---- navigation ---- */
+                'nav.home': 'Inicio',
+                'nav.science': 'Ciencia',
+                'nav.education': 'Educación',
+                'nav.abstract': 'Resumen',
+                'nav.methods': 'Métodos',
+                'nav.features': 'Características clave',
+                'nav.results': 'Resultados',
+                'nav.authors': 'Autores',
+                'nav.cite': 'Citar',
+                'nav.auc': 'Explorador AUC',
+                'nav.gbc': 'Explicador GBC',
+                'nav.shap': 'Valores SHAP',
+                'nav.explore': 'Explorar los datos',
+
+                /* ---- hero ---- */
+                'hero.title': 'Predicción de la probabilidad de encontrar<br>adultos mayores desaparecidos mediante aprendizaje automático',
+                'hero.subtitle': 'El aprendizaje automático supervisado sobre 7,855 casos de datos abiertos de adultos mayores desaparecidos en Colombia (1930&ndash;junio&nbsp;de&nbsp;2021) identifica los factores individuales y ambientales que predicen si una persona mayor desaparecida será encontrada posteriormente.',
+                'hero.btn.paper': 'Artículo (acceso abierto)',
+                'hero.btn.code': 'Código y datos (OSF)',
+                'hero.btn.cite': 'Citar',
+
+                /* ---- AUC demo (dynamic, via t()) ---- */
+                'auc.leg.found': 'Encontrado',
+                'auc.leg.missing': 'Aún desaparecido',
+                'auc.axis.score': 'puntuación del modelo',
+                'auc.axis.fpr': 'Tasa de falsos positivos',
+                'auc.axis.tpr': 'Tasa de verdaderos positivos'
+            }
+        };
+
+        let LANG = 'en';
+        const _i18nOrig = new Map();
+        const _i18nRerender = [];
+
+        function registerI18nRerender(fn) { _i18nRerender.push(fn); }
+
+        // Dynamic-string translator: English stays inline as the fallback.
+        // Named tr() (not t()) to avoid clashing with the demos' local
+        // `t` threshold variables.
+        function tr(key, en) {
+            return (LANG === 'es' && I18N.es[key] != null) ? I18N.es[key] : en;
+        }
+
+        function applyLang(lang) {
+            LANG = (lang === 'es') ? 'es' : 'en';
+
+            document.querySelectorAll('[data-i18n]').forEach(function (el) {
+                const key = el.getAttribute('data-i18n');
+                const ok = 'h:' + key;
+                if (!_i18nOrig.has(ok)) _i18nOrig.set(ok, el.innerHTML);
+                const es = I18N.es[key];
+                el.innerHTML = (LANG === 'es' && es != null) ? es : _i18nOrig.get(ok);
+            });
+
+            document.querySelectorAll('[data-i18n-attr]').forEach(function (el) {
+                el.getAttribute('data-i18n-attr').split('|').forEach(function (pair) {
+                    const idx = pair.indexOf(':');
+                    if (idx < 0) return;
+                    const attr = pair.slice(0, idx), key = pair.slice(idx + 1);
+                    const ok = 'a:' + attr + ':' + key;
+                    if (!_i18nOrig.has(ok)) _i18nOrig.set(ok, el.getAttribute(attr));
+                    const es = I18N.es[key];
+                    const v = (LANG === 'es' && es != null) ? es : _i18nOrig.get(ok);
+                    if (v != null) el.setAttribute(attr, v);
+                });
+            });
+
+            document.documentElement.lang = LANG;
+            const ogl = document.querySelector('meta[property="og:locale"]');
+            if (ogl) ogl.setAttribute('content', LANG === 'es' ? 'es_CO' : 'en_US');
+            try { localStorage.setItem('lang', LANG); } catch (e) { /* ignore */ }
+
+            document.querySelectorAll('.lang-toggle button[data-lang]').forEach(function (b) {
+                const on = b.getAttribute('data-lang') === LANG;
+                b.classList.toggle('active', on);
+                b.setAttribute('aria-pressed', on ? 'true' : 'false');
+            });
+
+            _i18nRerender.forEach(function (fn) { try { fn(); } catch (e) { /* ignore */ } });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const tg = document.querySelector('.lang-toggle');
+            if (tg) tg.addEventListener('click', function (e) {
+                const b = e.target.closest('button[data-lang]');
+                if (b) applyLang(b.getAttribute('data-lang'));
+            });
+            const urlLang = new URLSearchParams(location.search).get('lang');
+            let saved = null;
+            try { saved = localStorage.getItem('lang'); } catch (e) { /* ignore */ }
+            const navLang = (navigator.language || '').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
+            applyLang((urlLang === 'es' || urlLang === 'en') ? urlLang : (saved || navLang));
+        });
+
         document.addEventListener('DOMContentLoaded', function () {
 
             // Sticky nav shadow on scroll
@@ -5364,7 +5520,7 @@
                     x: legX + 14, y: legY + 9,
                     class: 'legend-label'
                 });
-                legNeg.textContent = 'Still missing';
+                legNeg.textContent = tr('auc.leg.missing', 'Still missing');
                 distSvg.appendChild(legNeg);
                 distSvg.appendChild(el('rect', {
                     x: legX + 88, y: legY, width: 10, height: 10, rx: 2,
@@ -5374,7 +5530,7 @@
                     x: legX + 102, y: legY + 9,
                     class: 'legend-label'
                 });
-                legPos.textContent = 'Found';
+                legPos.textContent = tr('auc.leg.found', 'Found');
                 distSvg.appendChild(legPos);
 
                 // X-axis title.
@@ -5384,7 +5540,7 @@
                     class: 'axis-label',
                     'text-anchor': 'middle'
                 });
-                xLab.textContent = 'model score';
+                xLab.textContent = tr('auc.axis.score', 'model score');
                 distSvg.appendChild(xLab);
             }
 
@@ -5493,7 +5649,7 @@
                     class: 'axis-label',
                     'text-anchor': 'middle'
                 });
-                xTitle.textContent = 'False-positive rate';
+                xTitle.textContent = tr('auc.axis.fpr', 'False-positive rate');
                 rocSvg.appendChild(xTitle);
 
                 const yTitle = el('text', {
@@ -5502,7 +5658,7 @@
                     'text-anchor': 'middle',
                     transform: 'rotate(-90 12 ' + ((rocSy(0) + rocSy(1)) / 2) + ')'
                 });
-                yTitle.textContent = 'True-positive rate';
+                yTitle.textContent = tr('auc.axis.tpr', 'True-positive rate');
                 rocSvg.appendChild(yTitle);
             }
 
@@ -5547,6 +5703,7 @@
                 renderRoc();
                 updateKpis();
             }
+            registerI18nRerender(rerender);
 
             // Wire controls.
             const sepEl = document.getElementById('aucSep');
