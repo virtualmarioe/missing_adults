@@ -5096,7 +5096,50 @@
                 'auc.leg.missing': 'Aún desaparecido',
                 'auc.axis.score': 'puntuación del modelo',
                 'auc.axis.fpr': 'Tasa de falsos positivos',
-                'auc.axis.tpr': 'Tasa de verdaderos positivos'
+                'auc.axis.tpr': 'Tasa de verdaderos positivos',
+
+                /* ---- shared chart legends (dynamic, via tr()) ---- */
+                'leg.foundalive': 'encontrado con vida',
+                'leg.stillmissing': 'aún desaparecido',
+
+                /* ---- GBC demo (dynamic, via tr()) ---- */
+                'gbc.ax.days': 'Días transcurridos desde el reporte',
+                'gbc.ax.age': 'Edad al momento de la desaparición',
+                'gbc.ax.iters': 'Número de iteraciones de boosting (árboles)',
+                'gbc.ax.loss': 'Log-loss de entrenamiento',
+                'gbc.data.paper': 'Cohorte del artículo',
+                'gbc.data.synth': 'Demo sintética',
+
+                /* ---- SHAP demo (dynamic, via tr()) ---- */
+                'shap.sex.f': 'Mujer',
+                'shap.sex.m': 'Hombre',
+                'shap.ax.logodds': 'Log-odds de "encontrado con vida"',
+                'shap.ax.shap': 'Valor SHAP (contribución en log-odds)',
+                'shap.lbl.baseline': 'línea base',
+                'shap.lbl.prediction': 'predicción',
+                'shap.fname.0': 'Días transcurridos',
+                'shap.fname.1': 'Edad',
+                'shap.fname.2': 'Tamaño del municipio',
+                'shap.fname.3': 'Sexo',
+                'shap.meanphi': 'media |phi| = ',
+                'shap.low': 'bajo',
+                'shap.high': 'alto',
+                'shap.data.paper': 'Cohorte del artículo',
+                'shap.data.toy': 'Modelo analítico',
+
+                /* ---- Explore demo (dynamic) ---- */
+                'exp.xrate': 'Tasa de hallazgo en la cohorte completa',
+                'exp.yrate': 'Tasa de hallazgo en la selección actual',
+                'exp.median': 'mediana · ',
+                'exp.range': 'rango · ',
+                'exp.cohort': '% de la cohorte de 7.855 casos',
+                'exp.cases': ' casos',
+                'exp.tip.found': ' encontrado',
+                'exp.tip.missing': ' aún desaparecido',
+                'exp.tip.baseline': 'Línea base: ',
+                'exp.tip.selection': 'Selección: ',
+                'exp.tip.ci': 'IC 95%: ',
+                'exp.legend.feature': 'Variable'
             },
 
             /* Plain-text leaves — matched by normalized English text. */
@@ -6297,6 +6340,18 @@
             const emptyEl = document.getElementById('exploreEmpty');
             if (!loadingEl || !contentEl) return;
 
+            /* i18n helpers local to Explore */
+            const _FEAT_ES = { 'Sex': 'Sexo', 'Age': 'Edad', 'Municipality': 'Municipio',
+                               'Decade': 'Década', 'Education': 'Educación',
+                               'Vulnerability': 'Vulnerabilidad' };
+            const _LBL_ES  = { 'Men': 'Hombres', 'Women': 'Mujeres',
+                               'Before 2000': 'Antes del 2000',
+                               'No formal': 'Sin escolaridad', 'Primary': 'Primaria',
+                               'Secondary': 'Secundaria', 'Tertiary': 'Superior',
+                               'None reported': 'Sin reporte', 'Any reported': 'Con reporte' };
+            function trFeat(f) { return (LANG === 'es' && _FEAT_ES[f]) ? _FEAT_ES[f] : f; }
+            function trLabel(l) { return (LANG === 'es' && _LBL_ES[l])  ? _LBL_ES[l]  : l; }
+
             const state = {
                 records: null,
                 columns: null,
@@ -6521,7 +6576,7 @@
                     row.className = 'brk-row';
                     const pctText = pctStr(rate);
                     row.innerHTML =
-                        '<div class="brk-label">' + key + '</div>' +
+                        '<div class="brk-label">' + trLabel(key) + '</div>' +
                         '<div class="brk-track"><div class="brk-fill' +
                         (lowN ? ' low' : '') +
                         '" style="width:' + rate.toFixed(1) + '%"></div></div>' +
@@ -6614,10 +6669,10 @@
                         const lo = nonEmpty[0].v;
                         const hi = nonEmpty[nonEmpty.length - 1].v;
                         if (medianEl) {
-                            medianEl.textContent = 'median \u00b7 ' + formatKey(median);
+                            medianEl.textContent = tr('exp.median','median \u00b7 ') + formatKey(median);
                         }
                         if (rangeEl) {
-                            rangeEl.textContent = 'range \u00b7 ' +
+                            rangeEl.textContent = tr('exp.range','range \u00b7 ') +
                                 formatKey(lo) + ' \u2013 ' + formatKey(hi);
                         }
                     }
@@ -6634,13 +6689,14 @@
                     const still = total - found;
                     const rate = (100 * found / total).toFixed(1);
                     const v = parseInt(bar.dataset.value, 10);
+                    const _loc = LANG === 'es' ? 'es-CO' : 'en-US';
                     tip.innerHTML =
                         '<div class="tip-title">' + formatKey(v) + (unit ? ' ' + unit : '') + '</div>' +
                         '<div class="tip-row"><span class="tip-swatch found"></span>' +
-                        found.toLocaleString('en-US') + ' found (' + rate + '%)</div>' +
+                        found.toLocaleString(_loc) + tr('exp.tip.found',' found') + ' (' + rate + '%)</div>' +
                         '<div class="tip-row"><span class="tip-swatch still"></span>' +
-                        still.toLocaleString('en-US') + ' still missing</div>' +
-                        '<div class="tip-muted">n = ' + total.toLocaleString('en-US') + ' cases</div>';
+                        still.toLocaleString(_loc) + tr('exp.tip.missing',' still missing') + '</div>' +
+                        '<div class="tip-muted">n = ' + total.toLocaleString(_loc) + tr('exp.cases',' cases') + '</div>';
                     const rect = bar.getBoundingClientRect();
                     tip.style.left = (rect.left + rect.width / 2) + 'px';
                     tip.style.top = rect.top + 'px';
@@ -6703,13 +6759,13 @@
 
                 document.getElementById('kpiTotal').textContent = kpiFmt(total);
                 document.getElementById('kpiShare').textContent =
-                    shareOfCohort.toFixed(1) + '% of the 7,855-case cohort';
+                    shareOfCohort.toFixed(1) + tr('exp.cohort','% of the 7,855-case cohort');
                 document.getElementById('kpiFoundRate').textContent = pctStr(foundRate);
                 document.getElementById('kpiFoundCount').textContent =
-                    kpiFmt(found) + ' cases';
+                    kpiFmt(found) + tr('exp.cases',' cases');
                 document.getElementById('kpiStillRate').textContent = pctStr(stillRate);
                 document.getElementById('kpiStillCount').textContent =
-                    kpiFmt(still) + ' cases';
+                    kpiFmt(still) + tr('exp.cases',' cases');
 
                 const stackFound = document.getElementById('stackFound');
                 const stackStill = document.getElementById('stackStill');
@@ -6930,7 +6986,7 @@
                     class: 'id-axis-title',
                     'text-anchor': 'middle'
                 });
-                xTitle.textContent = 'Found rate in full cohort';
+                xTitle.textContent = tr('exp.xrate','Found rate in full cohort');
                 svg.appendChild(xTitle);
 
                 const yTitle = el('text', {
@@ -6939,7 +6995,7 @@
                     'text-anchor': 'middle',
                     transform: 'rotate(-90 14 ' + sy(0.5) + ')'
                 });
-                yTitle.textContent = 'Found rate in current selection';
+                yTitle.textContent = tr('exp.yrate','Found rate in current selection');
                 svg.appendChild(yTitle);
 
                 // Bubbles.
@@ -7070,18 +7126,19 @@
                     const cls = Math.abs(delta) < 0.5 ? 'same' : (delta > 0 ? 'up' : 'down');
                     const ciLo = parseFloat(t.dataset.cilo);
                     const ciHi = parseFloat(t.dataset.cihi);
+                    const _idloc = LANG === 'es' ? 'es-CO' : 'en-US';
                     tip.innerHTML =
-                        '<div class="identity-tooltip-feature">' + t.dataset.feature + '</div>' +
-                        '<div class="identity-tooltip-label">' + t.dataset.label + '</div>' +
-                        '<div class="identity-tooltip-row">Baseline: ' +
+                        '<div class="identity-tooltip-feature">' + trFeat(t.dataset.feature) + '</div>' +
+                        '<div class="identity-tooltip-label">' + trLabel(t.dataset.label) + '</div>' +
+                        '<div class="identity-tooltip-row">' + tr('exp.tip.baseline','Baseline: ') +
                             (base * 100).toFixed(1) + '% &middot; ' +
-                            Number(t.dataset.basefound).toLocaleString() + ' / ' +
-                            Number(t.dataset.basecount).toLocaleString() + '</div>' +
-                        '<div class="identity-tooltip-row">Selection: ' +
+                            Number(t.dataset.basefound).toLocaleString(_idloc) + ' / ' +
+                            Number(t.dataset.basecount).toLocaleString(_idloc) + '</div>' +
+                        '<div class="identity-tooltip-row">' + tr('exp.tip.selection','Selection: ') +
                             (cur * 100).toFixed(1) + '% &middot; ' +
-                            Number(t.dataset.found).toLocaleString() + ' / ' +
-                            Number(t.dataset.count).toLocaleString() + '</div>' +
-                        '<div class="identity-tooltip-row">95% CI: ' +
+                            Number(t.dataset.found).toLocaleString(_idloc) + ' / ' +
+                            Number(t.dataset.count).toLocaleString(_idloc) + '</div>' +
+                        '<div class="identity-tooltip-row">' + tr('exp.tip.ci','95% CI: ') +
                             (ciLo * 100).toFixed(1) + '% &ndash; ' +
                             (ciHi * 100).toFixed(1) + '%</div>' +
                         '<div class="identity-tooltip-delta ' + cls + '">' + deltaStr + '</div>';
@@ -7116,7 +7173,7 @@
                 for (const def of SUBGROUP_DEFS) {
                     if (!seen.has(def.feature)) seen.set(def.feature, def.color);
                 }
-                host.innerHTML = '<h6>Feature</h6>';
+                host.innerHTML = '<h6>' + tr('exp.legend.feature','Feature') + '</h6>';
                 for (const [feature, color] of seen) {
                     const row = document.createElement('div');
                     row.className = 'identity-legend-item';
@@ -7124,23 +7181,30 @@
                     sw.className = 'identity-legend-swatch';
                     sw.style.background = color;
                     const lab = document.createElement('span');
-                    lab.textContent = feature;
+                    lab.textContent = trFeat(feature);
                     row.appendChild(sw);
                     row.appendChild(lab);
                     host.appendChild(row);
                 }
                 const note = document.createElement('div');
                 note.className = 'identity-legend-note';
-                note.innerHTML =
-                    '<strong>Bubble area</strong> &prop; subgroup size in the ' +
-                    'selection. <strong>Hollow ring</strong> on the diagonal = ' +
-                    'full-cohort baseline. <strong>Guide line</strong> connects ' +
-                    'baseline to current. <strong>Whisker</strong> = 95% Wilson ' +
-                    'confidence interval for the selection rate. Hover any ' +
-                    'bubble for exact counts, rates, CI and delta.';
+                note.innerHTML = (LANG === 'es')
+                    ? '<strong>Área de la burbuja</strong> &prop; tamaño del subgrupo en la '
+                      + 'selección. <strong>Anillo hueco</strong> en la diagonal = '
+                      + 'línea base de la cohorte completa. <strong>Línea guía</strong> conecta '
+                      + 'línea base con la selección. <strong>Bigote</strong> = IC 95% Wilson '
+                      + 'para la tasa de la selección. Pase el cursor sobre '
+                      + 'cualquier burbuja para ver conteos, tasas, IC y delta exactos.'
+                    : '<strong>Bubble area</strong> &prop; subgroup size in the '
+                      + 'selection. <strong>Hollow ring</strong> on the diagonal = '
+                      + 'full-cohort baseline. <strong>Guide line</strong> connects '
+                      + 'baseline to current. <strong>Whisker</strong> = 95% Wilson '
+                      + 'confidence interval for the selection rate. Hover any '
+                      + 'bubble for exact counts, rates, CI and delta.';
                 host.appendChild(note);
             }
 
+            registerI18nRerender(function () { if (state.records) update(); });
             loadOnVisible();
         }
 
@@ -7438,7 +7502,7 @@
                     'text-anchor': 'middle',
                     class: 'axis-label'
                 });
-                xlab.textContent = 'Days elapsed since report';
+                xlab.textContent = tr('gbc.ax.days', 'Days elapsed since report');
                 surfaceSvg.appendChild(xlab);
                 const ylab = el('text', {
                     x: 10, y: sMargin.top + sPlotH / 2,
@@ -7446,7 +7510,7 @@
                     class: 'axis-label',
                     transform: 'rotate(-90 10 ' + (sMargin.top + sPlotH / 2) + ')'
                 });
-                ylab.textContent = 'Age at missingness';
+                ylab.textContent = tr('gbc.ax.age', 'Age at missingness');
                 surfaceSvg.appendChild(ylab);
 
                 // Training samples on top.
@@ -7473,7 +7537,7 @@
                 const lt1 = el('text', {
                     x: legendX + 14, y: legendY + 8, class: 'legend-label'
                 });
-                lt1.textContent = 'found alive';
+                lt1.textContent = tr('leg.foundalive', 'found alive');
                 surfaceSvg.appendChild(lt1);
                 surfaceSvg.appendChild(el('circle', {
                     cx: legendX + 6, cy: legendY + 20, r: 3.2, class: 'pt-neg'
@@ -7481,7 +7545,7 @@
                 const lt2 = el('text', {
                     x: legendX + 14, y: legendY + 23, class: 'legend-label'
                 });
-                lt2.textContent = 'still missing';
+                lt2.textContent = tr('leg.stillmissing', 'still missing');
                 surfaceSvg.appendChild(lt2);
             }
 
@@ -7597,14 +7661,14 @@
                     y: lossViewH - 2,
                     'text-anchor': 'middle', class: 'axis-label'
                 });
-                xlab.textContent = 'Number of boosting iterations (trees)';
+                xlab.textContent = tr('gbc.ax.iters', 'Number of boosting iterations (trees)');
                 lossSvg.appendChild(xlab);
                 const ylab = el('text', {
                     x: 12, y: lMargin.top + lPlotH / 2,
                     'text-anchor': 'middle', class: 'axis-label',
                     transform: 'rotate(-90 12 ' + (lMargin.top + lPlotH / 2) + ')'
                 });
-                ylab.textContent = 'Training log-loss';
+                ylab.textContent = tr('gbc.ax.loss', 'Training log-loss');
                 lossSvg.appendChild(ylab);
             }
 
@@ -7764,26 +7828,27 @@
                 }
                 if (dataValEl) {
                     dataValEl.textContent = state.dataSource === 'paper'
-                        ? 'Paper cohort' : 'Synthetic demo';
+                        ? tr('gbc.data.paper', 'Paper cohort')
+                        : tr('gbc.data.synth', 'Synthetic demo');
                 }
                 if (dataStatusEl) {
+                    const es = (LANG === 'es');
                     if (state.dataSource === 'paper' && PAPER_DATA) {
-                        dataStatusEl.innerHTML =
-                            'Training on <strong>' + PAPER_DATA.xs.length + '</strong> '
-                            + 'stratified samples from the paper&rsquo;s '
-                            + '<strong>7,855-case</strong> cohort (SIRDEC / Datos '
-                            + 'Abiertos Colombia). Axis goes up to '
-                            + daysMax.toLocaleString() + ' d &asymp; '
-                            + (daysMax / 365).toFixed(0) + ' yr.';
+                        const n = PAPER_DATA.xs.length;
+                        const dmax = daysMax.toLocaleString();
+                        const yr = (daysMax / 365).toFixed(0);
+                        dataStatusEl.innerHTML = es
+                            ? 'Entrenando con <strong>' + n + '</strong> muestras estratificadas de la cohorte de <strong>7,855 casos</strong> del art\u00edculo (SIRDEC / Datos Abiertos Colombia). El eje llega hasta ' + dmax + ' d &asymp; ' + yr + ' a.'
+                            : 'Training on <strong>' + n + '</strong> stratified samples from the paper&rsquo;s <strong>7,855-case</strong> cohort (SIRDEC / Datos Abiertos Colombia). Axis goes up to ' + dmax + ' d &asymp; ' + yr + ' yr.';
                     } else if (state.dataSource === 'paper') {
-                        dataStatusEl.textContent =
-                            'Loading paper cohort data\u2026';
+                        dataStatusEl.textContent = es
+                            ? 'Cargando datos de la cohorte del art\u00edculo\u2026'
+                            : 'Loading paper cohort data\u2026';
                     } else {
-                        dataStatusEl.innerHTML =
-                            'Training on <strong>' + SYNTHETIC_DATA.xs.length
-                            + '</strong> synthetic points drawn from a toy '
-                            + 'logistic data-generating process. Axis goes up to '
-                            + '1,800 d &asymp; 5 yr.';
+                        const n = SYNTHETIC_DATA.xs.length;
+                        dataStatusEl.innerHTML = es
+                            ? 'Entrenando con <strong>' + n + '</strong> puntos sint\u00e9ticos generados por un proceso log\u00edstico de juguete. El eje llega hasta 1,800 d &asymp; 5 a.'
+                            : 'Training on <strong>' + n + '</strong> synthetic points drawn from a toy logistic data-generating process. Axis goes up to 1,800 d &asymp; 5 yr.';
                     }
                 }
             }
@@ -7883,6 +7948,7 @@
                 retrain();
                 render();
                 updateDataUi();
+                registerI18nRerender(function () { render(); updateDataUi(); });
                 if (state.dataSource === 'paper') {
                     loadPaperDemo().then(applyPaperData).catch(function () {
                         state.dataSource = 'synthetic';
@@ -8096,9 +8162,9 @@
 
             function syncLabels() {
                 daysVal.textContent = state.days + ' d';
-                ageVal.textContent = state.age + ' yr';
+                ageVal.textContent = state.age + (LANG === 'es' ? ' a' : ' yr');
                 muniVal.textContent = MUNI_LABELS[state.muni];
-                sexVal.textContent = state.sexF ? 'Female' : 'Male';
+                sexVal.textContent = state.sexF ? tr('shap.sex.f', 'Female') : tr('shap.sex.m', 'Male');
                 Array.prototype.forEach.call(
                     sexPills.querySelectorAll('button'),
                     function (b) {
@@ -8173,7 +8239,7 @@
                     y: wfViewH - 4,
                     'text-anchor': 'middle', class: 'axis-label'
                 });
-                axLab.textContent = 'Log-odds of "found alive"';
+                axLab.textContent = tr('shap.ax.logodds', 'Log-odds of "found alive"');
                 wfSvg.appendChild(axLab);
 
                 // Baseline guideline.
@@ -8188,7 +8254,7 @@
                     'text-anchor': 'middle', class: 'wf-label',
                     fill: '#64748b'
                 });
-                bLab.textContent = 'baseline';
+                bLab.textContent = tr('shap.lbl.baseline', 'baseline');
                 wfSvg.appendChild(bLab);
 
                 // Final prediction guideline.
@@ -8203,7 +8269,7 @@
                     'text-anchor': 'middle', class: 'wf-label',
                     fill: '#b45309'
                 });
-                fLab.textContent = 'prediction';
+                fLab.textContent = tr('shap.lbl.prediction', 'prediction');
                 wfSvg.appendChild(fLab);
 
                 // Feature rows.
@@ -8236,7 +8302,7 @@
                         x: wfMargin.left - 8, y: y - 2,
                         'text-anchor': 'end', class: 'wf-label'
                     });
-                    fLab2.textContent = FEATURES[idx].name;
+                    fLab2.textContent = tr('shap.fname.' + idx, FEATURES[idx].name);
                     wfSvg.appendChild(fLab2);
                     const vLab = el('text', {
                         x: wfMargin.left - 8, y: y + 10,
@@ -8271,9 +8337,9 @@
 
             function featureValueLabel(idx) {
                 if (idx === F_DAYS) return state.days + ' d';
-                if (idx === F_AGE) return state.age + ' yr';
+                if (idx === F_AGE) return state.age + (LANG === 'es' ? ' a' : ' yr');
                 if (idx === F_MUNI) return MUNI_LABELS[state.muni];
-                if (idx === F_SEX) return state.sexF ? 'Female' : 'Male';
+                if (idx === F_SEX) return state.sexF ? tr('shap.sex.f', 'Female') : tr('shap.sex.m', 'Male');
                 return '';
             }
 
@@ -8448,7 +8514,7 @@
                     y: bwViewH - 4,
                     'text-anchor': 'middle', class: 'axis-label'
                 });
-                axLab.textContent = 'SHAP value (log-odds contribution)';
+                axLab.textContent = tr('shap.ax.shap', 'SHAP value (log-odds contribution)');
                 beeSvg.appendChild(axLab);
 
                 // Rows.
@@ -8461,13 +8527,13 @@
                         x: bwMargin.left - 8, y: yc - 2,
                         'text-anchor': 'end', class: 'wf-label'
                     });
-                    fl.textContent = FEATURES[idx].name;
+                    fl.textContent = tr('shap.fname.' + idx, FEATURES[idx].name);
                     beeSvg.appendChild(fl);
                     const ml = el('text', {
                         x: bwMargin.left - 8, y: yc + 10,
                         'text-anchor': 'end', class: 'wf-value'
                     });
-                    ml.textContent = 'mean |phi| = ' + means[idx].toFixed(2);
+                    ml.textContent = tr('shap.meanphi', 'mean |phi| = ') + means[idx].toFixed(2);
                     beeSvg.appendChild(ml);
                     // Row divider.
                     beeSvg.appendChild(el('line', {
@@ -8507,12 +8573,12 @@
                 const lo = el('text', {
                     x: lgX, y: lgY + 24, class: 'legend-label'
                 });
-                lo.textContent = 'low';
+                lo.textContent = tr('shap.low', 'low');
                 beeSvg.appendChild(lo);
                 const hi = el('text', {
                     x: lgX + 80, y: lgY + 24, 'text-anchor': 'end', class: 'legend-label'
                 });
-                hi.textContent = 'high';
+                hi.textContent = tr('shap.high', 'high');
                 beeSvg.appendChild(hi);
             }
 
@@ -8534,8 +8600,9 @@
                 const baseP = sigmoid(BASELINE_LOGIT);
                 predVal.textContent = Math.round(predP * 100) + '%';
                 const shiftPp = Math.round((predP - baseP) * 100);
-                predSub.textContent = 'baseline ' + Math.round(baseP * 100)
-                    + '% \u00B7 shift ' + (shiftPp >= 0 ? '+' : '') + shiftPp + ' pp';
+                predSub.textContent = (LANG === 'es')
+                    ? 'l\u00EDnea base ' + Math.round(baseP * 100) + '% \u00B7 cambio ' + (shiftPp >= 0 ? '+' : '') + shiftPp + ' pp'
+                    : 'baseline ' + Math.round(baseP * 100) + '% \u00B7 shift ' + (shiftPp >= 0 ? '+' : '') + shiftPp + ' pp';
                 renderWaterfall(xn, phi);
                 renderBeeswarm();
             }
@@ -8623,26 +8690,31 @@
                 }
                 if (dataValEl) {
                     dataValEl.textContent = state.dataSource === 'paper'
-                        ? 'Paper cohort' : 'Toy model';
+                        ? tr('shap.data.paper', 'Paper cohort')
+                        : tr('shap.data.toy', 'Toy model');
                 }
                 if (dataStatusEl) {
+                    const _es = (LANG === 'es');
                     if (state.dataSource === 'paper' && paperCoef) {
-                        dataStatusEl.innerHTML =
-                            'Scoring function: logistic model fitted on the '
-                            + '<strong>7,855-case</strong> cohort (4 main effects '
-                            + '+ 2 interactions). Background/beeswarm draw from '
-                            + '<strong>60</strong> and <strong>80</strong> real '
-                            + 'cases. Days slider spans '
-                            + daysMax.toLocaleString() + ' d.';
+                        dataStatusEl.innerHTML = _es
+                            ? 'Funci\u00f3n de puntuaci\u00f3n: modelo log\u00edstico ajustado sobre la cohorte de <strong>7.855 casos</strong> (4 efectos principales + 2 interacciones). Fondo/beeswarm extra\u00eddos de <strong>60</strong> y <strong>80</strong> casos reales. El deslizador de d\u00edas abarca ' + daysMax.toLocaleString('es') + ' d.'
+                            : 'Scoring function: logistic model fitted on the '
+                              + '<strong>7,855-case</strong> cohort (4 main effects '
+                              + '+ 2 interactions). Background/beeswarm draw from '
+                              + '<strong>60</strong> and <strong>80</strong> real '
+                              + 'cases. Days slider spans '
+                              + daysMax.toLocaleString() + ' d.';
                     } else if (state.dataSource === 'paper') {
-                        dataStatusEl.textContent =
-                            'Loading paper cohort coefficients\u2026';
+                        dataStatusEl.textContent = _es
+                            ? 'Cargando coeficientes de la cohorte del art\u00edculo\u2026'
+                            : 'Loading paper cohort coefficients\u2026';
                     } else {
-                        dataStatusEl.innerHTML =
-                            'Scoring function: a toy analytical logistic model. '
-                            + 'Background and beeswarm populations are drawn '
-                            + 'from a synthetic RNG. Days slider spans '
-                            + daysMax.toLocaleString() + ' d.';
+                        dataStatusEl.innerHTML = _es
+                            ? 'Funci\u00f3n de puntuaci\u00f3n: modelo log\u00edstico anal\u00edtico de prueba. La poblaci\u00f3n de fondo y el beeswarm se generan con un RNG sint\u00e9tico. El deslizador de d\u00edas abarca ' + daysMax.toLocaleString('es') + ' d.'
+                            : 'Scoring function: a toy analytical logistic model. '
+                              + 'Background and beeswarm populations are drawn '
+                              + 'from a synthetic RNG. Days slider spans '
+                              + daysMax.toLocaleString() + ' d.';
                     }
                 }
             }
@@ -8694,11 +8766,14 @@
                         syncLabels();
                         render();
                         if (dataStatusEl) {
-                            dataStatusEl.innerHTML =
-                                '<strong>Paper cohort unavailable</strong> '
-                                + '(serve the site over HTTP to load '
-                                + 'data/paper_demo.json). Falling back to '
-                                + 'the toy model.';
+                            dataStatusEl.innerHTML = (LANG === 'es')
+                                ? '<strong>Cohorte del artículo no disponible</strong> '
+                                  + '(sirva el sitio vía HTTP para cargar '
+                                  + 'data/paper_demo.json). Usando el modelo de prueba.'
+                                : '<strong>Paper cohort unavailable</strong> '
+                                  + '(serve the site over HTTP to load '
+                                  + 'data/paper_demo.json). Falling back to '
+                                  + 'the toy model.';
                         }
                         updateDataUi();
                     });
@@ -8788,16 +8863,21 @@
                     }).catch(function () {
                         state.dataSource = 'toy';
                         if (dataStatusEl) {
-                            dataStatusEl.innerHTML =
-                                '<strong>Paper cohort unavailable</strong> '
-                                + '(serve the site over HTTP to load '
-                                + 'data/paper_demo.json). Falling back to '
-                                + 'the toy model.';
+                            dataStatusEl.innerHTML = (LANG === 'es')
+                                ? '<strong>Cohorte del artículo no disponible</strong> '
+                                  + '(sirva el sitio vía HTTP para cargar '
+                                  + 'data/paper_demo.json). Usando el modelo de prueba.'
+                                : '<strong>Paper cohort unavailable</strong> '
+                                  + '(serve the site over HTTP to load '
+                                  + 'data/paper_demo.json). Falling back to '
+                                  + 'the toy model.';
                         }
                         updateDataUi();
                     });
                 }
             }
+            registerI18nRerender(function () { render(); updateDataUi(); });
+
             if ('IntersectionObserver' in window) {
                 const obs = new IntersectionObserver(function (entries) {
                     for (const e of entries) {
