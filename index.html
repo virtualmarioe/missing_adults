@@ -5232,7 +5232,51 @@
                 /* ---- glossary term labels (visible text) ---- */
                 'Recall (TPR)': 'Sensibilidad (TPR)',
                 'False alarm (FPR)': 'Falsa alarma (FPR)',
-                'Precision': 'Precisión'
+                'Precision': 'Precisión',
+
+                /* ---- GBC: plain leaves ---- */
+                'A small learning rate takes smaller, more careful steps: more trees are needed, but the model generalizes better. Large rates reach low loss quickly but can overshoot and overfit.':
+                    'Una tasa de aprendizaje pequeña da pasos más pequeños y cuidadosos: se necesitan más árboles, pero el modelo generaliza mejor. Las tasas grandes alcanzan rápido una pérdida baja, pero pueden excederse y sobreajustar.',
+                'Orange cloud = P(found) high · grey cloud = P(found) low · dots = training samples':
+                    'Nube ámbar = P(encontrado) alta · nube gris = P(encontrado) baja · puntos = muestras de entrenamiento',
+                'Training log-loss per iteration': 'Log-loss de entrenamiento por iteración',
+                'Each new tree should push the loss down; dot marks the current setting.':
+                    'Cada nuevo árbol debería reducir la pérdida; el punto marca el ajuste actual.',
+                'Trees': 'Árboles',
+                'Train acc.': 'Exact. entr.',
+                'Training data': 'Datos de entrenamiento',
+                'Paper cohort': 'Cohorte del artículo',
+                'Synthetic demo': 'Demo sintética',
+                'How many weak learners are added to the ensemble. Slide to the left to see the underfit regime; slide right to watch the loss keep dropping.':
+                    'Cuántos aprendices débiles se añaden al ensamble. Desliza a la izquierda para ver el régimen de subajuste; a la derecha para ver cómo la pérdida sigue bajando.',
+                'Each new tree is multiplied by this rate before being added. Low → more trees needed but safer; high → fast progress but jumpier.':
+                    'Cada nuevo árbol se multiplica por esta tasa antes de añadirse. Baja → se necesitan más árboles pero es más seguro; alta → progreso rápido pero más inestable.',
+                'Underfit (3 trees)': 'Subajuste (3 árboles)',
+                'Paper-like': 'Como el artículo',
+                'Greedy (60 · η=1.0)': 'Voraz (60 · η=1.0)',
+                'Reset to paper': 'Restablecer al artículo',
+
+                /* ---- SHAP: plain leaves ---- */
+                'Local explanation (waterfall)': 'Explicación local (cascada)',
+                'Global summary (beeswarm)': 'Resumen global (enjambre)',
+                'Model prediction': 'Predicción del modelo',
+                'Model & background': 'Modelo y fondo',
+                'Toy model': 'Modelo de juguete',
+                'Longer delays make cases harder to solve; this is the strongest negative driver in the paper’s SHAP ranking.':
+                    'Los retrasos más largos hacen que los casos sean más difíciles de resolver; este es el factor negativo más fuerte en el ranking SHAP del artículo.',
+                'Age at missingness': 'Edad al momento de la desaparición',
+                'Higher ages push the probability down, with a modest non-linear kink around the mid-seventies.':
+                    'Las edades más altas empujan la probabilidad hacia abajo, con un leve quiebre no lineal alrededor de los setenta y cinco años.',
+                'Municipality population': 'Población del municipio',
+                'Larger cities have denser search networks → finding someone alive is more likely.':
+                    'Las ciudades más grandes tienen redes de búsqueda más densas → encontrar a alguien con vida es más probable.',
+                'Female': 'Mujer',
+                'Male': 'Hombre',
+                'The paper reports higher found-rates for women than for men; SHAP makes this visible for any individual case.':
+                    'El artículo reporta tasas de hallazgo más altas para las mujeres que para los hombres; SHAP lo hace visible para cualquier caso individual.',
+                'Easy case': 'Caso fácil',
+                'Average case': 'Caso promedio',
+                'Hard case': 'Caso difícil'
             },
 
             /* Rich blocks — matched by normalized innerHTML (no tagging). */
@@ -5267,7 +5311,54 @@
                 'Truly<br>missing': 'Realmente<br>desaparecido',
                 'Class separation <em>(centers apart)</em>': 'Separación de clases <em>(distancia entre centros)</em>',
                 '<strong>In the paper’s language:</strong> the Gradient Boosting Classifier pushes AUC from the mean-elapsed-time baseline (≈0.63) up to ≈0.73: exactly the kind of separation change you can produce with the first slider. Undersampling the dominant “still missing” class doesn’t move AUC, but it lets the team pick a more generous threshold that keeps recall on the minority “found” class high, the trade-off the middle slider reveals.':
-                    '<strong>En el lenguaje del artículo:</strong> el Gradient Boosting Classifier eleva el AUC desde la línea base del tiempo medio transcurrido (≈0.63) hasta ≈0.73: exactamente el tipo de cambio de separación que puedes producir con el primer control. Submuestrear la clase dominante «aún desaparecido» no mueve el AUC, pero permite al equipo elegir un umbral más generoso que mantiene alta la sensibilidad sobre la clase minoritaria «encontrado», el equilibrio que revela el control central.'
+                    '<strong>En el lenguaje del artículo:</strong> el Gradient Boosting Classifier eleva el AUC desde la línea base del tiempo medio transcurrido (≈0.63) hasta ≈0.73: exactamente el tipo de cambio de separación que puedes producir con el primer control. Submuestrear la clase dominante «aún desaparecido» no mueve el AUC, pero permite al equipo elegir un umbral más generoso que mantiene alta la sensibilidad sobre la clase minoritaria «encontrado», el equilibrio que revela el control central.',
+
+                /* ===== GBC ===== */
+                'The paper’s best model is a <em>Gradient Boosting Classifier</em> (GBC): it builds a <em>sequence</em> of very simple decision trees, each one trained to fix the mistakes of the ensemble built so far. With a small synthetic dataset inspired by the paper (<em>days elapsed</em> vs. <em>age at missingness</em>), the demo below lets you add trees one at a time and watch the decision surface sharpen and the training log-loss drop.':
+                    'El mejor modelo del artículo es un <em>Gradient Boosting Classifier</em> (GBC): construye una <em>secuencia</em> de árboles de decisión muy simples, cada uno entrenado para corregir los errores del ensamble construido hasta el momento. Con un pequeño conjunto de datos sintético inspirado en el artículo (<em>días transcurridos</em> vs. <em>edad al momento de la desaparición</em>), la demostración de abajo te permite añadir árboles uno a uno y ver cómo la superficie de decisión se afina y el log-loss de entrenamiento baja.',
+                '1. Weak learners <em>cooperate</em>': '1. Los aprendices débiles <em>cooperan</em>',
+                'Each individual tree is intentionally shallow (here, depth-1 <em>stumps</em>). On its own a stump is barely better than guessing, but adding many of them in sequence produces a strong model.':
+                    'Cada árbol individual es deliberadamente poco profundo (aquí, <em>tocones</em> de profundidad 1). Por sí solo, un tocón es apenas mejor que adivinar, pero añadir muchos en secuencia produce un modelo fuerte.',
+                '2. Fit the <em>residuals</em>': '2. Ajustar los <em>residuos</em>',
+                'At step <em>m</em>, the new tree is fit on the gradient of the <abbr class="term" title="Log-loss (cross-entropy): a penalty that grows as the predicted probability drifts from the true label. Lower is better.">log-loss</abbr> at the current prediction; in practice, the <abbr class="term" title="Residual: the gap between the true label y and the current predicted probability p — what the next tree tries to correct.">residuals</abbr> <em>y&nbsp;−&nbsp;p</em>. That is what “gradient boosting” literally means.':
+                    'En el paso <em>m</em>, el nuevo árbol se ajusta al gradiente del <abbr class="term" title="Log-loss (entropía cruzada): una penalización que crece a medida que la probabilidad predicha se aleja de la etiqueta real. Más baja es mejor.">log-loss</abbr> en la predicción actual; en la práctica, los <abbr class="term" title="Residuo: la diferencia entre la etiqueta real y y la probabilidad predicha actual p — lo que el siguiente árbol intenta corregir.">residuos</abbr> <em>y&nbsp;−&nbsp;p</em>. Eso es lo que «gradient boosting» significa literalmente.',
+                '3. Learning rate <em>controls speed</em>': '3. La tasa de aprendizaje <em>controla la velocidad</em>',
+                'Set <strong>Number of trees</strong> to 1, then drag it slowly to the right. Watch the amber “found” region sharpen and the training log-loss fall with every tree you add.':
+                    'Pon <strong>Número de árboles</strong> en 1 y luego arrástralo despacio a la derecha. Observa cómo la región ámbar de «encontrado» se afina y el log-loss de entrenamiento cae con cada árbol que añades.',
+                'Training on <strong>400</strong> stratified samples from the paper’s <strong>7,855-case</strong> cohort (days elapsed × age at missingness).':
+                    'Entrenando con <strong>400</strong> muestras estratificadas de la cohorte de <strong>7,855 casos</strong> del artículo (días transcurridos × edad al momento de la desaparición).',
+                'Number of trees <em>(boosting iterations)</em>': 'Número de árboles <em>(iteraciones de boosting)</em>',
+                'Learning rate <em>(<abbr class="term" title="Shrinkage: each tree\'s contribution is scaled down by the learning rate so the ensemble improves in small, careful steps.">shrinkage</abbr>)</em>':
+                    'Tasa de aprendizaje <em>(<abbr class="term" title="Reducción (shrinkage): la contribución de cada árbol se reduce mediante la tasa de aprendizaje para que el ensamble mejore en pasos pequeños y cuidadosos.">reducción</abbr>)</em>',
+                'Tree depth <em>(per weak learner)</em>': 'Profundidad del árbol <em>(por aprendiz débil)</em>',
+                'Depth-1 means decision <em>stumps</em> (one split). Deeper trees capture interactions but risk overfitting with many iterations.':
+                    'Profundidad 1 significa <em>tocones</em> de decisión (una sola división). Los árboles más profundos capturan interacciones, pero arriesgan sobreajuste con muchas iteraciones.',
+                '<strong>Why the paper picks GBC:</strong> with tabular features like <em>days elapsed</em>, <em>age</em>, <em>municipality size</em>, <em>sex</em>, <em>education</em> and <em>vulnerability factor</em>, no single decision rule captures the full pattern. Gradient boosting adds dozens of tiny, almost-orthogonal rules until the ensemble together models the interactions. In the paper this recipe improves ROC-AUC from the <em>mean-elapsed-time</em> baseline of ≈0.63 to ≈0.73, while keeping recall on the minority <em>“found”</em> class at 83%.':
+                    '<strong>Por qué el artículo elige el GBC:</strong> con variables tabulares como <em>días transcurridos</em>, <em>edad</em>, <em>tamaño del municipio</em>, <em>sexo</em>, <em>educación</em> y <em>factor de vulnerabilidad</em>, ninguna regla de decisión por sí sola capta todo el patrón. El gradient boosting añade decenas de reglas diminutas y casi ortogonales hasta que el ensamble, en conjunto, modela las interacciones. En el artículo esta receta mejora el ROC-AUC desde la línea base del <em>tiempo medio transcurrido</em> de ≈0.63 a ≈0.73, manteniendo la sensibilidad sobre la clase minoritaria <em>«encontrado»</em> en el 83%.',
+
+                /* ===== SHAP ===== */
+                'SHAP (<em>SHapley Additive exPlanations</em>) answers a deceptively simple question for any single prediction: <em>how much did each feature push the model’s output away from the average case?</em> The paper uses SHAP both as a <em>global</em> feature-importance ranking (Fig.&nbsp;3 in the article) and, implicitly, to sanity-check the model’s logic. Slide the controls below to see a local explanation build up feature by feature.':
+                    'SHAP (<em>SHapley Additive exPlanations</em>) responde una pregunta engañosamente simple para cualquier predicción individual: <em>¿cuánto empujó cada variable la salida del modelo respecto al caso promedio?</em> El artículo usa SHAP tanto como un ranking <em>global</em> de importancia de variables (Fig.&nbsp;3 del artículo) como, implícitamente, para verificar la lógica del modelo. Mueve los controles de abajo para ver cómo una explicación local se construye variable por variable.',
+                '1. Additivity <em>is the rule</em>': '1. La aditividad <em>es la regla</em>',
+                'SHAP values are defined so that <em>baseline&nbsp;+&nbsp;∑&nbsp;φ<sub>i</sub>&nbsp;=&nbsp;prediction</em>. That means every explanation is guaranteed to add up exactly: no hand-waving.':
+                    'Los valores SHAP se definen de modo que <em>línea base&nbsp;+&nbsp;∑&nbsp;φ<sub>i</sub>&nbsp;=&nbsp;predicción</em>. Esto significa que toda explicación está garantizada para sumar exactamente: sin ambigüedades.',
+                '2. Fair <em>attribution</em>': '2. Atribución <em>justa</em>',
+                'φ<sub>i</sub> is the <em>average marginal contribution</em> of feature&nbsp;<em>i</em> over every possible order in which features could enter the model, i.e. the <abbr class="term" title="Shapley value: from cooperative game theory — the unique fair way to split a payout among players (here, features) by averaging each one\'s contribution across every join order.">Shapley value</abbr> from cooperative game theory.':
+                    'φ<sub>i</sub> es la <em>contribución marginal promedio</em> de la variable&nbsp;<em>i</em> sobre todos los órdenes posibles en que las variables podrían entrar al modelo, es decir, el <abbr class="term" title="Valor de Shapley: de la teoría de juegos cooperativos — la única forma justa de repartir una ganancia entre jugadores (aquí, las variables) promediando la contribución de cada uno en todos los órdenes de entrada.">valor de Shapley</abbr> de la teoría de juegos cooperativos.',
+                '3. Local <em>and</em> global': '3. Local <em>y</em> global',
+                'Each case gets its own φ<sub>i</sub>’s. Averaging <em>|φ<sub>i</sub>|</em> across the cohort turns those local attributions into the global ranking shown in the paper’s Key Features figure.':
+                    'Cada caso tiene sus propios φ<sub>i</sub>. Promediar <em>|φ<sub>i</sub>|</em> en toda la cohorte convierte esas atribuciones locales en el ranking global que se muestra en la figura de Características clave del artículo.',
+                'Drag <strong>Days elapsed</strong> from low to high. The <strong>amber</strong> bars (pushing toward “found”) shrink and the <strong>slate</strong> bars (pushing toward “still missing”) take over — the prediction follows.':
+                    'Arrastra <strong>Días transcurridos</strong> de bajo a alto. Las barras <strong>ámbar</strong> (que empujan hacia «encontrado») se reducen y las barras <strong>pizarra</strong> (que empujan hacia «aún desaparecido») toman el control: la predicción las sigue.',
+                'Bars show each feature’s push on the log-odds of <em>found alive</em> · orange = towards <em>found</em> · grey = towards <em>still missing</em>':
+                    'Las barras muestran el empuje de cada variable sobre el log-odds de <em>encontrado con vida</em> · ámbar = hacia <em>encontrado</em> · gris = hacia <em>aún desaparecido</em>',
+                'One dot per synthetic case. <em>X</em> = SHAP value · <em>color</em> = feature value (blue&nbsp;=&nbsp;low, orange&nbsp;=&nbsp;high)':
+                    'Un punto por caso sintético. <em>X</em> = valor SHAP · <em>color</em> = valor de la variable (azul&nbsp;=&nbsp;bajo, ámbar&nbsp;=&nbsp;alto)',
+                'Scoring function is a logistic model fitted on the <strong>7,855-case</strong> paper cohort (4 features + 2 interactions). Background and beeswarm samples are drawn from real cases.':
+                    'La función de puntuación es un modelo logístico ajustado sobre la cohorte de <strong>7,855 casos</strong> del artículo (4 variables + 2 interacciones). Las muestras de fondo y del enjambre provienen de casos reales.',
+                'Days elapsed since report <em>(feature 1)</em>': 'Días transcurridos desde el reporte <em>(variable 1)</em>',
+                '<strong>What the paper learns from SHAP:</strong> averaged across all 7,855 cases, the four biggest drivers of <em>“found alive”</em> probability are the <em>time elapsed</em> since the disappearance was reported, the <em>population size</em> of the municipality where the case was opened, the person’s <em>sex</em>, and their <em>age</em>, in that order. Marital status, education and vulnerability factors tune the answer but rarely dominate it.':
+                    '<strong>Lo que el artículo aprende de SHAP:</strong> promediado sobre los 7,855 casos, los cuatro factores que más impulsan la probabilidad de <em>«encontrado con vida»</em> son el <em>tiempo transcurrido</em> desde que se reportó la desaparición, el <em>tamaño de la población</em> del municipio donde se abrió el caso, el <em>sexo</em> de la persona y su <em>edad</em>, en ese orden. El estado civil, la educación y los factores de vulnerabilidad ajustan la respuesta, pero rara vez la dominan.'
             }
         };
 
