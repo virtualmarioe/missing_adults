@@ -4188,15 +4188,15 @@
                         </div>
                         <div class="auc-kpi-row">
                             <div class="auc-kpi">
-                                <div class="auc-kpi-label"><abbr class="term" title="True Positive Rate: of all truly-found people, the share the model correctly flags as found.">Recall (TPR)</abbr></div>
+                                <div class="auc-kpi-label"><abbr class="term" data-i18n-attr="title:auc.tip.recall" title="True Positive Rate: of all truly-found people, the share the model correctly flags as found.">Recall (TPR)</abbr></div>
                                 <div class="auc-kpi-value" id="aucTprVal">77.3%</div>
                             </div>
                             <div class="auc-kpi">
-                                <div class="auc-kpi-label"><abbr class="term" title="False Positive Rate: of all truly-still-missing people, the share the model wrongly flags as found.">False alarm (FPR)</abbr></div>
+                                <div class="auc-kpi-label"><abbr class="term" data-i18n-attr="title:auc.tip.fpr" title="False Positive Rate: of all truly-still-missing people, the share the model wrongly flags as found.">False alarm (FPR)</abbr></div>
                                 <div class="auc-kpi-value" id="aucFprVal">22.7%</div>
                             </div>
                             <div class="auc-kpi">
-                                <div class="auc-kpi-label"><abbr class="term" title="Of everyone the model flags as found, the share that truly are found. Falls sharply when the found class is rare.">Precision</abbr></div>
+                                <div class="auc-kpi-label"><abbr class="term" data-i18n-attr="title:auc.tip.precision" title="Of everyone the model flags as found, the share that truly are found. Falls sharply when the found class is rare.">Precision</abbr></div>
                                 <div class="auc-kpi-value" id="aucPrecVal">59.3%</div>
                             </div>
                         </div>
@@ -5086,6 +5086,11 @@
                 'res.bl.noresample': 'GBC<br>(sin remuestreo)',
                 'res.bl.under': '<strong>GBC<br>(submuestreado)</strong>',
 
+                /* ---- AUC glossary tooltips (title attrs) ---- */
+                'auc.tip.recall': 'Tasa de verdaderos positivos: de todas las personas realmente encontradas, la proporción que el modelo marca correctamente como encontradas.',
+                'auc.tip.fpr': 'Tasa de falsos positivos: de todas las personas que en realidad siguen desaparecidas, la proporción que el modelo marca erróneamente como encontradas.',
+                'auc.tip.precision': 'De todas las personas que el modelo marca como encontradas, la proporción que realmente lo está. Cae bruscamente cuando la clase «encontrado» es rara.',
+
                 /* ---- AUC demo (dynamic, via t()) ---- */
                 'auc.leg.found': 'Encontrado',
                 'auc.leg.missing': 'Aún desaparecido',
@@ -5189,7 +5194,80 @@
                 'Robust': 'Robusto',
                 'Sensitivity analysis': 'Análisis de sensibilidad',
                 'Restricting the sample to cases from 2000 onwards preserves the model’s performance and feature ranking, confirming robustness to historical-technological change.':
-                    'Restringir la muestra a casos a partir del año 2000 preserva el desempeño del modelo y el orden de importancia de las variables, confirmando su robustez ante el cambio histórico-tecnológico.'
+                    'Restringir la muestra a casos a partir del año 2000 preserva el desempeño del modelo y el orden de importancia de las variables, confirmando su robustez ante el cambio histórico-tecnológico.',
+
+                /* ---- shared callouts & "Try this" ---- */
+                'For teaching & exploration only': 'Solo para enseñanza y exploración',
+                'Try this': 'Prueba esto',
+
+                /* ---- AUC: plain leaves ---- */
+                'The decision threshold slides your operating point along the ROC curve (trading recall for false-alarms). It never changes the underlying AUC.':
+                    'El umbral de decisión desplaza tu punto de operación a lo largo de la curva ROC (intercambiando sensibilidad por falsas alarmas). Nunca cambia el AUC subyacente.',
+                'Score distributions': 'Distribuciones de puntuación',
+                'Dashed line = threshold · solid tails = model says “found”':
+                    'Línea discontinua = umbral · colas sólidas = el modelo dice «encontrado»',
+                'ROC curve': 'Curva ROC',
+                'Dot = current threshold · shaded area = AUC':
+                    'Punto = umbral actual · área sombreada = AUC',
+                '· per 1,000 cases': '· por cada 1000 casos',
+                'True +': 'VP',
+                'False −': 'FN',
+                'False +': 'FP',
+                'True −': 'VN',
+                'Recall = TP ÷ (TP + FN) · Precision = TP ÷ (TP + FP). Move the prevalence slider and watch precision shift while the columns stay fixed.':
+                    'Sensibilidad = VP ÷ (VP + FN) · Precisión = VP ÷ (VP + FP). Mueve el control de prevalencia y observa cómo cambia la precisión mientras las columnas se mantienen fijas.',
+                'How far apart the centers of the two score distributions sit. Only this slider moves AUC.':
+                    'Qué tan separados están los centros de las dos distribuciones de puntuación. Solo este control mueve el AUC.',
+                'Decision threshold': 'Umbral de decisión',
+                'Slides the operating point along the ROC curve. AUC stays the same; only recall and false-alarm swap.':
+                    'Desplaza el punto de operación a lo largo de la curva ROC. El AUC se mantiene; solo se intercambian la sensibilidad y la falsa alarma.',
+                'Positive prevalence': 'Prevalencia positiva',
+                'Share of cases that are truly “found.” Watch precision collapse when the positive class becomes rare, even at the same AUC.':
+                    'Proporción de casos que realmente son «encontrados». Observa cómo la precisión se desploma cuando la clase positiva se vuelve rara, incluso con el mismo AUC.',
+                'Random (0.5)': 'Aleatorio (0.5)',
+                'Paper (≈0.73)': 'Artículo (≈0.73)',
+                'Strong (≈0.92)': 'Fuerte (≈0.92)',
+                'Perfect (1.0)': 'Perfecto (1.0)',
+
+                /* ---- glossary term labels (visible text) ---- */
+                'Recall (TPR)': 'Sensibilidad (TPR)',
+                'False alarm (FPR)': 'Falsa alarma (FPR)',
+                'Precision': 'Precisión'
+            },
+
+            /* Rich blocks — matched by normalized innerHTML (no tagging). */
+            esH: {
+                /* educational-use disclaimer */
+                'The four live demos below, namely <strong>ROC-AUC</strong>, <strong>Gradient Boosting</strong>, <strong>SHAP</strong> and the <strong>Data Explorer</strong>, are <strong>simplified pedagogical tools</strong> designed to build intuition for the concepts in the paper. The toy models, synthetic datasets and in-browser re-fits are <em>not</em> the production model reported in the article and should <strong>not</strong> be used for inference, decision-making or policy.':
+                    'Las cuatro demostraciones interactivas que siguen, a saber <strong>ROC-AUC</strong>, <strong>Gradient Boosting</strong>, <strong>SHAP</strong> y el <strong>Explorador de datos</strong>, son <strong>herramientas pedagógicas simplificadas</strong> diseñadas para desarrollar intuición sobre los conceptos del artículo. Los modelos de juguete, los conjuntos de datos sintéticos y los reajustes en el navegador <em>no</em> son el modelo de producción reportado en el artículo y <strong>no</strong> deben usarse para inferencia, toma de decisiones ni políticas.',
+                'All data, code and results from the peer-reviewed study are open access at the authors’ <a href="https://osf.io/agz5e/" target="_blank" rel="noopener">OSF repository</a>, and the full methodology (pipeline, hyperparameters, validation and reporting) is documented in the original publication: <a href="https://doi.org/10.1007/s42001-022-00171-x" target="_blank" rel="noopener">Ruiz-Rizzo, Archila-Meléndez &amp; González Veloza (2022), <em>Journal of Computational Social Science</em></a>.':
+                    'Todos los datos, el código y los resultados del estudio revisado por pares son de acceso abierto en el <a href="https://osf.io/agz5e/" target="_blank" rel="noopener">repositorio OSF</a> de los autores, y la metodología completa (flujo de trabajo, hiperparámetros, validación y reporte) está documentada en la publicación original: <a href="https://doi.org/10.1007/s42001-022-00171-x" target="_blank" rel="noopener">Ruiz-Rizzo, Archila-Meléndez &amp; González Veloza (2022), <em>Journal of Computational Social Science</em></a>.',
+
+                /* color legend */
+                '<span class="swatch swatch-found"></span> Amber → toward <strong>found</strong>':
+                    '<span class="swatch swatch-found"></span> Ámbar → hacia <strong>encontrado</strong>',
+                '<span class="swatch swatch-missing"></span> Slate → toward <strong>still missing</strong>':
+                    '<span class="swatch swatch-missing"></span> Pizarra → hacia <strong>aún desaparecido</strong>',
+
+                /* AUC intro, cards, try-this, matrix heads, slider, takeaway */
+                '<strong>AUC</strong> (Area Under the ROC Curve) is the metric the authors optimize. It answers a simple question: <em>if we draw one “found” case and one “still missing” case at random, how often does the model assign a higher score to the found case?</em> A perfect model scores <strong>1.0</strong>; random guessing scores <strong>0.5</strong>. Drag the sliders below to see how the three most-confused factors (separation, threshold and class balance) each influence what you see.':
+                    'El <strong>AUC</strong> (área bajo la curva ROC) es la métrica que optimizan los autores. Responde una pregunta sencilla: <em>si tomamos al azar un caso «encontrado» y uno «aún desaparecido», ¿con qué frecuencia el modelo asigna una puntuación más alta al caso encontrado?</em> Un modelo perfecto obtiene <strong>1.0</strong>; adivinar al azar obtiene <strong>0.5</strong>. Arrastra los controles de abajo para ver cómo influyen los tres factores que más se confunden (separación, umbral y balance de clases).',
+                '1. Separation <em>moves AUC</em>': '1. La separación <em>mueve el AUC</em>',
+                'The <em>only</em> thing that changes AUC is how much the “found” and “still-missing” score distributions overlap. More overlap → noisier model → lower AUC.':
+                    'Lo <em>único</em> que cambia el AUC es cuánto se solapan las distribuciones de puntuación de «encontrado» y «aún desaparecido». Más solapamiento → modelo más ruidoso → menor AUC.',
+                '2. Threshold <em>picks a point</em>': '2. El umbral <em>elige un punto</em>',
+                '3. Prevalence <em>hides in precision</em>': '3. La prevalencia <em>se esconde en la precisión</em>',
+                'AUC, TPR and FPR are invariant to class balance, but <strong>precision</strong> reacts sharply. That’s exactly why the paper undersamples the majority class to boost recall from 52% to 83%.':
+                    'El AUC, la TPR y la FPR son invariantes al balance de clases, pero la <strong>precisión</strong> reacciona con fuerza. Por eso precisamente el artículo submuestrea la clase mayoritaria para elevar la sensibilidad del 52% al 83%.',
+                'Drag <strong>Class separation</strong> down to 0 — the two score clouds merge and AUC collapses to <strong>0.5</strong>, a model that knows nothing. Then slide it right and watch the curve bow toward the corner.':
+                    'Arrastra <strong>Separación de clases</strong> hasta 0: las dos nubes de puntuación se fusionan y el AUC cae a <strong>0.5</strong>, un modelo que no sabe nada. Luego deslízalo a la derecha y observa cómo la curva se arquea hacia la esquina.',
+                'Model says<br>“found”': 'El modelo dice<br>«encontrado»',
+                'Model says<br>“missing”': 'El modelo dice<br>«desaparecido»',
+                'Truly<br>found': 'Realmente<br>encontrado',
+                'Truly<br>missing': 'Realmente<br>desaparecido',
+                'Class separation <em>(centers apart)</em>': 'Separación de clases <em>(distancia entre centros)</em>',
+                '<strong>In the paper’s language:</strong> the Gradient Boosting Classifier pushes AUC from the mean-elapsed-time baseline (≈0.63) up to ≈0.73: exactly the kind of separation change you can produce with the first slider. Undersampling the dominant “still missing” class doesn’t move AUC, but it lets the team pick a more generous threshold that keeps recall on the minority “found” class high, the trade-off the middle slider reveals.':
+                    '<strong>En el lenguaje del artículo:</strong> el Gradient Boosting Classifier eleva el AUC desde la línea base del tiempo medio transcurrido (≈0.63) hasta ≈0.73: exactamente el tipo de cambio de separación que puedes producir con el primer control. Submuestrear la clase dominante «aún desaparecido» no mueve el AUC, pero permite al equipo elegir un umbral más generoso que mantiene alta la sensibilidad sobre la clase minoritaria «encontrado», el equilibrio que revela el control central.'
             }
         };
 
@@ -5197,10 +5275,36 @@
         const _i18nOrig = new Map();
         const _i18nRerender = [];
         const _textState = [];   // plain-text leaves translated via I18N.esT
+        const _htmlState = [];   // rich blocks translated via I18N.esH
         // Leaf elements whose text may be auto-translated from the esT map.
-        const _TEXT_TAGS = 'h1,h2,h3,h4,h5,p,span,small,li,button,a,div,figcaption,th,td,label,strong,em,b,i';
+        const _TEXT_TAGS = 'h1,h2,h3,h4,h5,p,span,small,li,button,a,div,figcaption,th,td,label,strong,em,b,i,abbr';
+        // Block elements whose innerHTML may be auto-translated from the esH map.
+        const _HTML_TAGS = 'p,h2,h3,h4,h5,div,span,label,li,figcaption';
 
         function registerI18nRerender(fn) { _i18nRerender.push(fn); }
+
+        // Auto-translate rich blocks (inline markup) by matching their
+        // normalized innerHTML against I18N.esH — no data-i18n tagging needed.
+        function applyHtmlDict(lang) {
+            const dict = I18N.esH || {};
+            if (lang === 'es') {
+                document.querySelectorAll(_HTML_TAGS).forEach(function (el) {
+                    if (el.hasAttribute('data-i18n')) return;
+                    if (!el.children.length) return;
+                    if (el.closest('svg')) return;
+                    if (!el.querySelector('strong,em,abbr,code,br,sup,sub')) return;
+                    const cur = el.innerHTML.replace(/\s+/g, ' ').trim();
+                    const es = dict[cur];
+                    if (es == null) return;
+                    if (el.__i18nHTML == null) { el.__i18nHTML = el.innerHTML; _htmlState.push(el); }
+                    el.innerHTML = es;
+                });
+            } else {
+                _htmlState.forEach(function (el) {
+                    if (el.__i18nHTML != null) el.innerHTML = el.__i18nHTML;
+                });
+            }
+        }
 
         // Auto-translate plain-text leaf nodes by matching their English text
         // against I18N.esT (no data-i18n tagging needed for simple strings).
@@ -5256,6 +5360,7 @@
                 });
             });
 
+            applyHtmlDict(LANG);
             applyTextDict(LANG);
 
             document.documentElement.lang = LANG;
