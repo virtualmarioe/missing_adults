@@ -3559,13 +3559,13 @@
 
             <!-- Plain-language lead: human framing before the technical summary -->
             <div class="lead fade-in">
-                <p class="lead-text">
+                <p class="lead-text" data-i18n="ov.lead1">
                     When an older adult goes missing, the hours and days that follow can
                     decide everything. This study asks a painfully practical question:
                     <strong>from only what is known the moment a person is reported
                     missing, how likely are they to be found?</strong>
                 </p>
-                <p class="lead-text">
+                <p class="lead-text" data-i18n="ov.lead2">
                     Drawing on <strong>7,855 real cases</strong> reported across Colombia
                     over nine decades, we trained machine-learning models to weigh the
                     factors that matter most &mdash; so that search teams, caregivers and
@@ -3585,7 +3585,7 @@
                             <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
                         </svg>
                     </div>
-                    <div class="tldr-text">
+                    <div class="tldr-text" data-i18n="ov.tldr1">
                         Gradient-boosting classifiers predict whether a missing older adult will be found with up to
                         <strong>10% higher AUC</strong> than a data-informed reference model.
                     </div>
@@ -3598,7 +3598,7 @@
                             <path d="M10 3h4a1 1 0 0 1 1 1v2.2a2 2 0 1 0 0 3.6V13h3.2a2 2 0 1 1 0 4H15v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-4.2a2 2 0 1 0 0-3.6V7a1 1 0 0 1 1-1h5.2a2 2 0 1 0 .8-3Z"/>
                         </svg>
                     </div>
-                    <div class="tldr-text">
+                    <div class="tldr-text" data-i18n="ov.tldr2">
                         The outcome depends on both <strong>intrinsic</strong> (age, sex) and
                         <strong>extrinsic</strong> (time elapsed, place size) factors of missingness.
                     </div>
@@ -3615,7 +3615,7 @@
                             <circle cx="17" cy="7" r="2.4" fill="#fff" stroke="currentColor" stroke-width="2"/>
                         </svg>
                     </div>
-                    <div class="tldr-text">
+                    <div class="tldr-text" data-i18n="ov.tldr3">
                         First study to characterize non-forced missingness in older adults in Colombia using open
                         SIRDEC data spanning <strong>90&nbsp;years</strong>.
                     </div>
@@ -3712,7 +3712,7 @@
                         <path d="M9.5 12l2 2 3.5-3.5"/>
                     </svg>
                 </div>
-                <p>
+                <p data-i18n="ov.responsible">
                     <strong>How to read this responsibly.</strong> These models describe
                     population-level patterns in historical data; they do not judge any
                     individual case and must never automate decisions about a real person.
@@ -3729,7 +3729,7 @@
         <div class="container">
             <h2 class="section-title">Abstract</h2>
             <div class="abstract-card fade-in">
-                <p>
+                <p data-i18n="abs.body">
                     Person missingness is an enigmatic and frequent phenomenon that can bring about negative
                     consequences for the missing person, their family, and society in general. Age-related cognitive
                     changes and a higher vulnerability to dementia can increase the propensity of older adults to go
@@ -3757,7 +3757,7 @@
     <section id="methods">
         <div class="container">
             <h2 class="section-title">Methods</h2>
-            <p class="section-desc">
+            <p class="section-desc" data-i18n="meth.desc">
                 Open data from the <em>Sistema de Informaci&oacute;n Red de Desaparecidos y Cad&aacute;veres</em>
                 (SIRDEC) of the Colombian National Institute of Legal Medicine were processed in a three-phase
                 pipeline using <code>PyCaret&nbsp;2.3.6</code> and <code>scikit-learn&nbsp;1.0.2</code>.
@@ -3767,7 +3767,7 @@
                 <div class="pipeline-step">
                     <div class="pipeline-num">1</div>
                     <div class="pipeline-title">Data cleaning</div>
-                    <div class="pipeline-desc">Exclude null Age/Date, forced disappearance, <em>&lt;&nbsp;60&nbsp;y</em>, &ldquo;Found dead&rdquo; and cases outside Colombia.</div>
+                    <div class="pipeline-desc" data-i18n="meth.p1desc">Exclude null Age/Date, forced disappearance, <em>&lt;&nbsp;60&nbsp;y</em>, &ldquo;Found dead&rdquo; and cases outside Colombia.</div>
                 </div>
                 <div class="pipeline-step">
                     <div class="pipeline-num">2</div>
@@ -3795,17 +3795,17 @@
             <div class="findings-grid fade-in">
                 <div class="finding-card">
                     <div class="finding-label">Environmental (extrinsic)</div>
-                    <p><strong>Date of missingness</strong>: days elapsed since the report until 30 July 2021.</p>
-                    <p style="margin-top:8px;"><strong>Place of missingness</strong>: municipality population size in Colombia.</p>
+                    <p data-i18n="meth.f1a"><strong>Date of missingness</strong>: days elapsed since the report until 30 July 2021.</p>
+                    <p style="margin-top:8px;" data-i18n="meth.f1b"><strong>Place of missingness</strong>: municipality population size in Colombia.</p>
                 </div>
                 <div class="finding-card">
                     <div class="finding-label">Individual (intrinsic)</div>
-                    <p><strong>Age</strong> at the time of missingness (all examples &ge;&nbsp;60&nbsp;years).</p>
-                    <p style="margin-top:8px;"><strong>Sex</strong>, <strong>marital status</strong>, <strong>education level</strong>, and <strong>vulnerability factor</strong>.</p>
+                    <p data-i18n="meth.f2a"><strong>Age</strong> at the time of missingness (all examples &ge;&nbsp;60&nbsp;years).</p>
+                    <p style="margin-top:8px;" data-i18n="meth.f2b"><strong>Sex</strong>, <strong>marital status</strong>, <strong>education level</strong>, and <strong>vulnerability factor</strong>.</p>
                 </div>
                 <div class="finding-card">
                     <div class="finding-label">Target</div>
-                    <p><strong>Found</strong> vs. <strong>Still missing</strong> (binary classification). Only alive outcomes retained to focus on findability.</p>
+                    <p data-i18n="meth.f3"><strong>Found</strong> vs. <strong>Still missing</strong> (binary classification). Only alive outcomes retained to focus on findability.</p>
                 </div>
             </div>
         </div>
@@ -3823,7 +3823,7 @@
 
             <div class="features-card fade-in">
                 <div class="feature-row">
-                    <div class="feature-name">
+                    <div class="feature-name" data-i18n="feat.days">
                         Days since missingness
                         <small>Environmental &middot; temporal context</small>
                     </div>
@@ -3831,7 +3831,7 @@
                     <div class="feature-value">1.00</div>
                 </div>
                 <div class="feature-row">
-                    <div class="feature-name">
+                    <div class="feature-name" data-i18n="feat.muni">
                         Municipality size
                         <small>Environmental &middot; place where missingness occurred</small>
                     </div>
@@ -3839,7 +3839,7 @@
                     <div class="feature-value">0.72</div>
                 </div>
                 <div class="feature-row">
-                    <div class="feature-name">
+                    <div class="feature-name" data-i18n="feat.sex">
                         Sex
                         <small>Individual &middot; male vs. female</small>
                     </div>
@@ -3847,7 +3847,7 @@
                     <div class="feature-value">0.48</div>
                 </div>
                 <div class="feature-row">
-                    <div class="feature-name">
+                    <div class="feature-name" data-i18n="feat.age">
                         Age
                         <small>Individual &middot; years at the time of report</small>
                     </div>
@@ -3855,7 +3855,7 @@
                     <div class="feature-value">0.40</div>
                 </div>
                 <div class="feature-row">
-                    <div class="feature-name">
+                    <div class="feature-name" data-i18n="feat.vuln">
                         Vulnerability factor
                         <small>Individual &middot; reported vulnerabilities</small>
                     </div>
@@ -3863,7 +3863,7 @@
                     <div class="feature-value">0.22</div>
                 </div>
                 <div class="feature-row">
-                    <div class="feature-name">
+                    <div class="feature-name" data-i18n="feat.rel">
                         Relationship status
                         <small>Individual &middot; current relationship at report</small>
                     </div>
@@ -3871,7 +3871,7 @@
                     <div class="feature-value">0.16</div>
                 </div>
                 <div class="feature-row">
-                    <div class="feature-name">
+                    <div class="feature-name" data-i18n="feat.edu">
                         Education level
                         <small>Individual &middot; years of schooling</small>
                     </div>
@@ -3925,11 +3925,11 @@
                         </div>
                     </div>
                     <div class="bar-labels">
-                        <span class="bar-label baseline-label">Reference<br>model<br><small style="color:#94a3b8;">(Baseline)</small></span>
+                        <span class="bar-label baseline-label" data-i18n="res.bl.ref">Reference<br>model<br><small style="color:#94a3b8;">(Baseline)</small></span>
                         <span style="width:1px; margin:0 2px;"></span>
                         <span class="bar-label">GBC<br>(SMOTE)</span>
                         <span class="bar-label">LGBM</span>
-                        <span class="bar-label"><strong>GBC<br>(Undersampled)</strong></span>
+                        <span class="bar-label" data-i18n="res.bl.under"><strong>GBC<br>(Undersampled)</strong></span>
                     </div>
                     <div class="chart-note">Machine-learning models reduce classification error from 37% (reference) to ~28% (GBC).</div>
                 </div>
@@ -3960,11 +3960,11 @@
                         </div>
                     </div>
                     <div class="bar-labels">
-                        <span class="bar-label baseline-label">Reference<br>model<br><small style="color:#94a3b8;">(Baseline)</small></span>
+                        <span class="bar-label baseline-label" data-i18n="res.bl.ref">Reference<br>model<br><small style="color:#94a3b8;">(Baseline)</small></span>
                         <span style="width:1px; margin:0 2px;"></span>
-                        <span class="bar-label">GBC<br>(no resample)</span>
+                        <span class="bar-label" data-i18n="res.bl.noresample">GBC<br>(no resample)</span>
                         <span class="bar-label">LGBM<br>(SMOTE)</span>
-                        <span class="bar-label"><strong>GBC<br>(Undersampled)</strong></span>
+                        <span class="bar-label" data-i18n="res.bl.under"><strong>GBC<br>(Undersampled)</strong></span>
                     </div>
                     <div class="chart-note">+10% AUC improvement vs. the data-informed reference model.</div>
                 </div>
@@ -3995,11 +3995,11 @@
                         </div>
                     </div>
                     <div class="bar-labels">
-                        <span class="bar-label baseline-label">Reference<br>model<br><small style="color:#94a3b8;">(Baseline)</small></span>
+                        <span class="bar-label baseline-label" data-i18n="res.bl.ref">Reference<br>model<br><small style="color:#94a3b8;">(Baseline)</small></span>
                         <span style="width:1px; margin:0 2px;"></span>
-                        <span class="bar-label">GBC<br>(no resample)</span>
+                        <span class="bar-label" data-i18n="res.bl.noresample">GBC<br>(no resample)</span>
                         <span class="bar-label">LGBM<br>(SMOTE)</span>
-                        <span class="bar-label"><strong>GBC<br>(Undersampled)</strong></span>
+                        <span class="bar-label" data-i18n="res.bl.under"><strong>GBC<br>(Undersampled)</strong></span>
                     </div>
                     <div class="chart-note">Undersampling maximizes recall on the minority class without sacrificing AUC.</div>
                 </div>
@@ -4030,11 +4030,11 @@
                         </div>
                     </div>
                     <div class="bar-labels">
-                        <span class="bar-label baseline-label">Reference<br>model<br><small style="color:#94a3b8;">(Baseline)</small></span>
+                        <span class="bar-label baseline-label" data-i18n="res.bl.ref">Reference<br>model<br><small style="color:#94a3b8;">(Baseline)</small></span>
                         <span style="width:1px; margin:0 2px;"></span>
-                        <span class="bar-label">GBC<br>(no resample)</span>
+                        <span class="bar-label" data-i18n="res.bl.noresample">GBC<br>(no resample)</span>
                         <span class="bar-label">LGBM<br>(SMOTE)</span>
-                        <span class="bar-label"><strong>GBC<br>(Undersampled)</strong></span>
+                        <span class="bar-label" data-i18n="res.bl.under"><strong>GBC<br>(Undersampled)</strong></span>
                     </div>
                     <div class="chart-note">GBC with undersampling yields the best harmonic mean of precision and recall.</div>
                 </div>
@@ -5054,20 +5054,176 @@
                 'hero.btn.code': 'Código y datos (OSF)',
                 'hero.btn.cite': 'Citar',
 
+                /* ---- overview: rich prose ---- */
+                'ov.lead1': 'Cuando un adulto mayor desaparece, las horas y los días que siguen pueden decidirlo todo. Este estudio plantea una pregunta dolorosamente práctica: <strong>a partir únicamente de lo que se sabe en el momento en que se reporta la desaparición, ¿qué probabilidad hay de encontrar a la persona?</strong>',
+                'ov.lead2': 'A partir de <strong>7,855 casos reales</strong> reportados en toda Colombia a lo largo de nueve décadas, entrenamos modelos de aprendizaje automático para ponderar los factores que más importan, de modo que los equipos de búsqueda, las personas cuidadoras y las familias puedan comprender mejor las probabilidades y dónde se necesita atención con mayor urgencia.',
+                'ov.tldr1': 'Los clasificadores de gradient boosting predicen si un adulto mayor desaparecido será encontrado con hasta un <strong>10% más de AUC</strong> que un modelo de referencia informado por los datos.',
+                'ov.tldr2': 'El resultado depende tanto de factores <strong>intrínsecos</strong> (edad, sexo) como <strong>extrínsecos</strong> (tiempo transcurrido, tamaño del lugar) de la desaparición.',
+                'ov.tldr3': 'Primer estudio en caracterizar la desaparición no forzada de adultos mayores en Colombia usando datos abiertos del SIRDEC que abarcan <strong>90&nbsp;años</strong>.',
+                'ov.responsible': '<strong>Cómo leer esto de forma responsable.</strong> Estos modelos describen patrones a nivel poblacional en datos históricos; no juzgan ningún caso individual y nunca deben automatizar decisiones sobre una persona real. Los patrones también reflejan cómo se reportaron y registraron los casos, no solo lo que ocurrió. El objetivo es la comprensión y la priorización, no predecir el destino de ninguna persona.',
+
+                /* ---- abstract & methods: rich prose ---- */
+                'abs.body': 'La desaparición de personas es un fenómeno enigmático y frecuente que puede acarrear consecuencias negativas para la persona desaparecida, su familia y la sociedad en general. Los cambios cognitivos asociados a la edad y una mayor vulnerabilidad a la demencia pueden aumentar la propensión de los adultos mayores a desaparecer. Por ello, es necesario comprender mejor el fenómeno de la desaparición en adultos mayores. El presente estudio buscó identificar los factores individuales y ambientales que podrían predecir si un adulto mayor reportado como desaparecido será encontrado. Se utilizaron modelos de aprendizaje automático supervisado a partir de los datos abiertos de casos de personas desaparecidas de Colombia entre 1930 y junio&nbsp;de&nbsp;2021 (<em>n</em>&nbsp;=&nbsp;7855). Se entrenaron algoritmos de clasificación para predecir si un adulto mayor que desapareció sería finalmente encontrado. Los modelos de clasificación con mejor desempeño en los datos de prueba fueron los basados en gradient boosting. En particular, los algoritmos Gradient Boosting Classifier y Light Gradient Boosting Machine mostraron, respectivamente, un 10% y un 9% más de área bajo la curva (AUC) característica operativa del receptor (ROC) que un modelo de referencia basado en datos, fundamentado en la media del tiempo transcurrido desde la desaparición observado en los datos de entrenamiento. Las variables con mayor contribución a la clasificación fueron el tiempo desde la desaparición, el lugar donde ocurrió, y la edad y el sexo de la persona desaparecida. Los presentes resultados arrojan luz sobre el fenómeno social de la desaparición de personas, a la vez que sientan las bases para la aplicación de modelos de aprendizaje automático en casos de adultos mayores desaparecidos.',
+                'meth.desc': 'Los datos abiertos del <em>Sistema de Información Red de Desaparecidos y Cadáveres</em> (SIRDEC) del Instituto Nacional de Medicina Legal de Colombia se procesaron en un flujo de tres fases usando <code>PyCaret&nbsp;2.3.6</code> y <code>scikit-learn&nbsp;1.0.2</code>.',
+                'meth.p1desc': 'Excluir Edad/Fecha nulas, desaparición forzada, <em>&lt;&nbsp;60&nbsp;a</em>, &laquo;Encontrado muerto&raquo; y casos fuera de Colombia.',
+                'meth.f1a': '<strong>Fecha de la desaparición</strong>: días transcurridos desde el reporte hasta el 30 de julio de 2021.',
+                'meth.f1b': '<strong>Lugar de la desaparición</strong>: tamaño de la población del municipio en Colombia.',
+                'meth.f2a': '<strong>Edad</strong> en el momento de la desaparición (todos los ejemplos &ge;&nbsp;60&nbsp;años).',
+                'meth.f2b': '<strong>Sexo</strong>, <strong>estado civil</strong>, <strong>nivel educativo</strong> y <strong>factor de vulnerabilidad</strong>.',
+                'meth.f3': '<strong>Encontrado</strong> frente a <strong>Aún desaparecido</strong> (clasificación binaria). Solo se conservaron los desenlaces con vida para centrarse en la posibilidad de ser encontrado.',
+
+                /* ---- key features: feature names (label + small) ---- */
+                'feat.days': 'Días desde la desaparición <small>Ambiental &middot; contexto temporal</small>',
+                'feat.muni': 'Tamaño del municipio <small>Ambiental &middot; lugar donde ocurrió la desaparición</small>',
+                'feat.sex': 'Sexo <small>Individual &middot; hombre vs. mujer</small>',
+                'feat.age': 'Edad <small>Individual &middot; años al momento del reporte</small>',
+                'feat.vuln': 'Factor de vulnerabilidad <small>Individual &middot; vulnerabilidades reportadas</small>',
+                'feat.rel': 'Estado de la relación <small>Individual &middot; relación actual al momento del reporte</small>',
+                'feat.edu': 'Nivel educativo <small>Individual &middot; años de escolaridad</small>',
+
+                /* ---- results: bar-chart labels ---- */
+                'res.bl.ref': 'Modelo<br>de<br><small style="color:#94a3b8;">referencia</small>',
+                'res.bl.noresample': 'GBC<br>(sin remuestreo)',
+                'res.bl.under': '<strong>GBC<br>(submuestreado)</strong>',
+
                 /* ---- AUC demo (dynamic, via t()) ---- */
                 'auc.leg.found': 'Encontrado',
                 'auc.leg.missing': 'Aún desaparecido',
                 'auc.axis.score': 'puntuación del modelo',
                 'auc.axis.fpr': 'Tasa de falsos positivos',
                 'auc.axis.tpr': 'Tasa de verdaderos positivos'
+            },
+
+            /* Plain-text leaves — matched by normalized English text. */
+            esT: {
+                /* ---- section & subsection titles ---- */
+                'Overview': 'Visión general',
+                'Abstract': 'Resumen',
+                'Methods': 'Métodos',
+                'Key Features for Prediction': 'Características clave para la predicción',
+                'Results': 'Resultados',
+                'Understanding ROC-AUC': 'Entender el ROC-AUC',
+                'Gradient Boosting in Action': 'Gradient Boosting en acción',
+                'Explaining Predictions with SHAP': 'Explicar predicciones con SHAP',
+                'Explore the Data': 'Explora los datos',
+                'Authors & Contributions': 'Autores y contribuciones',
+                'What we found, in plain language': 'Lo que encontramos, en lenguaje sencillo',
+                'Predictor variables': 'Variables predictoras',
+                'Classification Performance': 'Desempeño de clasificación',
+                'Takeaways': 'Conclusiones',
+
+                /* ---- overview: key numbers ---- */
+                'Cases analyzed': 'Casos analizados',
+                'Older adults (age ≥ 60) reported missing in Colombia between 1930 and June 2021.':
+                    'Adultos mayores (edad ≥ 60) reportados como desaparecidos en Colombia entre 1930 y junio de 2021.',
+                'Still missing / Found': 'Aún desaparecidos / Encontrados',
+                'Class imbalance addressed with undersampling and SMOTE during training.':
+                    'El desbalance de clases se trató con submuestreo y SMOTE durante el entrenamiento.',
+                'Train / Test split': 'División entrenamiento / prueba',
+                'Stratified split with 10-fold cross-validation on the training data.':
+                    'División estratificada con validación cruzada de 10 particiones sobre los datos de entrenamiento.',
+                'Best GBC model': 'Mejor modelo GBC',
+                'vs. 0.69 AUC for the mean-elapsed-time reference (base) model.':
+                    'frente a 0.69 AUC del modelo de referencia (base) basado en el tiempo medio transcurrido.',
+
+                /* ---- overview: headline findings ---- */
+                'Time is decisive': 'El tiempo es decisivo',
+                'The longer a person stays missing, the steeper the drop in the chance of being found. Elapsed time outweighs every other factor in the model — by a wide margin.':
+                    'Cuanto más tiempo permanece desaparecida una persona, más pronunciada es la caída en la probabilidad de ser encontrada. El tiempo transcurrido supera a cualquier otro factor del modelo, por un amplio margen.',
+                'Smaller places, harder searches': 'Lugares más pequeños, búsquedas más difíciles',
+                'People who go missing in smaller municipalities are found less often than those in large cities, where reporting and search resources are concentrated.':
+                    'Las personas que desaparecen en municipios más pequeños se encuentran con menos frecuencia que quienes desaparecen en grandes ciudades, donde se concentran los recursos de reporte y búsqueda.',
+                'Who is found differs': 'A quién se encuentra varía',
+                'Sex and age both shift the odds: in this cohort, missing men and the oldest individuals were less likely to be found than women and the “younger old.”':
+                    'El sexo y la edad modifican las probabilidades: en esta cohorte, los hombres desaparecidos y las personas de mayor edad tuvieron menos probabilidad de ser encontrados que las mujeres y los «mayores más jóvenes».',
+
+                /* ---- methods: pipeline & cards (plain) ---- */
+                'Data cleaning': 'Limpieza de datos',
+                'Feature preparation': 'Preparación de variables',
+                'Standard scaling of numeric features, one-hot encoding of categorical variables, label encoding of the target.':
+                    'Escalado estándar de variables numéricas, codificación one-hot de variables categóricas y codificación de etiquetas de la variable objetivo.',
+                'Class balancing': 'Balanceo de clases',
+                'SMOTE oversampling and random undersampling applied to the training set only.':
+                    'Sobremuestreo SMOTE y submuestreo aleatorio aplicados únicamente al conjunto de entrenamiento.',
+                'Model training': 'Entrenamiento del modelo',
+                '10-fold stratified CV across a broad set of classifiers; top models selected by accuracy and AUC.':
+                    'Validación cruzada estratificada de 10 particiones sobre un amplio conjunto de clasificadores; los mejores modelos se seleccionaron por exactitud y AUC.',
+                'Interpretation': 'Interpretación',
+                'SHAP values extracted from the GBC to rank and interpret feature contributions.':
+                    'Valores SHAP extraídos del GBC para ordenar e interpretar la contribución de cada variable.',
+                'Environmental (extrinsic)': 'Ambiental (extrínseco)',
+                'Individual (intrinsic)': 'Individual (intrínseco)',
+                'Target': 'Variable objetivo',
+
+                /* ---- key features (plain) ---- */
+                'Feature importance of the Gradient Boosting Classifier (GBC) with under-sampled training data, based on mean absolute SHAP values. Longer time elapsed, smaller municipality, male sex, and more advanced age were all associated with a lower probability of being found.':
+                    'Importancia de las variables del Gradient Boosting Classifier (GBC) con datos de entrenamiento submuestreados, según los valores SHAP absolutos medios. Un mayor tiempo transcurrido, un municipio más pequeño, el sexo masculino y una edad más avanzada se asociaron con una menor probabilidad de ser encontrado.',
+                'Relative feature importance visualized from SHAP magnitudes reported for the GBC with under-sampled training data (see Fig. 7 of the paper). Values are rescaled to the top feature for display purposes.':
+                    'Importancia relativa de las variables visualizada a partir de las magnitudes SHAP reportadas para el GBC con datos de entrenamiento submuestreados (véase la Fig. 7 del artículo). Los valores se reescalan respecto a la variable principal con fines de visualización.',
+
+                /* ---- results (plain) ---- */
+                'Gradient-boosting models consistently outperform the mean-elapsed-time reference model across accuracy, AUC, recall on the minority “Found” class, and F1-score.':
+                    'Los modelos de gradient boosting superan de forma consistente al modelo de referencia basado en el tiempo medio transcurrido en exactitud, AUC, sensibilidad sobre la clase minoritaria «Encontrado» y puntuación F1.',
+                'Test Accuracy': 'Exactitud en prueba',
+                '↑ Higher is better': '↑ Más alto es mejor',
+                '(Baseline)': '(Referencia)',
+                'Machine-learning models reduce classification error from 37% (reference) to ~28% (GBC).':
+                    'Los modelos de aprendizaje automático reducen el error de clasificación del 37% (referencia) a ~28% (GBC).',
+                '+10% AUC improvement vs. the data-informed reference model.':
+                    'Mejora del +10% en AUC frente al modelo de referencia informado por los datos.',
+                'Recall on the “Found” class': 'Sensibilidad sobre la clase «Encontrado»',
+                'Undersampling maximizes recall on the minority class without sacrificing AUC.':
+                    'El submuestreo maximiza la sensibilidad sobre la clase minoritaria sin sacrificar el AUC.',
+                'F1-score on the “Found” class': 'Puntuación F1 sobre la clase «Encontrado»',
+                'GBC with undersampling yields the best harmonic mean of precision and recall.':
+                    'El GBC con submuestreo logra la mejor media armónica entre precisión y sensibilidad.',
+                'AUC gain': 'Ganancia de AUC',
+                'The Gradient Boosting Classifier increases ROC–AUC by 10 percentage points over a data-informed baseline that uses only the mean elapsed time.':
+                    'El Gradient Boosting Classifier aumenta el ROC–AUC en 10 puntos porcentuales frente a una línea base informada por los datos que solo usa el tiempo medio transcurrido.',
+                'Recall on “Found”': 'Sensibilidad sobre «Encontrado»',
+                'Using random undersampling of the dominant “Still missing” class on the training set raises recall on the minority “Found” class from 52% to 83%.':
+                    'Usar submuestreo aleatorio de la clase dominante «Aún desaparecido» en el conjunto de entrenamiento eleva la sensibilidad sobre la clase minoritaria «Encontrado» del 52% al 83%.',
+                'Core predictors': 'Predictores principales',
+                'Time since missingness, municipality size, sex, and age of the missing person concentrate most of the predictive signal in the model.':
+                    'El tiempo desde la desaparición, el tamaño del municipio, el sexo y la edad de la persona desaparecida concentran la mayor parte de la señal predictiva del modelo.',
+                'Robust': 'Robusto',
+                'Sensitivity analysis': 'Análisis de sensibilidad',
+                'Restricting the sample to cases from 2000 onwards preserves the model’s performance and feature ranking, confirming robustness to historical-technological change.':
+                    'Restringir la muestra a casos a partir del año 2000 preserva el desempeño del modelo y el orden de importancia de las variables, confirmando su robustez ante el cambio histórico-tecnológico.'
             }
         };
 
         let LANG = 'en';
         const _i18nOrig = new Map();
         const _i18nRerender = [];
+        const _textState = [];   // plain-text leaves translated via I18N.esT
+        // Leaf elements whose text may be auto-translated from the esT map.
+        const _TEXT_TAGS = 'h1,h2,h3,h4,h5,p,span,small,li,button,a,div,figcaption,th,td,label,strong,em,b,i';
 
         function registerI18nRerender(fn) { _i18nRerender.push(fn); }
+
+        // Auto-translate plain-text leaf nodes by matching their English text
+        // against I18N.esT (no data-i18n tagging needed for simple strings).
+        function applyTextDict(lang) {
+            const dict = I18N.esT || {};
+            if (lang === 'es') {
+                document.querySelectorAll(_TEXT_TAGS).forEach(function (el) {
+                    if (el.hasAttribute('data-i18n')) return;
+                    if (el.children.length) return;            // leaf nodes only
+                    const cur = el.textContent;
+                    const key = cur.replace(/\s+/g, ' ').trim();
+                    if (!key) return;
+                    const es = dict[key];
+                    if (es == null) return;
+                    if (el.__i18nEN == null) { el.__i18nEN = cur; _textState.push(el); }
+                    el.textContent = es;
+                });
+            } else {
+                _textState.forEach(function (el) {
+                    if (el.__i18nEN != null) el.textContent = el.__i18nEN;
+                });
+            }
+        }
 
         // Dynamic-string translator: English stays inline as the fallback.
         // Named tr() (not t()) to avoid clashing with the demos' local
@@ -5099,6 +5255,8 @@
                     if (v != null) el.setAttribute(attr, v);
                 });
             });
+
+            applyTextDict(LANG);
 
             document.documentElement.lang = LANG;
             const ogl = document.querySelector('meta[property="og:locale"]');
